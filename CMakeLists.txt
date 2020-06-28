@@ -5,7 +5,6 @@ project(frilibrary)
 include(ExternalProject)
 
 set(frilibrary_VERSION 0.0.0)
-
 set(RML_HEADER_DIR "${CMAKE_BINARY_DIR}/frilibrary-prefix/src/frilibrary/include/")
 set(RML_RELEASE_LIBRARY_DIR "${CMAKE_BINARY_DIR}/frilibrary-prefix/src/frilibrary/Linux/x64/release/lib/")
 set(RML_DEBUG_LIBRARY_DIR "${CMAKE_BINARY_DIR}/frilibrary-prefix/src/frilibrary/Linux/x64/debug/lib/")
@@ -30,12 +29,12 @@ install(
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   install(DIRECTORY ${RML_DEBUG_LIBRARY_DIR}
     DESTINATION lib
-    FILES_MATCHING PATTERN "*${CMAKE_SHARED_LIBRARY_SUFFIX}"
+    FILES_MATCHING PATTERN "*${CMAKE_STATIC_LIBRARY_SUFFIX}"
     )
 else()
   install(DIRECTORY ${RML_RELEASE_LIBRARY_DIR}
     DESTINATION lib
-    FILES_MATCHING PATTERN "*${CMAKE_SHARED_LIBRARY_SUFFIX}"
+    FILES_MATCHING PATTERN "*${CMAKE_STATIC_LIBRARY_SUFFIX}"
     )
 endif()
 
