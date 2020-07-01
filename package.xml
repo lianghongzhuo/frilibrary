@@ -19,7 +19,8 @@
     able to set-up own control architectures and/or application-specific controllers for the light-weight 
     arm as it is often desired at research institutions.
   </description>
-  <maintainer email="tkr@stanford.edu">Torsten Kroeger Stanford University</maintainer>
+  <author email="tkr@stanford.edu">Torsten Kroeger Stanford University (original source code)</author>
+  <maintainer email="liang@informatik.uni-hamburg.de">Hongzhuo Liang (catkin package)</maintainer>
   <url>https://cs.stanford.edu/people/tkr/fri/html/index.html</url>
   <license>Apachev2</license>
 
