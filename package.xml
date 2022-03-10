@@ -23,8 +23,7 @@
   <maintainer email="liang@informatik.uni-hamburg.de">Hongzhuo Liang (catkin package)</maintainer>
   <url>https://cs.stanford.edu/people/tkr/fri/html/index.html</url>
   <license>Apachev2</license>
-
-  <buildtool_depend>cmake</buildtool_depend>
+  <buildtool_depend>catkin</buildtool_depend>
 
   <export>
     <build_type>cmake</build_type>

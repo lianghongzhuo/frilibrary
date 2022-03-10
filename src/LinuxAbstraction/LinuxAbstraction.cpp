@@ -42,10 +42,6 @@
 
 
 #include <OSAbstraction.h>
-
-#ifdef __LINUX__
-
-
 #include <time.h>
 #include <string.h>
 #include <strings.h>
@@ -273,5 +269,3 @@ float GetSystemTimeInSeconds(const bool &Reset)
 					-	StoredSystemTimeInSeconds.tv_nsec)
 					*	(double)1e-9));
 }
-
-#endif

@@ -1,19 +1,23 @@
 cmake_minimum_required(VERSION 3.0.2)
 
 project(frilibrary)
-set(frilibrary_VERSION 0.0.0)
+set(frilibrary_VERSION 0.0.1)
 include_directories(
         include
+        ${catkin_INCLUDE_DIRS}
 )
+
+find_package(catkin REQUIRED COMPONENTS nodelet)
+
+catkin_package(
+   INCLUDE_DIRS include
+   LIBRARIES FastResearchInterfaceLibrary TypeIRML)
+
 file(GLOB FRI_FILES ${PROJECT_SOURCE_DIR}/src/FastResearchInterfaceLibrary/*.cpp)
-add_library(FastResearchInterfaceLibrary ${LINUX_ABS_FILES} ${FRI_FILES})
+add_library(FastResearchInterfaceLibrary  ${FRI_FILES} ${PROJECT_SOURCE_DIR}/src/LinuxAbstraction/LinuxAbstraction.cpp)
 
 file(GLOB RML_FILES ${PROJECT_SOURCE_DIR}/src/TypeIRML/*.cpp)
-add_library(TypeIRML ${LINUX_ABS_FILES} ${RML_FILES})
+add_library(TypeIRML ${RML_FILES})
 
-# install header file hierarchy
-file(GLOB HEADER_FILES RELATIVE ${PROJECT_SOURCE_DIR} include/*.h)
-foreach(HEADER ${HEADER_FILES})
-    string(REGEX MATCH "(.*)[/\\]" DIR ${HEADER})
-    install(FILES ${HEADER} DESTINATION include)
-endforeach()
+install(TARGETS FastResearchInterfaceLibrary TypeIRML
+        DESTINATION lib)
