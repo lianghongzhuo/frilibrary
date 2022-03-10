@@ -47,16 +47,11 @@
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-#include <LWRJointPositionController.h>
+#include <frilibrary/LWRJointPositionController.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <errno.h>
 #include <math.h>
-
-#ifndef NUMBER_OF_JOINTS
-#define NUMBER_OF_JOINTS 7
-#endif
 
 #ifndef PI
 #define PI 3.1415926535897932384626433832795

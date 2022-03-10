@@ -47,25 +47,10 @@
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-#include <LWRCartImpedanceController.h>
+#include <frilibrary/LWRCartImpedanceController.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <errno.h>
-#include <math.h>
-
-#ifndef NUMBER_OF_JOINTS
-#define NUMBER_OF_JOINTS 7
-#endif
-
-#ifndef NUMBER_OF_CART_DOFS
-#define NUMBER_OF_CART_DOFS 6
-#endif
-
-#ifndef NUMBER_OF_FRAME_ELEMENTS
-#define NUMBER_OF_FRAME_ELEMENTS 12
-#endif
-
 #define RUN_TIME_IN_SECONDS 10.0
 
 //*******************************************************************************************

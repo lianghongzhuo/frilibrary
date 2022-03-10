@@ -25,3 +25,19 @@ install(TARGETS FastResearchInterfaceLibrary TypeIRML
 install(DIRECTORY include/${PROJECT_NAME}/
         DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
         )
+
+add_executable(LWRCartImpedanceControlExample src/LWRGettingStartedExamples/LWRCartImpedanceControlExample.cpp)
+add_dependencies(LWRCartImpedanceControlExample ${catkin_EXPORTED_TARGETS})
+target_link_libraries(LWRCartImpedanceControlExample ${catkin_LIBRARIES} FastResearchInterfaceLibrary pthread)
+
+add_executable(LWRJointImpedanceControlExample src/LWRGettingStartedExamples/LWRJointImpedanceControlExample.cpp)
+add_dependencies(LWRJointImpedanceControlExample ${catkin_EXPORTED_TARGETS})
+target_link_libraries(LWRJointImpedanceControlExample ${catkin_LIBRARIES} FastResearchInterfaceLibrary pthread)
+
+add_executable(LWRJointPositionControlExample src/LWRGettingStartedExamples/LWRJointPositionControlExample.cpp)
+add_dependencies(LWRJointPositionControlExample ${catkin_EXPORTED_TARGETS})
+target_link_libraries(LWRJointPositionControlExample ${catkin_LIBRARIES} FastResearchInterfaceLibrary pthread)
+
+add_executable(LWRLoggingExample src/LWRGettingStartedExamples/LWRLoggingExample.cpp)
+add_dependencies(LWRLoggingExample ${catkin_EXPORTED_TARGETS})
+target_link_libraries(LWRLoggingExample ${catkin_LIBRARIES} FastResearchInterfaceLibrary pthread)

@@ -47,17 +47,10 @@
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-#include <LWRJointImpedanceController.h>
+#include <frilibrary/LWRJointImpedanceController.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <errno.h>
-#include <math.h>
-
-#ifndef NUMBER_OF_JOINTS
-#define NUMBER_OF_JOINTS 7
-#endif
-
 #define RUN_TIME_IN_SECONDS 10.0
 
 //*******************************************************************************************

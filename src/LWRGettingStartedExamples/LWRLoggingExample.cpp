@@ -51,7 +51,7 @@
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-#include <LWRJointPositionController.h>
+#include <frilibrary/LWRJointPositionController.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
