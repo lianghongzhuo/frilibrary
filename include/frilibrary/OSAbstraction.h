@@ -45,17 +45,7 @@
 
 #include <stdlib.h>
 
-//  ---------------------- Doxygen info ----------------------
-//! \def OS_FOLDER_SEPARATOR
-//!
-//! \brief
-//! Slash for non-Microsoft operating system or backslash for Microsoft operating systems
-//  ----------------------------------------------------------
-#if defined(WIN32) || defined(WIN64) || defined(_WIN64)
-#define OS_FOLDER_SEPARATOR ("\\")
-#else
 #define OS_FOLDER_SEPARATOR ("/")
-#endif
 
 //  ---------------------- Doxygen info ----------------------
 //! \fn unsigned char WaitForKBCharacter(bool *Abort = NULL)

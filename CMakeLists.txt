@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.0.2)
 project(frilibrary)
 set(frilibrary_VERSION 0.0.1)
 include_directories(
-        include
+        include/${PROJECT_NAME}/
         ${catkin_INCLUDE_DIRS}
 )
 
@@ -21,3 +21,7 @@ add_library(TypeIRML ${RML_FILES})
 
 install(TARGETS FastResearchInterfaceLibrary TypeIRML
         DESTINATION lib)
+
+install(DIRECTORY include/${PROJECT_NAME}/
+        DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+        )
