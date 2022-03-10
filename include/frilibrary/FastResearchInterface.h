@@ -47,9 +47,9 @@
 #ifndef __FastResearchInterface__
 #define __FastResearchInterface__
 
-#include <Console.h>
-#include <DataLogging.h>
-#include <FRICommunication.h>
+#include <frilibrary/Console.h>
+#include <frilibrary/DataLogging.h>
+#include <frilibrary/FRICommunication.h>
 #include <pthread.h>
 
 //  ---------------------- Doxygen info ----------------------

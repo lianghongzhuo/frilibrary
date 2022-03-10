@@ -40,7 +40,7 @@
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-#include <OSAbstraction.h>
+#include <frilibrary/OSAbstraction.h>
 #include <time.h>
 #include <string.h>
 #include <strings.h>

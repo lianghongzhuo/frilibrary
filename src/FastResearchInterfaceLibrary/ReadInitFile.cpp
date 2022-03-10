@@ -45,11 +45,11 @@
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-#include <FastResearchInterface.h>
-#include <Console.h>
+#include <frilibrary/FastResearchInterface.h>
+#include <frilibrary/Console.h>
 #include <errno.h>
 #include <string.h>
-#include <InitializationFileEntry.h>
+#include <frilibrary/InitializationFileEntry.h>
 
 #define stricmp strcasecmp
 #define strnicmp strncasecmp

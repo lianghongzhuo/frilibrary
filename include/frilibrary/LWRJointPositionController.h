@@ -48,8 +48,8 @@
 #ifndef __LWRJointPositionController__
 #define __LWRJointPositionController__
 
-#include <FastResearchInterface.h>
-#include <LWRBaseControllerInterface.h>
+#include <frilibrary/FastResearchInterface.h>
+#include <frilibrary/LWRBaseControllerInterface.h>
 
 //  ---------------------- Doxygen info ----------------------
 //! \class LWRJointPositionController

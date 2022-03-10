@@ -47,11 +47,11 @@
 #ifndef __TypeIRML__
 #define __TypeIRML__
 
-#include <TypeIRMLMath.h>
-#include <TypeIRMLVector.h>
-#include <TypeIRMLInputParameters.h>
-#include <TypeIRMLOutputParameters.h>
-#include <TypeIRMLPolynomial.h>
+#include <frilibrary/TypeIRMLMath.h>
+#include <frilibrary/TypeIRMLVector.h>
+#include <frilibrary/TypeIRMLInputParameters.h>
+#include <frilibrary/TypeIRMLOutputParameters.h>
+#include <frilibrary/TypeIRMLPolynomial.h>
 
 using namespace TypeIRMLMath;
 

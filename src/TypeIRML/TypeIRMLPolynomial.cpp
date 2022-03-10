@@ -40,8 +40,8 @@
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-#include <TypeIRMLPolynomial.h>
-#include <TypeIRMLMath.h>
+#include <frilibrary/TypeIRMLPolynomial.h>
+#include <frilibrary/TypeIRMLMath.h>
 
 //************************************************************************************
 // Constructor

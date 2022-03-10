@@ -45,10 +45,10 @@
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-#include <FastResearchInterface.h>
-#include <Console.h>
+#include <frilibrary/FastResearchInterface.h>
+#include <frilibrary/Console.h>
 #include <errno.h>
-#include <OSAbstraction.h>
+#include <frilibrary/OSAbstraction.h>
 
 #define TIMEOUT_VALUE_IN_SECONDS_TO_REACH_MONITOR_MODE 10.0
 

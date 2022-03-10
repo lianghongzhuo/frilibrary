@@ -41,7 +41,7 @@
 #ifndef __TypeIRMLOutputParameters__
 #define __TypeIRMLOutputParameters__
 
-#include <TypeIRMLVector.h>
+#include <frilibrary/TypeIRMLVector.h>
 
 namespace TypeIRMLMath
 {

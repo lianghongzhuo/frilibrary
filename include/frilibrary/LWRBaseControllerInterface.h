@@ -52,9 +52,9 @@
 #ifndef __LWRBaseControllerInterface__
 #define __LWRBaseControllerInterface__
 
-#include <FastResearchInterface.h>
-#include <FRICommunication.h>
-#include <OSAbstraction.h>
+#include <frilibrary/FastResearchInterface.h>
+#include <frilibrary/FRICommunication.h>
+#include <frilibrary/OSAbstraction.h>
 #include <errno.h>
 #include <stdarg.h>
 

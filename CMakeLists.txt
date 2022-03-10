@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.0.2)
 project(frilibrary)
 set(frilibrary_VERSION 0.0.1)
 include_directories(
-        include/${PROJECT_NAME}/
+        include/
         ${catkin_INCLUDE_DIRS}
 )
 

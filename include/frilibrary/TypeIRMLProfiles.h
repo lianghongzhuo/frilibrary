@@ -41,7 +41,7 @@
 #ifndef __TypeIRMLProfiles__
 #define __TypeIRMLProfiles__
 
-#include <TypeIRMLPolynomial.h>
+#include <frilibrary/TypeIRMLPolynomial.h>
 
 namespace TypeIRMLMath
 {

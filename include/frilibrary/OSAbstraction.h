@@ -102,6 +102,6 @@ unsigned char CheckForKBCharacter(void);
 //  ----------------------------------------------------------
 float GetSystemTimeInSeconds(const bool& Reset = false);
 
-#include <LinuxAbstraction.h>
+#include <frilibrary/LinuxAbstraction.h>
 
 #endif

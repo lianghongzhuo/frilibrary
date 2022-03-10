@@ -46,9 +46,9 @@
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-#include <FastResearchInterface.h>
+#include <frilibrary/FastResearchInterface.h>
 #include <string.h>
-#include <OSAbstraction.h>
+#include <frilibrary/OSAbstraction.h>
 
 #define SINGLE_LINE "-----------------------------------------------------------------------------"
 #define DOUBLE_LINE "============================================================================="

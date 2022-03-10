@@ -48,8 +48,8 @@
 #ifndef __LWRCartImpedanceController__
 #define __LWRCartImpedanceController__
 
-#include <FastResearchInterface.h>
-#include <LWRBaseControllerInterface.h>
+#include <frilibrary/FastResearchInterface.h>
+#include <frilibrary/LWRBaseControllerInterface.h>
 
 //  ---------------------- Doxygen info ----------------------
 //! \class LWRCartImpedanceController

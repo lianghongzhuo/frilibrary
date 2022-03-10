@@ -46,12 +46,12 @@
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-#include <Console.h>
+#include <frilibrary/Console.h>
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
 #include <pthread.h>
-#include <OSAbstraction.h>
+#include <frilibrary/OSAbstraction.h>
 
 #if defined(WIN32) || defined(WIN64) || defined(_WIN64)  // \ToDo Make this clean through the OSAbstraction
 #include <Windows.h>

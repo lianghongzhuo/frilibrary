@@ -44,8 +44,8 @@
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-#include "UDPSocket.h"
-#include <OSAbstraction.h>
+#include <frilibrary/UDPSocket.h>
+#include <frilibrary/OSAbstraction.h>
 
 #if defined(WIN32) || defined(WIN64) || defined(_WIN64)
 #include <winsock2.h>

@@ -45,10 +45,10 @@
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-#include <FastResearchInterface.h>
+#include <frilibrary/FastResearchInterface.h>
 #include <pthread.h>
 #include <errno.h>
-#include <OSAbstraction.h>
+#include <frilibrary/OSAbstraction.h>
 
 // ****************************************************************
 // WaitForKRCTick()

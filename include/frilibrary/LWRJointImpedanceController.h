@@ -48,8 +48,8 @@
 #ifndef __LWRJointImpedanceController__
 #define __LWRJointImpedanceController__
 
-#include <FastResearchInterface.h>
-#include <LWRBaseControllerInterface.h>
+#include <frilibrary/FastResearchInterface.h>
+#include <frilibrary/LWRBaseControllerInterface.h>
 
 //  ---------------------- Doxygen info ----------------------
 //! \class LWRJointImpedanceController

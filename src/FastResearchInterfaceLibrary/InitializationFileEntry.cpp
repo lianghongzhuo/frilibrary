@@ -45,7 +45,7 @@
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-#include <InitializationFileEntry.h>
+#include <frilibrary/InitializationFileEntry.h>
 #include <string.h>
 #include <stdio.h>
 

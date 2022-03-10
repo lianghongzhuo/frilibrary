@@ -39,14 +39,14 @@
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-#include <TypeIRML.h>
-#include <TypeIRMLPolynomial.h>
-#include <TypeIRMLMath.h>
-#include <TypeIRMLVector.h>
-#include <TypeIRMLInputParameters.h>
-#include <TypeIRMLOutputParameters.h>
-#include <TypeIRMLDecision.h>
-#include <TypeIRMLProfiles.h>
+#include <frilibrary/TypeIRML.h>
+#include <frilibrary/TypeIRMLPolynomial.h>
+#include <frilibrary/TypeIRMLMath.h>
+#include <frilibrary/TypeIRMLVector.h>
+#include <frilibrary/TypeIRMLInputParameters.h>
+#include <frilibrary/TypeIRMLOutputParameters.h>
+#include <frilibrary/TypeIRMLDecision.h>
+#include <frilibrary/TypeIRMLProfiles.h>
 #include <string.h>
 #include <math.h>
 

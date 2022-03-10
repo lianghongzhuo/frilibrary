@@ -45,8 +45,8 @@
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-#include <FastResearchInterface.h>
-#include <Console.h>
+#include <frilibrary/FastResearchInterface.h>
+#include <frilibrary/Console.h>
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -54,7 +54,7 @@
 #include <signal.h>
 #include <errno.h>
 #include <stdarg.h>
-#include <OSAbstraction.h>
+#include <frilibrary/OSAbstraction.h>
 
 #define MAX_ROBOT_NAME_LENGTH 256
 #define MAX_OUTPUT_PATH_LENGTH 256

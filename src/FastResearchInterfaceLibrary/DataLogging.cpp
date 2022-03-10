@@ -46,9 +46,9 @@
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-#include <DataLogging.h>
-#include <FastResearchInterface.h>
-#include <OSAbstraction.h>
+#include <frilibrary/DataLogging.h>
+#include <frilibrary/FastResearchInterface.h>
+#include <frilibrary/OSAbstraction.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>

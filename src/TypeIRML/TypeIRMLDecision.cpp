@@ -40,8 +40,8 @@
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-#include <TypeIRMLDecision.h>
-#include <TypeIRMLMath.h>
+#include <frilibrary/TypeIRMLDecision.h>
+#include <frilibrary/TypeIRMLMath.h>
 
 //************************************************************************************
 // Decision_1001()

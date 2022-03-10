@@ -46,14 +46,14 @@
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-#include <FastResearchInterface.h>
+#include <frilibrary/FastResearchInterface.h>
 #include <pthread.h>
 #include <sched.h>
 #include <string.h>
 #include <stdio.h>
-#include <UDPSocket.h>
-#include <FRICommunication.h>
-#include <OSAbstraction.h>
+#include <frilibrary/UDPSocket.h>
+#include <frilibrary/FRICommunication.h>
+#include <frilibrary/OSAbstraction.h>
 
 #if defined(WIN32) || defined(WIN64) || defined(_WIN64)  // \ToDo Make this clean through the OSAbstraction
 #include <Windows.h>

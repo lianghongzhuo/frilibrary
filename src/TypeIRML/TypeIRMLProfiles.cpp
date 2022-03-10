@@ -40,8 +40,8 @@
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-#include <TypeIRMLProfiles.h>
-#include <TypeIRMLMath.h>
+#include <frilibrary/TypeIRMLProfiles.h>
+#include <frilibrary/TypeIRMLMath.h>
 #include <math.h>
 
 //************************************************************************************

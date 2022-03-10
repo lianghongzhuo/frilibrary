@@ -50,7 +50,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <FRICommunication.h>
+#include <frilibrary/FRICommunication.h>
 
 //  ---------------------- Doxygen info ----------------------
 //! \class DataLogging
