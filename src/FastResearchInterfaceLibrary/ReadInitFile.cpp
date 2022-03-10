@@ -52,10 +52,8 @@
 #include <string.h>
 #include <InitializationFileEntry.h>
 
-#ifdef __LINUX__
 #define stricmp strcasecmp
 #define strnicmp strncasecmp
-#endif
 
 
 // ****************************************************************

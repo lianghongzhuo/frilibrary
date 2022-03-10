@@ -44,8 +44,6 @@
 #ifndef __LinuxAbstraction__
 #define __LinuxAbstraction__
 
-#ifdef __LINUX__
-
 #include <unistd.h>
 #include <string.h>
 
@@ -63,4 +61,4 @@ int stricmp(const char *s1, const char *s2);
 
 
 #endif
-#endif
+
