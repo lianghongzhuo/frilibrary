@@ -39,100 +39,94 @@
 //! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n
 //! See the License for the specific language governing permissions and\n
 //! limitations under the License.\n
-//! 
+//!
 //  ----------------------------------------------------------
 //   For a convenient reading of this file's source code,
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
-
 
 #include <FastResearchInterface.h>
 #include <DataLogging.h>
 #include <errno.h>
 #include <OSAbstraction.h>
 
-
 // ****************************************************************
 // PrepareLogging()
 //
-int FastResearchInterface::PrepareLogging(const char *FileIdentifier)
+int FastResearchInterface::PrepareLogging(const char* FileIdentifier)
 {
-	if (this->LoggingState != FastResearchInterface::WriteLoggingDataFileCalled)
-	{
-		return(EINVAL);
-	}
-	else
-	{
-		this->LoggingState = FastResearchInterface::PrepareLoggingCalled;
-	}
+    if (this->LoggingState != FastResearchInterface::WriteLoggingDataFileCalled)
+    {
+        return (EINVAL);
+    }
+    else
+    {
+        this->LoggingState = FastResearchInterface::PrepareLoggingCalled;
+    }
 
-	return(this->DataLogger->PrepareLogging(this->CurrentControlScheme, FileIdentifier));
+    return (this->DataLogger->PrepareLogging(this->CurrentControlScheme, FileIdentifier));
 }
-
 
 // ****************************************************************
 // StartLogging()
 //
 int FastResearchInterface::StartLogging(void)
 {
-	if (this->LoggingState != FastResearchInterface::PrepareLoggingCalled)
-	{
-		return(EINVAL);
-	}
-	else
-	{
-		this->LoggingState = FastResearchInterface::StartLoggingCalled;
-	}
+    if (this->LoggingState != FastResearchInterface::PrepareLoggingCalled)
+    {
+        return (EINVAL);
+    }
+    else
+    {
+        this->LoggingState = FastResearchInterface::StartLoggingCalled;
+    }
 
-	pthread_mutex_lock(&(this->MutexForLogging));
-	this->LoggingIsActive	=	true;
-	pthread_mutex_unlock(&(this->MutexForLogging));
+    pthread_mutex_lock(&(this->MutexForLogging));
+    this->LoggingIsActive = true;
+    pthread_mutex_unlock(&(this->MutexForLogging));
 
-	return(EOK);
+    return (EOK);
 }
-
 
 // ****************************************************************
 // StopLogging()
 //
 int FastResearchInterface::StopLogging(void)
 {
-	if (this->LoggingState != FastResearchInterface::StartLoggingCalled)
-	{
-		return(EINVAL);
-	}
-	else
-	{
-		this->LoggingState = FastResearchInterface::StopLoggingCalled;
-	}
+    if (this->LoggingState != FastResearchInterface::StartLoggingCalled)
+    {
+        return (EINVAL);
+    }
+    else
+    {
+        this->LoggingState = FastResearchInterface::StopLoggingCalled;
+    }
 
-	pthread_mutex_lock(&(this->MutexForLogging));
-	this->LoggingIsActive	=	false;
-	pthread_mutex_unlock(&(this->MutexForLogging));
+    pthread_mutex_lock(&(this->MutexForLogging));
+    this->LoggingIsActive = false;
+    pthread_mutex_unlock(&(this->MutexForLogging));
 
-	return(EOK);
+    return (EOK);
 }
-
 
 // ****************************************************************
 // WriteLoggingDataFile()
 //
 int FastResearchInterface::WriteLoggingDataFile(void)
 {
-	if (this->LoggingState == FastResearchInterface::WriteLoggingDataFileCalled)
-	{
-		return(EINVAL);
-	}
+    if (this->LoggingState == FastResearchInterface::WriteLoggingDataFileCalled)
+    {
+        return (EINVAL);
+    }
 
-	this->LoggingState = FastResearchInterface::WriteLoggingDataFileCalled;
+    this->LoggingState = FastResearchInterface::WriteLoggingDataFileCalled;
 
-	if (this->LoggingState == FastResearchInterface::StartLoggingCalled)
-	{
-		pthread_mutex_lock(&(this->MutexForLogging));
-		this->LoggingIsActive	=	false;
-		pthread_mutex_unlock(&(this->MutexForLogging));
-	}
+    if (this->LoggingState == FastResearchInterface::StartLoggingCalled)
+    {
+        pthread_mutex_lock(&(this->MutexForLogging));
+        this->LoggingIsActive = false;
+        pthread_mutex_unlock(&(this->MutexForLogging));
+    }
 
-	return(this->DataLogger->WriteToFile());
+    return (this->DataLogger->WriteToFile());
 }
-

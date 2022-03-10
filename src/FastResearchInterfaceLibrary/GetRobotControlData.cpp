@@ -40,176 +40,165 @@
 //! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n
 //! See the License for the specific language governing permissions and\n
 //! limitations under the License.\n
-//! 
+//!
 //  ----------------------------------------------------------
 //   For a convenient reading of this file's source code,
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-
 #include <FastResearchInterface.h>
 #include <pthread.h>
 #include <FRICommunication.h>
 
-
 // ****************************************************************
 // GetMeasuredJointPositions()
 //
-void FastResearchInterface::GetMeasuredJointPositions(float *MeasuredJointPositions)
+void FastResearchInterface::GetMeasuredJointPositions(float* MeasuredJointPositions)
 {
-	unsigned int		i	=	0;
+    unsigned int i = 0;
 
-	pthread_mutex_lock(&(this->MutexForControlData));
-	for (i = 0; i < NUMBER_OF_JOINTS; i++)
-	{
-		MeasuredJointPositions[i]	=	this->ReadData.MeasuredData.FRIMeasuredJointPositionVectorInRad[i];
-	}
-	pthread_mutex_unlock(&(this->MutexForControlData));
+    pthread_mutex_lock(&(this->MutexForControlData));
+    for (i = 0; i < NUMBER_OF_JOINTS; i++)
+    {
+        MeasuredJointPositions[i] = this->ReadData.MeasuredData.FRIMeasuredJointPositionVectorInRad[i];
+    }
+    pthread_mutex_unlock(&(this->MutexForControlData));
 
-	return;
+    return;
 }
-
 
 // ****************************************************************
 // GetCommandedJointPositions()
 //
-void FastResearchInterface::GetCommandedJointPositions(float *CommandedJointPositions)
+void FastResearchInterface::GetCommandedJointPositions(float* CommandedJointPositions)
 {
-	unsigned int		i	=	0;
+    unsigned int i = 0;
 
-	pthread_mutex_lock(&(this->MutexForControlData));
-	for (i = 0; i < NUMBER_OF_JOINTS; i++)
-	{
-		CommandedJointPositions[i]	=	this->ReadData.MeasuredData.FRICommandedJointPostionVectorFromKRC[i];
-	}
-	pthread_mutex_unlock(&(this->MutexForControlData));
+    pthread_mutex_lock(&(this->MutexForControlData));
+    for (i = 0; i < NUMBER_OF_JOINTS; i++)
+    {
+        CommandedJointPositions[i] = this->ReadData.MeasuredData.FRICommandedJointPostionVectorFromKRC[i];
+    }
+    pthread_mutex_unlock(&(this->MutexForControlData));
 
-	return;
+    return;
 }
-
 
 // ****************************************************************
 // GetCommandedJointPositionOffsets()
 //
-void FastResearchInterface::GetCommandedJointPositionOffsets(float *CommandedJointPositionOffsets)
+void FastResearchInterface::GetCommandedJointPositionOffsets(float* CommandedJointPositionOffsets)
 {
-	unsigned int		i	=	0;
+    unsigned int i = 0;
 
-	pthread_mutex_lock(&(this->MutexForControlData));
-	for (i = 0; i < NUMBER_OF_JOINTS; i++)
-	{
-		CommandedJointPositionOffsets[i]	=	this->ReadData.MeasuredData.FRICommandedJointPostionOffsetVectorFromKRC[i];
-	}
-	pthread_mutex_unlock(&(this->MutexForControlData));
+    pthread_mutex_lock(&(this->MutexForControlData));
+    for (i = 0; i < NUMBER_OF_JOINTS; i++)
+    {
+        CommandedJointPositionOffsets[i] = this->ReadData.MeasuredData.FRICommandedJointPostionOffsetVectorFromKRC[i];
+    }
+    pthread_mutex_unlock(&(this->MutexForControlData));
 
-	return;
+    return;
 }
-
 
 // ****************************************************************
 // GetMeasuredJointTorques()
 //
-void FastResearchInterface::GetMeasuredJointTorques(float *MeasuredJointTorques)
+void FastResearchInterface::GetMeasuredJointTorques(float* MeasuredJointTorques)
 {
-	unsigned int		i	=	0;
+    unsigned int i = 0;
 
-	pthread_mutex_lock(&(this->MutexForControlData));
-	for (i = 0; i < NUMBER_OF_JOINTS; i++)
-	{
-		MeasuredJointTorques[i]	=	this->ReadData.MeasuredData.FRIMeasuredJointTorqueVectorInNm[i];
-	}
-	pthread_mutex_unlock(&(this->MutexForControlData));
+    pthread_mutex_lock(&(this->MutexForControlData));
+    for (i = 0; i < NUMBER_OF_JOINTS; i++)
+    {
+        MeasuredJointTorques[i] = this->ReadData.MeasuredData.FRIMeasuredJointTorqueVectorInNm[i];
+    }
+    pthread_mutex_unlock(&(this->MutexForControlData));
 
-	return;
+    return;
 }
-
 
 // ****************************************************************
 // GetEstimatedExternalJointTorques()
 //
-void FastResearchInterface::GetEstimatedExternalJointTorques(float *EstimatedExternalJointTorques)
+void FastResearchInterface::GetEstimatedExternalJointTorques(float* EstimatedExternalJointTorques)
 {
-	unsigned int		i	=	0;
+    unsigned int i = 0;
 
-	pthread_mutex_lock(&(this->MutexForControlData));
-	for (i = 0; i < NUMBER_OF_JOINTS; i++)
-	{
-		EstimatedExternalJointTorques[i]	=	this->ReadData.MeasuredData.FRIEstimatedExternalJointTorqueVectorInNm[i];
-	}
-	pthread_mutex_unlock(&(this->MutexForControlData));
+    pthread_mutex_lock(&(this->MutexForControlData));
+    for (i = 0; i < NUMBER_OF_JOINTS; i++)
+    {
+        EstimatedExternalJointTorques[i] = this->ReadData.MeasuredData.FRIEstimatedExternalJointTorqueVectorInNm[i];
+    }
+    pthread_mutex_unlock(&(this->MutexForControlData));
 
-	return;
+    return;
 }
-
 
 // ****************************************************************
 // GetMeasuredCartPose()
 //
-void FastResearchInterface::GetMeasuredCartPose(float *MeasuredCartPose)
+void FastResearchInterface::GetMeasuredCartPose(float* MeasuredCartPose)
 {
-	unsigned int		i	=	0;
+    unsigned int i = 0;
 
-	pthread_mutex_lock(&(this->MutexForControlData));
-	for (i = 0; i < NUMBER_OF_FRAME_ELEMENTS; i++)
-	{
-		MeasuredCartPose[i]	=	this->ReadData.MeasuredData.FRIMeasuredCartesianFrame[i];
-	}
-	pthread_mutex_unlock(&(this->MutexForControlData));
+    pthread_mutex_lock(&(this->MutexForControlData));
+    for (i = 0; i < NUMBER_OF_FRAME_ELEMENTS; i++)
+    {
+        MeasuredCartPose[i] = this->ReadData.MeasuredData.FRIMeasuredCartesianFrame[i];
+    }
+    pthread_mutex_unlock(&(this->MutexForControlData));
 
-	return;
+    return;
 }
-
 
 // ****************************************************************
 // GetCommandedCartPose()
 //
-void FastResearchInterface::GetCommandedCartPose(float *CommandedCartPose)
+void FastResearchInterface::GetCommandedCartPose(float* CommandedCartPose)
 {
-	unsigned int		i	=	0;
+    unsigned int i = 0;
 
-	pthread_mutex_lock(&(this->MutexForControlData));
-	for (i = 0; i < NUMBER_OF_FRAME_ELEMENTS; i++)
-	{
-		CommandedCartPose[i]	=	this->ReadData.MeasuredData.FRICommandedCartesianFrameFromKRC[i];
-	}
-	pthread_mutex_unlock(&(this->MutexForControlData));
+    pthread_mutex_lock(&(this->MutexForControlData));
+    for (i = 0; i < NUMBER_OF_FRAME_ELEMENTS; i++)
+    {
+        CommandedCartPose[i] = this->ReadData.MeasuredData.FRICommandedCartesianFrameFromKRC[i];
+    }
+    pthread_mutex_unlock(&(this->MutexForControlData));
 
-	return;
+    return;
 }
-
 
 // ****************************************************************
 // GetCommandedCartPoseOffsets()
 //
-void FastResearchInterface::GetCommandedCartPoseOffsets(float *CommandedCartPoseOffsets)
+void FastResearchInterface::GetCommandedCartPoseOffsets(float* CommandedCartPoseOffsets)
 {
-	unsigned int		i	=	0;
+    unsigned int i = 0;
 
-	pthread_mutex_lock(&(this->MutexForControlData));
-	for (i = 0; i < NUMBER_OF_FRAME_ELEMENTS; i++)
-	{
-		CommandedCartPoseOffsets[i]	=	this->ReadData.MeasuredData.FRICommandedCartesianFrameOffsetFromKRC[i];
-	}
-	pthread_mutex_unlock(&(this->MutexForControlData));
+    pthread_mutex_lock(&(this->MutexForControlData));
+    for (i = 0; i < NUMBER_OF_FRAME_ELEMENTS; i++)
+    {
+        CommandedCartPoseOffsets[i] = this->ReadData.MeasuredData.FRICommandedCartesianFrameOffsetFromKRC[i];
+    }
+    pthread_mutex_unlock(&(this->MutexForControlData));
 
-	return;
+    return;
 }
-
 
 // ****************************************************************
 // GetEstimatedExternalCartForcesAndTorques()
 //
-void FastResearchInterface::GetEstimatedExternalCartForcesAndTorques(float *EstimatedExternalCartForcesAndTorques)
+void FastResearchInterface::GetEstimatedExternalCartForcesAndTorques(float* EstimatedExternalCartForcesAndTorques)
 {
-	unsigned int		i	=	0;
+    unsigned int i = 0;
 
-	pthread_mutex_lock(&(this->MutexForControlData));
-	for (i = 0; i < NUMBER_OF_CART_DOFS; i++)
-	{
-		EstimatedExternalCartForcesAndTorques[i]	=	this->ReadData.MeasuredData.FRIEstimatedCartesianForcesAndTorques[i];
-	}
-	pthread_mutex_unlock(&(this->MutexForControlData));
+    pthread_mutex_lock(&(this->MutexForControlData));
+    for (i = 0; i < NUMBER_OF_CART_DOFS; i++)
+    {
+        EstimatedExternalCartForcesAndTorques[i] = this->ReadData.MeasuredData.FRIEstimatedCartesianForcesAndTorques[i];
+    }
+    pthread_mutex_unlock(&(this->MutexForControlData));
 
-	return;
+    return;
 }
-

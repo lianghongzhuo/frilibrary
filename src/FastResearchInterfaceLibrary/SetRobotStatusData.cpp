@@ -40,121 +40,110 @@
 //! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n
 //! See the License for the specific language governing permissions and\n
 //! limitations under the License.\n
-//! 
+//!
 //  ----------------------------------------------------------
 //   For a convenient reading of this file's source code,
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-
 #include <FastResearchInterface.h>
 #include <pthread.h>
 #include <FRICommunication.h>
 
-
 // ****************************************************************
 // SetKRLBoolValues()
 //
-void FastResearchInterface::SetKRLBoolValues(const bool *KRLBoolValues)
+void FastResearchInterface::SetKRLBoolValues(const bool* KRLBoolValues)
 {
-	unsigned int		i	=	0;
+    unsigned int i = 0;
 
-	pthread_mutex_lock(&(this->MutexForControlData));
-	for (i = 0; i < SIZE_USER_DATA; i++)
-	{
-		if (KRLBoolValues[i])
-		{
-			this->CommandData.SharedKRLVariables.FRIBoolValuesInKRC |= (1 << i);
-		}
-		else
-		{
-			this->CommandData.SharedKRLVariables.FRIBoolValuesInKRC &= ( ~( 1 << i) );
-		}
-	}
-	pthread_mutex_unlock(&(this->MutexForControlData));
+    pthread_mutex_lock(&(this->MutexForControlData));
+    for (i = 0; i < SIZE_USER_DATA; i++)
+    {
+        if (KRLBoolValues[i])
+        {
+            this->CommandData.SharedKRLVariables.FRIBoolValuesInKRC |= (1 << i);
+        }
+        else
+        {
+            this->CommandData.SharedKRLVariables.FRIBoolValuesInKRC &= (~(1 << i));
+        }
+    }
+    pthread_mutex_unlock(&(this->MutexForControlData));
 
-	return;
+    return;
 }
-
 
 // ****************************************************************
 // SetKRLIntValues()
 //
-void FastResearchInterface::SetKRLIntValues(const int *KRLIntValues)
+void FastResearchInterface::SetKRLIntValues(const int* KRLIntValues)
 {
-	unsigned int		i	=	0;
+    unsigned int i = 0;
 
-	pthread_mutex_lock(&(this->MutexForControlData));
-	for (i = 0; i < SIZE_USER_DATA; i++)
-	{
-		this->CommandData.SharedKRLVariables.FRIIntegerValuesInKRC[i]	=	KRLIntValues[i];
-	}
-	pthread_mutex_unlock(&(this->MutexForControlData));
+    pthread_mutex_lock(&(this->MutexForControlData));
+    for (i = 0; i < SIZE_USER_DATA; i++)
+    {
+        this->CommandData.SharedKRLVariables.FRIIntegerValuesInKRC[i] = KRLIntValues[i];
+    }
+    pthread_mutex_unlock(&(this->MutexForControlData));
 
-	return;
+    return;
 }
-
 
 // ****************************************************************
 // SetKRLFloatValues()
 //
-void FastResearchInterface::SetKRLFloatValues(const float *KRLFloatValues)
+void FastResearchInterface::SetKRLFloatValues(const float* KRLFloatValues)
 {
-	unsigned int		i	=	0;
+    unsigned int i = 0;
 
-	pthread_mutex_lock(&(this->MutexForControlData));
-	for (i = 0; i < SIZE_USER_DATA; i++)
-	{
-		this->CommandData.SharedKRLVariables.FRIFloatingPointValuesInKRC[i]	=	KRLFloatValues[i];
-	}
-	pthread_mutex_unlock(&(this->MutexForControlData));
+    pthread_mutex_lock(&(this->MutexForControlData));
+    for (i = 0; i < SIZE_USER_DATA; i++)
+    {
+        this->CommandData.SharedKRLVariables.FRIFloatingPointValuesInKRC[i] = KRLFloatValues[i];
+    }
+    pthread_mutex_unlock(&(this->MutexForControlData));
 
-	return;
+    return;
 }
-
 
 // ****************************************************************
 // SetKRLBoolValue()
 //
-void FastResearchInterface::SetKRLBoolValue(	const unsigned int	&Index
-											,	const bool			&Value	)
+void FastResearchInterface::SetKRLBoolValue(const unsigned int& Index, const bool& Value)
 {
-	pthread_mutex_lock(&(this->MutexForControlData));
-	if (Value)
-	{
-		this->CommandData.SharedKRLVariables.FRIBoolValuesInKRC |= (1 << Index);
-	}
-	else
-	{
-		this->CommandData.SharedKRLVariables.FRIBoolValuesInKRC &= ( ~( 1 << Index) );
-	}
-	pthread_mutex_unlock(&(this->MutexForControlData));
-	return;
+    pthread_mutex_lock(&(this->MutexForControlData));
+    if (Value)
+    {
+        this->CommandData.SharedKRLVariables.FRIBoolValuesInKRC |= (1 << Index);
+    }
+    else
+    {
+        this->CommandData.SharedKRLVariables.FRIBoolValuesInKRC &= (~(1 << Index));
+    }
+    pthread_mutex_unlock(&(this->MutexForControlData));
+    return;
 }
-
 
 // ****************************************************************
 // SetKRLIntValue()
 //
-void FastResearchInterface::SetKRLIntValue(		const unsigned int	&Index
-										   	,	const int			&Value	)
+void FastResearchInterface::SetKRLIntValue(const unsigned int& Index, const int& Value)
 {
-	pthread_mutex_lock(&(this->MutexForControlData));
-	this->CommandData.SharedKRLVariables.FRIIntegerValuesInKRC[Index]	=	Value;
-	pthread_mutex_unlock(&(this->MutexForControlData));
-	return;
+    pthread_mutex_lock(&(this->MutexForControlData));
+    this->CommandData.SharedKRLVariables.FRIIntegerValuesInKRC[Index] = Value;
+    pthread_mutex_unlock(&(this->MutexForControlData));
+    return;
 }
-
 
 // ****************************************************************
 // SetKRLFloatValue()
 //
-void FastResearchInterface::SetKRLFloatValue(	const unsigned int	&Index
-											 ,	const float			&Value	)
+void FastResearchInterface::SetKRLFloatValue(const unsigned int& Index, const float& Value)
 {
-	pthread_mutex_lock(&(this->MutexForControlData));
-	this->CommandData.SharedKRLVariables.FRIFloatingPointValuesInKRC[Index]	=	Value;
-	pthread_mutex_unlock(&(this->MutexForControlData));
-	return;
+    pthread_mutex_lock(&(this->MutexForControlData));
+    this->CommandData.SharedKRLVariables.FRIFloatingPointValuesInKRC[Index] = Value;
+    pthread_mutex_unlock(&(this->MutexForControlData));
+    return;
 }
-

@@ -43,12 +43,11 @@
 //! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n
 //! See the License for the specific language governing permissions and\n
 //! limitations under the License.\n
-//! 
+//!
 //  ----------------------------------------------------------
 //   For a convenient reading of this file's source code,
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
-
 
 #ifndef __LWRBaseControllerInterface__
 #define __LWRBaseControllerInterface__
@@ -58,8 +57,6 @@
 #include <OSAbstraction.h>
 #include <errno.h>
 #include <stdarg.h>
-
-
 
 //  ---------------------- Doxygen info ----------------------
 //! \class LWRBaseControllerInterface
@@ -90,298 +87,278 @@
 
 class LWRBaseControllerInterface
 {
-
-
 public:
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn LWRBaseControllerInterface(const char *InitFileName)
+    //!
+    //! \brief
+    //! Constructor
+    //!
+    //! \details
+    //! The constructor creates the actual object of the class FastResearchInterface, which is used by this class.
+    //!
+    //! \copydetails FastResearchInterface::FastResearchInterface()
+    //  ----------------------------------------------------------
+    LWRBaseControllerInterface(const char* InitFileName)
+    {
+        this->FRI = new FastResearchInterface(InitFileName);
+    }
 
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn ~LWRBaseControllerInterface(void)
+    //!
+    //! \brief
+    //! Destructor
+    //!
+    //! \details
+    //! The destructor deletes the actual object of the class FastResearchInterface, which is used by this class.
+    //!
+    //! \copydetails FastResearchInterface::~FastResearchInterface()
+    //  ----------------------------------------------------------
+    ~LWRBaseControllerInterface(void)
+    {
+        delete this->FRI;
+    }
 
-//  ---------------------- Doxygen info ----------------------
-//! \fn LWRBaseControllerInterface(const char *InitFileName)
-//!
-//! \brief
-//! Constructor
-//!
-//! \details
-//! The constructor creates the actual object of the class FastResearchInterface, which is used by this class.
-//!
-//! \copydetails FastResearchInterface::FastResearchInterface()
-//  ----------------------------------------------------------
-	LWRBaseControllerInterface(const char *InitFileName)
-	{
-		this->FRI			=	new FastResearchInterface(InitFileName);
-	}
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn virtual inline int StartRobot(const float &TimeOutValueInSeconds) = 0
+    //!
+    //! \brief
+    //! \copybrief FastResearchInterface::StartRobot()
+    //!
+    //! \details
+    //! \copydetails FastResearchInterface::StartRobot()
+    //  ----------------------------------------------------------
+    virtual inline int StartRobot(const float& TimeOutValueInSeconds) = 0;
 
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn inline int StopRobot(void)
+    //!
+    //! \brief
+    //! \copybrief FastResearchInterface::StopRobot()
+    //!
+    //! \details
+    //! \copydetails FastResearchInterface::StopRobot()
+    //  ----------------------------------------------------------
+    inline int StopRobot(void)
+    {
+        return (this->FRI->StopRobot());
+    }
 
-//  ---------------------- Doxygen info ----------------------
-//! \fn ~LWRBaseControllerInterface(void)
-//!
-//! \brief
-//! Destructor
-//!
-//! \details
-//! The destructor deletes the actual object of the class FastResearchInterface, which is used by this class.
-//!
-//! \copydetails FastResearchInterface::~FastResearchInterface()
-//  ----------------------------------------------------------
-	~LWRBaseControllerInterface(void)
-	{
-		delete this->FRI;
-	}
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn inline int GetMeasuredJointPositions(float *MeasuredJointPositions)
+    //!
+    //! \brief
+    //! \copybrief FastResearchInterface::GetMeasuredJointPositions()
+    //!
+    //! \details
+    //! \copydetails FastResearchInterface::GetMeasuredJointPositions()
+    //!
+    //! \return
+    //! <ul>
+    //! <li> \c ENOTCONN if no connection between the remote host and the KRC unit exists.
+    //! <li> \c EOK if no error occurred.
+    //! </ul>
+    //  ----------------------------------------------------------
+    inline int GetMeasuredJointPositions(float* MeasuredJointPositions)
+    {
+        this->FRI->GetMeasuredJointPositions(MeasuredJointPositions);
 
+        if (this->FRI->GetFRIMode() == FRI_STATE_OFF)
+        {
+            return (ENOTCONN);
+        }
+        else
+        {
+            return (EOK);
+        }
+    }
 
-//  ---------------------- Doxygen info ----------------------
-//! \fn virtual inline int StartRobot(const float &TimeOutValueInSeconds) = 0
-//!
-//! \brief
-//! \copybrief FastResearchInterface::StartRobot()
-//!
-//! \details
-//! \copydetails FastResearchInterface::StartRobot()
-//  ----------------------------------------------------------
-	virtual inline int StartRobot(const float &TimeOutValueInSeconds) = 0;
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn inline int GetMeasuredJointTorques(float *MeasuredJointTorques)
+    //!
+    //! \brief
+    //! \copybrief FastResearchInterface::GetMeasuredJointTorques()
+    //!
+    //! \details
+    //! \copydetails FastResearchInterface::GetMeasuredJointTorques()
+    //!
+    //! \return
+    //! <ul>
+    //! <li> \c ENOTCONN if no connection between the remote host and the KRC unit exists.
+    //! <li> \c EOK if no error occurred.
+    //! </ul>
+    //  ----------------------------------------------------------
+    inline int GetMeasuredJointTorques(float* MeasuredJointTorques)
+    {
+        this->FRI->GetMeasuredJointTorques(MeasuredJointTorques);
 
-//  ---------------------- Doxygen info ----------------------
-//! \fn inline int StopRobot(void)
-//!
-//! \brief
-//! \copybrief FastResearchInterface::StopRobot()
-//!
-//! \details
-//! \copydetails FastResearchInterface::StopRobot()
-//  ----------------------------------------------------------
-	inline int StopRobot(void)
-	{
-		return(this->FRI->StopRobot());
-	}
+        if (this->FRI->GetFRIMode() == FRI_STATE_OFF)
+        {
+            return (ENOTCONN);
+        }
+        else
+        {
+            return (EOK);
+        }
+    }
 
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn inline int WaitForKRCTick(const unsigned int &TimeoutValueInMicroSeconds = 0)
+    //!
+    //! \brief
+    //! \copybrief FastResearchInterface::WaitForKRCTick()
+    //!
+    //! \details
+    //! \copydetails FastResearchInterface::WaitForKRCTick()
+    //  ----------------------------------------------------------
+    inline int WaitForKRCTick(const unsigned int& TimeoutValueInMicroSeconds = 0)
+    {
+        return (this->FRI->WaitForKRCTick(TimeoutValueInMicroSeconds));
+    }
 
-//  ---------------------- Doxygen info ----------------------
-//! \fn inline int GetMeasuredJointPositions(float *MeasuredJointPositions)
-//!
-//! \brief
-//! \copybrief FastResearchInterface::GetMeasuredJointPositions()
-//!
-//! \details
-//! \copydetails FastResearchInterface::GetMeasuredJointPositions()
-//!
-//! \return
-//! <ul>
-//! <li> \c ENOTCONN if no connection between the remote host and the KRC unit exists.
-//! <li> \c EOK if no error occurred.
-//! </ul>
-//  ----------------------------------------------------------
-	inline int GetMeasuredJointPositions(float *MeasuredJointPositions)
-	{
-		this->FRI->GetMeasuredJointPositions(MeasuredJointPositions);
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn inline int WaitForTimerTick(const unsigned int &TimeoutValueInMicroSeconds = 0)
+    //!
+    //! \brief
+    //! \copybrief FastResearchInterface::WaitForTimerTick()
+    //!
+    //! \details
+    //! \copydetails FastResearchInterface::WaitForTimerTick()
+    //  ----------------------------------------------------------
+    inline int WaitForTimerTick(const unsigned int& TimeoutValueInMicroSeconds = 0)
+    {
+        return (this->FRI->WaitForTimerTick(TimeoutValueInMicroSeconds));
+    }
 
-		if (this->FRI->GetFRIMode() == FRI_STATE_OFF)
-		{
-			return(ENOTCONN);
-		}
-		else
-		{
-			return(EOK);
-		}
-	}
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn inline bool IsMachineOK(void)
+    //!
+    //! \brief
+    //! \copybrief FastResearchInterface::IsMachineOK()
+    //!
+    //! \details
+    //! \copydetails FastResearchInterface::IsMachineOK()
+    //  ----------------------------------------------------------
+    inline bool IsMachineOK(void)
+    {
+        return (this->FRI->IsMachineOK());
+    }
 
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn inline float GetCycleTime(void)
+    //!
+    //! \brief
+    //! \copybrief FastResearchInterface::GetFRICycleTime()
+    //!
+    //! \details
+    //! \copydetails FastResearchInterface::GetFRICycleTime()
+    //  ----------------------------------------------------------
+    inline float GetCycleTime(void)
+    {
+        return (this->FRI->GetFRICycleTime());
+    }
 
-//  ---------------------- Doxygen info ----------------------
-//! \fn inline int GetMeasuredJointTorques(float *MeasuredJointTorques)
-//!
-//! \brief
-//! \copybrief FastResearchInterface::GetMeasuredJointTorques()
-//!
-//! \details
-//! \copydetails FastResearchInterface::GetMeasuredJointTorques()
-//!
-//! \return
-//! <ul>
-//! <li> \c ENOTCONN if no connection between the remote host and the KRC unit exists.
-//! <li> \c EOK if no error occurred.
-//! </ul>
-//  ----------------------------------------------------------
-	inline int GetMeasuredJointTorques(float *MeasuredJointTorques)
-	{
-		this->FRI->GetMeasuredJointTorques(MeasuredJointTorques);
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn inline const char* GetCompleteRobotStateAndInformation(void)
+    //!
+    //! \brief
+    //! \copybrief FastResearchInterface::GetCompleteRobotStateAndInformation()
+    //!
+    //! \details
+    //! \copydetails FastResearchInterface::GetCompleteRobotStateAndInformation()
+    //  ----------------------------------------------------------
+    inline const char* GetCompleteRobotStateAndInformation(void)
+    {
+        return (FRI->GetCompleteRobotStateAndInformation());
+    }
 
-		if (this->FRI->GetFRIMode() == FRI_STATE_OFF)
-		{
-			return(ENOTCONN);
-		}
-		else
-		{
-			return(EOK);
-		}
-	}
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn inline int printf(const char* Format, ...)
+    //!
+    //! \brief
+    //! \copybrief FastResearchInterface::printf()
+    //!
+    //! \details
+    //! \copydetails FastResearchInterface::printf()
+    //  ----------------------------------------------------------
+    inline int printf(const char* Format, ...)
+    {
+        int Result = 0;
+        va_list ListOfArguments;
 
+        va_start(ListOfArguments, Format);
+        Result = FRI->printf(Format, ListOfArguments);
+        va_end(ListOfArguments);
 
-//  ---------------------- Doxygen info ----------------------
-//! \fn inline int WaitForKRCTick(const unsigned int &TimeoutValueInMicroSeconds = 0)
-//!
-//! \brief
-//! \copybrief FastResearchInterface::WaitForKRCTick()
-//!
-//! \details
-//! \copydetails FastResearchInterface::WaitForKRCTick()
-//  ----------------------------------------------------------
-	inline int WaitForKRCTick(const unsigned int &TimeoutValueInMicroSeconds = 0)
-	{
-		return(this->FRI->WaitForKRCTick(TimeoutValueInMicroSeconds));
-	}
+        return (Result);
+    }
 
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn inline int PrepareLogging(const char *FileIdentifier = NULL)
+    //!
+    //! \brief
+    //! \copybrief FastResearchInterface::PrepareLogging()
+    //!
+    //! \details
+    //! \copydetails FastResearchInterface::PrepareLogging()
+    //  ----------------------------------------------------------
+    inline int PrepareLogging(const char* FileIdentifier = NULL)
+    {
+        return (FRI->PrepareLogging(FileIdentifier));
+    }
 
-//  ---------------------- Doxygen info ----------------------
-//! \fn inline int WaitForTimerTick(const unsigned int &TimeoutValueInMicroSeconds = 0)
-//!
-//! \brief
-//! \copybrief FastResearchInterface::WaitForTimerTick()
-//!
-//! \details
-//! \copydetails FastResearchInterface::WaitForTimerTick()
-//  ----------------------------------------------------------
-	inline int WaitForTimerTick(const unsigned int &TimeoutValueInMicroSeconds = 0)
-	{
-		return(this->FRI->WaitForTimerTick(TimeoutValueInMicroSeconds));
-	}
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn inline int StartLogging(void)
+    //!
+    //! \brief
+    //! \copybrief FastResearchInterface::StartLogging()
+    //!
+    //! \details
+    //! \copydetails FastResearchInterface::StartLogging()
+    //  ----------------------------------------------------------
+    inline int StartLogging(void)
+    {
+        return (FRI->StartLogging());
+    }
 
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn inline int StopLogging(void)
+    //!
+    //! \brief
+    //! \copybrief FastResearchInterface::StopLogging()
+    //!
+    //! \details
+    //! \copydetails FastResearchInterface::StopLogging()
+    //  ----------------------------------------------------------
+    inline int StopLogging(void)
+    {
+        return (FRI->StopLogging());
+    }
 
-//  ---------------------- Doxygen info ----------------------
-//! \fn inline bool IsMachineOK(void)
-//!
-//! \brief
-//! \copybrief FastResearchInterface::IsMachineOK()
-//!
-//! \details
-//! \copydetails FastResearchInterface::IsMachineOK()
-//  ----------------------------------------------------------
-	inline bool IsMachineOK(void)
-	{
-		return(this->FRI->IsMachineOK());
-	}
-
-
-//  ---------------------- Doxygen info ----------------------
-//! \fn inline float GetCycleTime(void)
-//!
-//! \brief
-//! \copybrief FastResearchInterface::GetFRICycleTime()
-//!
-//! \details
-//! \copydetails FastResearchInterface::GetFRICycleTime()
-//  ----------------------------------------------------------
-	inline float GetCycleTime(void)
-	{
-		return(this->FRI->GetFRICycleTime());
-	}
-
-
-//  ---------------------- Doxygen info ----------------------
-//! \fn inline const char* GetCompleteRobotStateAndInformation(void)
-//!
-//! \brief
-//! \copybrief FastResearchInterface::GetCompleteRobotStateAndInformation()
-//!
-//! \details
-//! \copydetails FastResearchInterface::GetCompleteRobotStateAndInformation()
-//  ----------------------------------------------------------
-	inline const char* GetCompleteRobotStateAndInformation(void)
-	{
-		return(FRI->GetCompleteRobotStateAndInformation());
-	}
-
-//  ---------------------- Doxygen info ----------------------
-//! \fn inline int printf(const char* Format, ...)
-//!
-//! \brief
-//! \copybrief FastResearchInterface::printf()
-//!
-//! \details
-//! \copydetails FastResearchInterface::printf()
-//  ----------------------------------------------------------
-	inline int printf(const char* Format, ...)
-	{
-		int			Result		=	0;
-		va_list		ListOfArguments;
-
-		va_start(ListOfArguments, Format);
-		Result = FRI->printf(Format, ListOfArguments);
-		va_end(ListOfArguments);
-
-		return(Result);
-	}
-
-
-//  ---------------------- Doxygen info ----------------------
-//! \fn inline int PrepareLogging(const char *FileIdentifier = NULL)
-//!
-//! \brief
-//! \copybrief FastResearchInterface::PrepareLogging()
-//!
-//! \details
-//! \copydetails FastResearchInterface::PrepareLogging()
-//  ----------------------------------------------------------
-	inline int PrepareLogging(const char *FileIdentifier = NULL)
-	{
-		return(FRI->PrepareLogging(FileIdentifier));
-	}
-
-
-//  ---------------------- Doxygen info ----------------------
-//! \fn inline int StartLogging(void)
-//!
-//! \brief
-//! \copybrief FastResearchInterface::StartLogging()
-//!
-//! \details
-//! \copydetails FastResearchInterface::StartLogging()
-//  ----------------------------------------------------------
-	inline int StartLogging(void)
-	{
-		return(FRI->StartLogging());
-	}
-
-
-//  ---------------------- Doxygen info ----------------------
-//! \fn inline int StopLogging(void)
-//!
-//! \brief
-//! \copybrief FastResearchInterface::StopLogging()
-//!
-//! \details
-//! \copydetails FastResearchInterface::StopLogging()
-//  ----------------------------------------------------------
-	inline int StopLogging(void)
-	{
-		return(FRI->StopLogging());
-	}
-
-
-//  ---------------------- Doxygen info ----------------------
-//! \fn inline int WriteLoggingDataFile(void)
-//!
-//! \brief
-//! \copybrief FastResearchInterface::WriteLoggingDataFile()
-//!
-//! \details
-//! \copydetails FastResearchInterface::WriteLoggingDataFile()
-//  ----------------------------------------------------------
-	inline int WriteLoggingDataFile(void)
-	{
-		return(FRI->WriteLoggingDataFile());
-	}
-
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn inline int WriteLoggingDataFile(void)
+    //!
+    //! \brief
+    //! \copybrief FastResearchInterface::WriteLoggingDataFile()
+    //!
+    //! \details
+    //! \copydetails FastResearchInterface::WriteLoggingDataFile()
+    //  ----------------------------------------------------------
+    inline int WriteLoggingDataFile(void)
+    {
+        return (FRI->WriteLoggingDataFile());
+    }
 
 protected:
+    //  ---------------------- Doxygen info ----------------------
+    //! \var FastResearchInterface *FRI
+    //!
+    //! \brief
+    //! A pointer to the actual object of the class FastResearchInterface
+    //  ----------------------------------------------------------
+    FastResearchInterface* FRI;
 
-
-//  ---------------------- Doxygen info ----------------------
-//! \var FastResearchInterface *FRI
-//!
-//! \brief
-//! A pointer to the actual object of the class FastResearchInterface
-//  ----------------------------------------------------------
-	FastResearchInterface		*FRI;
-
-};	// class LWRBaseControllerInterface
+};  // class LWRBaseControllerInterface
 
 #endif

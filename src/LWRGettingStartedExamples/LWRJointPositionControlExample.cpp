@@ -41,12 +41,11 @@
 //! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n
 //! See the License for the specific language governing permissions and\n
 //! limitations under the License.\n
-//! 
+//!
 //  ----------------------------------------------------------
 //   For a convenient reading of this file's source code,
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
-
 
 #include <LWRJointPositionController.h>
 #include <stdlib.h>
@@ -55,89 +54,83 @@
 #include <errno.h>
 #include <math.h>
 
-
 #ifndef NUMBER_OF_JOINTS
-#define NUMBER_OF_JOINTS			7
+#define NUMBER_OF_JOINTS 7
 #endif
-
 
 #ifndef PI
-#define PI	3.1415926535897932384626433832795
+#define PI 3.1415926535897932384626433832795
 #endif
-
 
 //*******************************************************************************************
 // main()
 //
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
-	int							ResultValue		=	0
-							,	i				=	0;
+    int ResultValue = 0, i = 0;
 
-	float						FunctionValue	=	0.0
-							,	LoopVariable	=	0.0
-							,	JointValuesInRad[NUMBER_OF_JOINTS]
-		 					,	InitialJointValuesInRad[NUMBER_OF_JOINTS];
+    float FunctionValue = 0.0, LoopVariable = 0.0, JointValuesInRad[NUMBER_OF_JOINTS],
+          InitialJointValuesInRad[NUMBER_OF_JOINTS];
 
-	LWRJointPositionController	*Robot;
+    LWRJointPositionController* Robot;
 
-	Robot	=	new LWRJointPositionController("/home/lwrcontrol/etc/980039-FRI-Driver.init");
+    Robot = new LWRJointPositionController("/home/lwrcontrol/etc/980039-FRI-Driver.init");
 
-	fprintf(stdout, "RobotJointPositionController object created. Starting the robot...\n");
+    fprintf(stdout, "RobotJointPositionController object created. Starting the robot...\n");
 
-	ResultValue	=	Robot->StartRobot();
+    ResultValue = Robot->StartRobot();
 
-	if (ResultValue == EOK)
-	{
-		fprintf(stdout, "Robot successfully started.\n");
-	}
-	else
-	{
-		fprintf(stderr, "ERROR, could not start robot: %s\n", strerror(ResultValue));
-	}
+    if (ResultValue == EOK)
+    {
+        fprintf(stdout, "Robot successfully started.\n");
+    }
+    else
+    {
+        fprintf(stderr, "ERROR, could not start robot: %s\n", strerror(ResultValue));
+    }
 
-	fprintf(stdout, "Current system state:\n%s\n", Robot->GetCompleteRobotStateAndInformation());
+    fprintf(stdout, "Current system state:\n%s\n", Robot->GetCompleteRobotStateAndInformation());
 
-	Robot->GetMeasuredJointPositions(InitialJointValuesInRad);
+    Robot->GetMeasuredJointPositions(InitialJointValuesInRad);
 
-	while (LoopVariable < 5.0 * PI)
-	{
-		Robot->WaitForKRCTick();
+    while (LoopVariable < 5.0 * PI)
+    {
+        Robot->WaitForKRCTick();
 
-		if (!Robot->IsMachineOK())
-		{
-			fprintf(stderr, "ERROR, the machine is not ready anymore.\n");
-			break;
-		}
+        if (!Robot->IsMachineOK())
+        {
+            fprintf(stderr, "ERROR, the machine is not ready anymore.\n");
+            break;
+        }
 
-		FunctionValue	=	(float)(0.3 * sin(LoopVariable));
-		FunctionValue	*=	(float)FunctionValue;
+        FunctionValue = (float)(0.3 * sin(LoopVariable));
+        FunctionValue *= (float)FunctionValue;
 
-		for (i = 0; i < NUMBER_OF_JOINTS; i++)
-		{
-			JointValuesInRad[i]	=	InitialJointValuesInRad[i] + FunctionValue;
-		}
+        for (i = 0; i < NUMBER_OF_JOINTS; i++)
+        {
+            JointValuesInRad[i] = InitialJointValuesInRad[i] + FunctionValue;
+        }
 
-		Robot->SetCommandedJointPositions(JointValuesInRad);
+        Robot->SetCommandedJointPositions(JointValuesInRad);
 
-		LoopVariable	+=	(float)0.001;
-	}
+        LoopVariable += (float)0.001;
+    }
 
-	fprintf(stdout, "Stopping the robot...\n");
-	ResultValue	=	Robot->StopRobot();
+    fprintf(stdout, "Stopping the robot...\n");
+    ResultValue = Robot->StopRobot();
 
-	if (ResultValue != EOK)
-	{
-		fprintf(stderr, "An error occurred during stopping the robot...\n");
-	}
-	else
-	{
-		fprintf(stdout, "Robot successfully stopped.\n");
-	}
+    if (ResultValue != EOK)
+    {
+        fprintf(stderr, "An error occurred during stopping the robot...\n");
+    }
+    else
+    {
+        fprintf(stdout, "Robot successfully stopped.\n");
+    }
 
-	fprintf(stdout, "Deleting the object...\n");
-	delete Robot;
-	fprintf(stdout, "Object deleted...\n");
+    fprintf(stdout, "Deleting the object...\n");
+    delete Robot;
+    fprintf(stdout, "Object deleted...\n");
 
-	return(EXIT_SUCCESS);
+    return (EXIT_SUCCESS);
 }

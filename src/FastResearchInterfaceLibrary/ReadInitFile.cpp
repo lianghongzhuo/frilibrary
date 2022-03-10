@@ -39,12 +39,11 @@
 //! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n
 //! See the License for the specific language governing permissions and\n
 //! limitations under the License.\n
-//! 
+//!
 //  ----------------------------------------------------------
 //   For a convenient reading of this file's source code,
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
-
 
 #include <FastResearchInterface.h>
 #include <Console.h>
@@ -55,87 +54,84 @@
 #define stricmp strcasecmp
 #define strnicmp strncasecmp
 
-
 // ****************************************************************
 // ReadInitFile()
 //
-int FastResearchInterface::ReadInitFile(const char *InitFileName)
+int FastResearchInterface::ReadInitFile(const char* InitFileName)
 {
-	unsigned int				ParameterCount				=	0;
+    unsigned int ParameterCount = 0;
 
-	InitializationFileEntry		InitFileParser(InitFileName);
+    InitializationFileEntry InitFileParser(InitFileName);
 
-	if (InitFileName != NULL)
-	{
-		while ( InitFileParser.NextEntry() )
-		{
- 			if ( !stricmp (InitFileParser.GetSection(), "Priorities") )
-			{
-				if ( !stricmp (InitFileParser.GetName(), "KRCCommunicationThread") )
-				{
-					this->PriorityKRCCommunicationThread = atoi( InitFileParser.GetValue() );
-					ParameterCount++;
-				}
-				if ( !stricmp (InitFileParser.GetName(), "TimerThread") )
-				{
-					this->PriorityTimerThread = atoi( InitFileParser.GetValue() );
-					ParameterCount++;
-				}
-				if ( !stricmp (InitFileParser.GetName(), "MainThread") )
-				{
-					this->PriorityMainThread = atoi( InitFileParser.GetValue() );
-					ParameterCount++;
-				}
-				if ( !stricmp (InitFileParser.GetName(), "OutputConsoleThread") )
-				{
-					this->PriorityOutputConsoleThread = atoi( InitFileParser.GetValue() );
-					ParameterCount++;
-				}
-			}
- 			if ( !stricmp (InitFileParser.GetSection(), "RobotName") )
-			{
-				if ( !stricmp (InitFileParser.GetName(), "Name") )
-				{
-			   		strcpy(this->RobotName, InitFileParser.GetValue() );
-					ParameterCount++;
-				}
-			}
+    if (InitFileName != NULL)
+    {
+        while (InitFileParser.NextEntry())
+        {
+            if (!stricmp(InitFileParser.GetSection(), "Priorities"))
+            {
+                if (!stricmp(InitFileParser.GetName(), "KRCCommunicationThread"))
+                {
+                    this->PriorityKRCCommunicationThread = atoi(InitFileParser.GetValue());
+                    ParameterCount++;
+                }
+                if (!stricmp(InitFileParser.GetName(), "TimerThread"))
+                {
+                    this->PriorityTimerThread = atoi(InitFileParser.GetValue());
+                    ParameterCount++;
+                }
+                if (!stricmp(InitFileParser.GetName(), "MainThread"))
+                {
+                    this->PriorityMainThread = atoi(InitFileParser.GetValue());
+                    ParameterCount++;
+                }
+                if (!stricmp(InitFileParser.GetName(), "OutputConsoleThread"))
+                {
+                    this->PriorityOutputConsoleThread = atoi(InitFileParser.GetValue());
+                    ParameterCount++;
+                }
+            }
+            if (!stricmp(InitFileParser.GetSection(), "RobotName"))
+            {
+                if (!stricmp(InitFileParser.GetName(), "Name"))
+                {
+                    strcpy(this->RobotName, InitFileParser.GetValue());
+                    ParameterCount++;
+                }
+            }
 
- 			if ( !stricmp (InitFileParser.GetSection(), "ControlValues") )
-			{
-				if ( !stricmp (InitFileParser.GetName(), "CycleTime") )
-				{
-					this->CycleTime = atof( InitFileParser.GetValue() );
-					ParameterCount++;
-				}
-			}
+            if (!stricmp(InitFileParser.GetSection(), "ControlValues"))
+            {
+                if (!stricmp(InitFileParser.GetName(), "CycleTime"))
+                {
+                    this->CycleTime = atof(InitFileParser.GetValue());
+                    ParameterCount++;
+                }
+            }
 
- 			if ( !stricmp (InitFileParser.GetSection(), "Logging") )
-			{
-				if ( !stricmp (InitFileParser.GetName(), "NumberOfLoggingFileEntries") )
-				{
-					NumberOfLoggingFileEntries = atoi( InitFileParser.GetValue() );
-					ParameterCount++;
-				}
-				if ( !stricmp (InitFileParser.GetName(), "LoggingPath") )
-				{
-			   		strcpy(this->LoggingPath, InitFileParser.GetValue() );
-					ParameterCount++;
-				}
-				if ( !stricmp (InitFileParser.GetName(), "LoggingFileName") )
-				{
-			   		strcpy(this->LoggingFileName, InitFileParser.GetValue() );
-					ParameterCount++;
-				}
-			}
-		}
-	}
-	else
-	{
-		return(-1);
-	}
+            if (!stricmp(InitFileParser.GetSection(), "Logging"))
+            {
+                if (!stricmp(InitFileParser.GetName(), "NumberOfLoggingFileEntries"))
+                {
+                    NumberOfLoggingFileEntries = atoi(InitFileParser.GetValue());
+                    ParameterCount++;
+                }
+                if (!stricmp(InitFileParser.GetName(), "LoggingPath"))
+                {
+                    strcpy(this->LoggingPath, InitFileParser.GetValue());
+                    ParameterCount++;
+                }
+                if (!stricmp(InitFileParser.GetName(), "LoggingFileName"))
+                {
+                    strcpy(this->LoggingFileName, InitFileParser.GetValue());
+                    ParameterCount++;
+                }
+            }
+        }
+    }
+    else
+    {
+        return (-1);
+    }
 
-	return(ParameterCount);
-
+    return (ParameterCount);
 }
-

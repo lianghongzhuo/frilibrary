@@ -5,8 +5,8 @@ DEF fricontrol( )
     ;=====================================
     ; Stanford University
     ; Department of Computer Science
-    ; Artificial Intelligence Laboratory 
-    ; Gates Computer Science Building 1A 
+    ; Artificial Intelligence Laboratory
+    ; Gates Computer Science Building 1A
     ; 353 Serra Mall
     ; Stanford, CA 94305-9010
     ; USA
@@ -16,7 +16,7 @@ DEF fricontrol( )
     ; the KUKA Light-Weight Robot (LWR)
     ;
     ; July 20, 2010
-    ; 
+    ;
     ; Author: Torsten Kroeger, tkr@stanford.edu
     ;
     ; Latest update: November 19, 2011
@@ -27,7 +27,7 @@ DEF fricontrol( )
     ;=====================================
     ; ------------------------------------
     ; $FRI_FRM_INT[15]
-    ; This value contains the desired control mode 
+    ; This value contains the desired control mode
     ; (i.e., joint position control (10), joint
     ; impedance control (30), or Cartesian impedance
     ; control (20). The new mode will be activated by
@@ -37,27 +37,27 @@ DEF fricontrol( )
     ; This value is used to call the KRL
     ; functions of the Fast Research Interface.
     ; A value of 10 calls friStart(), a value of
-    ; 20 calls friStop(), and a value of 30/40 
+    ; 20 calls friStop(), and a value of 30/40
     ; depending on $FRI_TO_INT[15]) calls
-    ; friClose() to terminate the UDP connection 
+    ; friClose() to terminate the UDP connection
     ; and to end the KRL program.
-    ; ------------------------------------  
+    ; ------------------------------------
     ; $FRI_TO_INT[15]
     ; This value determines the abort condition
     ; to exit the endless loop of this KRL
     ; program. The value of $FRI_FRM_INT[16]
     ; has to be set corresponding to this.
-    ; ------------------------------------  
+    ; ------------------------------------
     ; $FRI_TO_INT[16]
-    ; If this value indicated the current state of 
-    ; this KRL program to the remote host. The 
+    ; If this value indicated the current state of
+    ; this KRL program to the remote host. The
     ; following values are used:
-    ; 
-    ; - 10: friOpen() was called (i.e., the FRI is in 
+    ;
+    ; - 10: friOpen() was called (i.e., the FRI is in
     ;   Monitor Mode)
     ;
     ; - 20: friStart() was called (i.e., the FRI is in
-    ;   Command Mode if the quality of the signals by 
+    ;   Command Mode if the quality of the signals by
     ;   remote host are sufficient).
     ;=====================================
 ;ENDFOLD (Variable information)
@@ -116,7 +116,7 @@ DEF fricontrol( )
 RETURN_VALUE = friOpen(2)
 
 ;FOLD Screen output
-    $MSG_T={MSG_T: VALID FALSE, RELEASE FALSE, TYP #NOTIFY, MODUL[] " ", KEY[] " ", PARAM_TYP #VALUE, PARAM[] " ", DLG_FORMAT[] " ", ANSWER 0} 
+    $MSG_T={MSG_T: VALID FALSE, RELEASE FALSE, TYP #NOTIFY, MODUL[] " ", KEY[] " ", PARAM_TYP #VALUE, PARAM[] " ", DLG_FORMAT[] " ", ANSWER 0}
     $MSG_T.MODUL[]="FRI-Ctrl"
     IF (RETURN_VALUE == #MON) THEN
         $MSG_T.KEY[] = "FRI successfully opened."
@@ -135,13 +135,13 @@ $FRI_TO_INT[16] = 10
 REPEAT
 
     IF ($FRI_FRM_INT[16] == 10) AND ($FRI_TO_INT[16] <> 20) THEN
-        
+
         ;FOLD Setting up $STIFFNESS
             $stiffness.tool = tool_data[2]
             $stiffness.maxforce = {X 300.0, Y 300.0, Z 300.0, A 30.0, B 30.0, C 30.0}
             $stiffness.cpmaxdelta = {X 100.0, Y 100.0, Z 100.0, A 100.0, B 100.0, C 100.0}
             ;$stiffness.axismaxdeltatorque = {A1 1000.0, A2 1000.0, A3 1000.0, A4 1000.0, A5 1000.0, A6 1000.0, E1 1000.0}
-            $stiffness.axismaxdelta = {A1 100.0, A2 100.0, A3 100.0, A4 100.0, A5 100.0, A6 100.0, E1 100.0}            
+            $stiffness.axismaxdelta = {A1 100.0, A2 100.0, A3 100.0, A4 100.0, A5 100.0, A6 100.0, E1 100.0}
             $stiffness.axisdamping = {A1 0.7, A2 0.7, A3 0.7, A4 0.7, A5 0.7, A6 0.7, E1 0.7}
             $stiffness.axisstiffness = {A1 1000.0, A2 1000.0, A3 1000.0, A4 1000.0, A5 1000.0, A6 1000.0, E1 1000.0}
             $stiffness.cpstiffness = {x 200, y 200, z 200, a 20, b 20, c 20}
@@ -152,7 +152,7 @@ REPEAT
         ; Set up the current control scheme
         $stiffness.strategy = $FRI_FRM_INT[15]
         $stiffness.commit = true
-        
+
         ;FOLD Screen output
             $MSG_T={MSG_T: VALID FALSE, RELEASE FALSE, TYP #NOTIFY, MODUL[] " ", KEY[] " ", PARAM_TYP #VALUE, PARAM[] " ", DLG_FORMAT[] " ", ANSWER 0}
             $MSG_T.MODUL[]="FRI-Ctrl"
@@ -172,13 +172,13 @@ REPEAT
             $MSG_T.VALID=TRUE
             WAIT FOR ($MSG_T.VALID == FALSE)
             WAIT SEC 0.3
-        ;ENDFOLD (Screen output)        
-    
+        ;ENDFOLD (Screen output)
+
         ; Apply a safety value of 1.0 and start the FRI
         RETURN_VALUE = friStart(1.0)
-        
+
         ;FOLD Screen output
-            $MSG_T={MSG_T: VALID FALSE, RELEASE FALSE, TYP #NOTIFY, MODUL[] " ", KEY[] " ", PARAM_TYP #VALUE, PARAM[] " ", DLG_FORMAT[] " ", ANSWER 0} 
+            $MSG_T={MSG_T: VALID FALSE, RELEASE FALSE, TYP #NOTIFY, MODUL[] " ", KEY[] " ", PARAM_TYP #VALUE, PARAM[] " ", DLG_FORMAT[] " ", ANSWER 0}
             $MSG_T.MODUL[]="FRI-Ctrl"
             IF (RETURN_VALUE == #CMD) THEN
                 $MSG_T.KEY[] = "FRI successfully started."
@@ -193,15 +193,15 @@ REPEAT
 
         ; Signalize to the remote host that friStart was called
         $FRI_TO_INT[16] = 20
-        
+
     ENDIF
 
     IF ($FRI_FRM_INT[16] == 20) AND ($FRI_TO_INT[16] <> 10) THEN
-  
+
         RETURN_VALUE = friStop()
-        
+
         ;FOLD Screen output
-            $MSG_T={MSG_T: VALID FALSE, RELEASE FALSE, TYP #NOTIFY, MODUL[] " ", KEY[] " ", PARAM_TYP #VALUE, PARAM[] " ", DLG_FORMAT[] " ", ANSWER 0} 
+            $MSG_T={MSG_T: VALID FALSE, RELEASE FALSE, TYP #NOTIFY, MODUL[] " ", KEY[] " ", PARAM_TYP #VALUE, PARAM[] " ", DLG_FORMAT[] " ", ANSWER 0}
             $MSG_T.MODUL[]="FRI-Ctrl"
             IF (RETURN_VALUE == #MON) THEN
                 $MSG_T.KEY[] = "FRI successfully stopped."
@@ -213,7 +213,7 @@ REPEAT
             WAIT FOR ($MSG_T.VALID == FALSE)
             WAIT SEC 0.3
         ;ENDFOLD (Screen output)
-        
+
         ; Signalize to the remote host that the FRI was stopped
         $FRI_TO_INT[16] = 10
 
@@ -221,16 +221,16 @@ REPEAT
 
     ; The Fast Research Interface is activated.
     WAIT SEC 0.05
-    
+
 UNTIL $FRI_FRM_INT[16] == $FRI_TO_INT[15]
 
 ;FOLD For the case, friStop() has not been called, call it here
     IF ($FRI_TO_INT[16] == 20) THEN
-        
-         RETURN_VALUE = friStop()        
-        
+
+         RETURN_VALUE = friStop()
+
         ;FOLD Screen output
-            $MSG_T={MSG_T: VALID FALSE, RELEASE FALSE, TYP #NOTIFY, MODUL[] " ", KEY[] " ", PARAM_TYP #VALUE, PARAM[] " ", DLG_FORMAT[] " ", ANSWER 0} 
+            $MSG_T={MSG_T: VALID FALSE, RELEASE FALSE, TYP #NOTIFY, MODUL[] " ", KEY[] " ", PARAM_TYP #VALUE, PARAM[] " ", DLG_FORMAT[] " ", ANSWER 0}
             $MSG_T.MODUL[]="FRI-Ctrl"
             IF (RETURN_VALUE == #MON) THEN
                 $MSG_T.KEY[] = "FRI successfully stopped."
@@ -242,7 +242,7 @@ UNTIL $FRI_FRM_INT[16] == $FRI_TO_INT[15]
             WAIT FOR ($MSG_T.VALID == FALSE)
             WAIT SEC 0.3
         ;ENDFOLD (Screen output)
-        
+
         ; Signalize to the remote host that the FRI was stopped
         $FRI_TO_INT[16] = 10
 
@@ -255,7 +255,7 @@ RETURN_VALUE = friClose()
 $FRI_TO_INT[16] = 30
 
 ;FOLD Screen output
-    $MSG_T={MSG_T: VALID FALSE, RELEASE FALSE, TYP #NOTIFY, MODUL[] " ", KEY[] " ", PARAM_TYP #VALUE, PARAM[] " ", DLG_FORMAT[] " ", ANSWER 0} 
+    $MSG_T={MSG_T: VALID FALSE, RELEASE FALSE, TYP #NOTIFY, MODUL[] " ", KEY[] " ", PARAM_TYP #VALUE, PARAM[] " ", DLG_FORMAT[] " ", ANSWER 0}
     $MSG_T.MODUL[]="FRI-Ctrl"
     IF (RETURN_VALUE == #OFF) THEN
         $MSG_T.KEY[] = "FRI successfully closed."

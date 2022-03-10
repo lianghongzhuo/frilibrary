@@ -34,19 +34,16 @@
 //! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n
 //! See the License for the specific language governing permissions and\n
 //! limitations under the License.\n
-//! 
+//!
 //  ----------------------------------------------------------
 //   For a convenient reading of this file's source code,
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-
 #ifndef __OSAbstraction__
 #define __OSAbstraction__
 
 #include <stdlib.h>
-
-
 
 //  ---------------------- Doxygen info ----------------------
 //! \def OS_FOLDER_SEPARATOR
@@ -55,11 +52,10 @@
 //! Slash for non-Microsoft operating system or backslash for Microsoft operating systems
 //  ----------------------------------------------------------
 #if defined(WIN32) || defined(WIN64) || defined(_WIN64)
-#define OS_FOLDER_SEPARATOR	("\\")
+#define OS_FOLDER_SEPARATOR ("\\")
 #else
-#define OS_FOLDER_SEPARATOR	("/")
+#define OS_FOLDER_SEPARATOR ("/")
 #endif
-
 
 //  ---------------------- Doxygen info ----------------------
 //! \fn unsigned char WaitForKBCharacter(bool *Abort = NULL)
@@ -80,8 +76,7 @@
 //!
 //! \sa CheckForKBCharacter()
 //  ----------------------------------------------------------
-unsigned char 	WaitForKBCharacter(bool *Abort = NULL);
-
+unsigned char WaitForKBCharacter(bool* Abort = NULL);
 
 //  ---------------------- Doxygen info ----------------------
 //! \fn unsigned char char CheckForKBCharacter(void)
@@ -99,7 +94,6 @@ unsigned char 	WaitForKBCharacter(bool *Abort = NULL);
 //  ----------------------------------------------------------
 unsigned char CheckForKBCharacter(void);
 
-
 //  ---------------------- Doxygen info ----------------------
 //! \fn float GetSystemTimeInSeconds(const bool &Reset = false)
 //!
@@ -116,7 +110,7 @@ unsigned char CheckForKBCharacter(void);
 //! \return
 //! The value of the system time in seconds.
 //  ----------------------------------------------------------
-float GetSystemTimeInSeconds(const bool &Reset = false);
+float GetSystemTimeInSeconds(const bool& Reset = false);
 
 #include <LinuxAbstraction.h>
 

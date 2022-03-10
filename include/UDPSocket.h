@@ -5,7 +5,7 @@
 //! Header file for UDP sockets
 //!
 //! \details
-//! The communication between the remote PC and the KRC is done through 
+//! The communication between the remote PC and the KRC is done through
 //! UDP sockets
 //!
 //! \date December 2014
@@ -38,13 +38,11 @@
 //! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n
 //! See the License for the specific language governing permissions and\n
 //! limitations under the License.\n
-//! 
+//!
 //  ----------------------------------------------------------
 //   For a convenient reading of this file's source code,
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
-
-
 
 #ifndef __UDPSocket__
 #define __UDPSocket__
@@ -52,7 +50,6 @@
 #include "FRICommunication.h"
 #include <stdio.h>
 #include <stdlib.h>
-
 
 #if defined(WIN32) || defined(WIN64) || defined(_WIN64)
 #include <winsock2.h>
@@ -66,7 +63,6 @@
 #include <netdb.h>
 #endif
 
-
 //  ---------------------- Doxygen info ----------------------
 //! \class UDPSocket
 //!
@@ -79,164 +75,150 @@
 class UDPSocket
 {
 public:
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn UDPSocket(void)
+    //!
+    //! \brief
+    //! Constructor
+    //!
+    //! \details
+    //! This constructor initializes the socket.
+    //!
+    //! \attention
+    //! Calling of the constructor does \b not fulfill any real-time requirements.
+    //  ----------------------------------------------------------
+    UDPSocket(void);
 
-//  ---------------------- Doxygen info ----------------------
-//! \fn UDPSocket(void)
-//!
-//! \brief
-//! Constructor
-//!
-//! \details
-//! This constructor initializes the socket.
-//!
-//! \attention
-//! Calling of the constructor does \b not fulfill any real-time requirements.
-//  ----------------------------------------------------------
-	UDPSocket(void);
-	
-	
-//  ---------------------- Doxygen info ----------------------
-//! \fn ~UDPSocket(void)
-//!
-//! \brief
-//! Destructor
-//!
-//! \details
-//! This destructor closes the socket again.
-//!
-//! \attention
-//! Calling of the destructor does \b not fulfill any real-time requirements.
-//  ----------------------------------------------------------
-	~UDPSocket(void);
-	
-	
-//  ---------------------- Doxygen info ----------------------
-//! \fn int SendFRIDataToKRC(const FRIDataSendToKRC *DataPackageToBeSentToKRC)
-//!
-//! \brief
-//! Sends data from the remote PC the KRC unit
-//!
-//! \param DataPackageToBeSentToKRC
-//! Pointer to a FRIDataSendToKRC object that contains the data to be sent
-//!
-//! \return
-//! <ul>
-//! <li>\c EOK if successful</li>
-//! <li>\c ENOTCONN if no connection is established or if a wrong amount
-//!        of data has been sent</li>
-//! </ul>
-//  ----------------------------------------------------------	
-	int SendFRIDataToKRC(const FRIDataSendToKRC *DataPackageToBeSentToKRC);
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn ~UDPSocket(void)
+    //!
+    //! \brief
+    //! Destructor
+    //!
+    //! \details
+    //! This destructor closes the socket again.
+    //!
+    //! \attention
+    //! Calling of the destructor does \b not fulfill any real-time requirements.
+    //  ----------------------------------------------------------
+    ~UDPSocket(void);
 
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn int SendFRIDataToKRC(const FRIDataSendToKRC *DataPackageToBeSentToKRC)
+    //!
+    //! \brief
+    //! Sends data from the remote PC the KRC unit
+    //!
+    //! \param DataPackageToBeSentToKRC
+    //! Pointer to a FRIDataSendToKRC object that contains the data to be sent
+    //!
+    //! \return
+    //! <ul>
+    //! <li>\c EOK if successful</li>
+    //! <li>\c ENOTCONN if no connection is established or if a wrong amount
+    //!        of data has been sent</li>
+    //! </ul>
+    //  ----------------------------------------------------------
+    int SendFRIDataToKRC(const FRIDataSendToKRC* DataPackageToBeSentToKRC);
 
-//  ---------------------- Doxygen info ----------------------
-//! \fn int ReceiveFRIDataFromKRC(FRIDataReceivedFromKRC *DataPackageFromKRC) const
-//!
-//! \brief
-//! Receives data from the KRC unit (blocking)
-//!
-//! \param DataPackageFromKRC
-//! Pointer to a FRIDataReceivedFromKRC object that will contain the
-//! received data from the KRC unit.
-//!
-//! \return
-//! <ul>
-//! <li>\c EOK if successful</li>
-//! <li>\c ENOTCONN if no connection is established or if a wrong amount
-//!        of data has been received</li>
-//! </ul>
-//  ----------------------------------------------------------		
-	int ReceiveFRIDataFromKRC(FRIDataReceivedFromKRC *DataPackageFromKRC) const;
-
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn int ReceiveFRIDataFromKRC(FRIDataReceivedFromKRC *DataPackageFromKRC) const
+    //!
+    //! \brief
+    //! Receives data from the KRC unit (blocking)
+    //!
+    //! \param DataPackageFromKRC
+    //! Pointer to a FRIDataReceivedFromKRC object that will contain the
+    //! received data from the KRC unit.
+    //!
+    //! \return
+    //! <ul>
+    //! <li>\c EOK if successful</li>
+    //! <li>\c ENOTCONN if no connection is established or if a wrong amount
+    //!        of data has been received</li>
+    //! </ul>
+    //  ----------------------------------------------------------
+    int ReceiveFRIDataFromKRC(FRIDataReceivedFromKRC* DataPackageFromKRC) const;
 
 protected:
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn void Init(void)
+    //!
+    //! \brief
+    //! Initializes the socket (only called by the constructor)
+    //  ----------------------------------------------------------
+    void Init(void);
 
-//  ---------------------- Doxygen info ----------------------
-//! \fn void Init(void)
-//!
-//! \brief
-//! Initializes the socket (only called by the constructor)
-//  ----------------------------------------------------------
-	void Init(void);
-	
-	
-//  ---------------------- Doxygen info ----------------------
-//! \fn void void Close(void)
-//!
-//! \brief
-//! Closes the socket (only called by the destructor)
-//  ----------------------------------------------------------	
-	void Close(void);
-
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn void void Close(void)
+    //!
+    //! \brief
+    //! Closes the socket (only called by the destructor)
+    //  ----------------------------------------------------------
+    void Close(void);
 
 #if defined(WIN32) || defined(WIN64) || defined(_WIN64)
-//  ---------------------- Doxygen info ----------------------
-//! \fn int StartWindowsSocket(void)
-//!
-//! \brief
-//! Microsoft Windows only: Initializes the socket (only called by the constructor)
-//!
-//! \return
-//! <ul>
-//! <li> Zero if successful</li>
-//! <li> Non-zero if Winsock DLL cannot be initialized</li>
-//! </ul>
-//  ----------------------------------------------------------
-	int StartWindowsSocket(void);
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn int StartWindowsSocket(void)
+    //!
+    //! \brief
+    //! Microsoft Windows only: Initializes the socket (only called by the constructor)
+    //!
+    //! \return
+    //! <ul>
+    //! <li> Zero if successful</li>
+    //! <li> Non-zero if Winsock DLL cannot be initialized</li>
+    //! </ul>
+    //  ----------------------------------------------------------
+    int StartWindowsSocket(void);
 #endif
 
-
 private:
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn int ReceiveUDPPackage(const int UDPSocketNumber, FRIDataReceivedFromKRC *ReceivedData) const
+    //!
+    //! \brief
+    //! Sends data from the remote PC to the KRC unit using \c recvfrom() (only called by the method ReceiveFRIDataFromKRC())
+    //!
+    //! \param UDPSocketNumber
+    //! Socket number
+    //!
+    //! \param ReceivedData
+    //! Pointer to a FRIDataReceivedFromKRC object that will contain the
+    //! received data from the KRC unit.
+    //!
+    //! \return
+    //! <ul>
+    //! <li>\c EOK if successful</li>
+    //! <li>\c ENOTCONN if no connection is established or if a wrong amount
+    //!        of data has been received</li>
+    //! </ul>
+    //  ----------------------------------------------------------
+    int ReceiveUDPPackage(const int UDPSocketNumber, FRIDataReceivedFromKRC* ReceivedData) const;
 
-//  ---------------------- Doxygen info ----------------------
-//! \fn int ReceiveUDPPackage(const int UDPSocketNumber, FRIDataReceivedFromKRC *ReceivedData) const
-//!
-//! \brief
-//! Sends data from the remote PC to the KRC unit using \c recvfrom() (only called by the method ReceiveFRIDataFromKRC())
-//!
-//! \param UDPSocketNumber
-//! Socket number
-//!
-//! \param ReceivedData
-//! Pointer to a FRIDataReceivedFromKRC object that will contain the
-//! received data from the KRC unit.
-//!
-//! \return
-//! <ul>
-//! <li>\c EOK if successful</li>
-//! <li>\c ENOTCONN if no connection is established or if a wrong amount
-//!        of data has been received</li>
-//! </ul>
-//  ----------------------------------------------------------
-	int ReceiveUDPPackage(const int UDPSocketNumber, FRIDataReceivedFromKRC *ReceivedData) const;
-	
-	
-//  ---------------------- Doxygen info ----------------------
-//! \var UDPSocketNumber
-//!
-//! \brief
-//! Contains the integer socket number
-//  ----------------------------------------------------------
-	int UDPSocketNumber ;
-	
-	
-//  ---------------------- Doxygen info ----------------------
-//! \var ServerPortNumber
-//!
-//! \brief
-//! Contains the integer server port number
-//  ----------------------------------------------------------	
-	int ServerPortNumber;
-	
-//  ---------------------- Doxygen info ----------------------
-//! \var IPAddressOfKRCUnit
-//!
-//! \brief
-//! Contains the IP address of the KRC unit
-//  ----------------------------------------------------------		
-	struct sockaddr_in IPAddressOfKRCUnit;
+    //  ---------------------- Doxygen info ----------------------
+    //! \var UDPSocketNumber
+    //!
+    //! \brief
+    //! Contains the integer socket number
+    //  ----------------------------------------------------------
+    int UDPSocketNumber;
+
+    //  ---------------------- Doxygen info ----------------------
+    //! \var ServerPortNumber
+    //!
+    //! \brief
+    //! Contains the integer server port number
+    //  ----------------------------------------------------------
+    int ServerPortNumber;
+
+    //  ---------------------- Doxygen info ----------------------
+    //! \var IPAddressOfKRCUnit
+    //!
+    //! \brief
+    //! Contains the IP address of the KRC unit
+    //  ----------------------------------------------------------
+    struct sockaddr_in IPAddressOfKRCUnit;
 };
-
-
 
 #endif

@@ -3,7 +3,7 @@
 //!
 //! \brief
 //! Header file for functions and definitions of constant values and macros
-//! 
+//!
 //! \details
 //! Header file for definitions of constant values and macros to be used
 //! for within in the library of the Type I On-Line Trajectory Algorithm.
@@ -35,30 +35,22 @@
 //! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n
 //! See the License for the specific language governing permissions and\n
 //! limitations under the License.\n
-//! 
+//!
 //  ----------------------------------------------------------
 //   For a convenient reading of this file's source code,
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-
 #ifndef __TypeIRMLMath__
 #define __TypeIRMLMath__
-
 
 //*******************************************************************************************
 // Include files
 
-
-
 namespace TypeIRMLMath
 {
-
 //*******************************************************************************************
 // Definitions and macros
-
-
-
 
 //  ---------------------- Doxygen info ----------------------
 //! \def RML_INFINITY
@@ -66,8 +58,7 @@ namespace TypeIRMLMath
 //! \brief
 //! A value for infinity \f$ \infty = 10^{100} \f$
 //  ----------------------------------------------------------
-#define		RML_INFINITY				((double)1.0e100)
-
+#define RML_INFINITY ((double)1.0e100)
 
 //  ---------------------- Doxygen info ----------------------
 //! \def RML_DENOMINATOR_EPSILON
@@ -75,8 +66,7 @@ namespace TypeIRMLMath
 //! \brief
 //! A threshold value for zero to be used for denominators
 //  ----------------------------------------------------------
-#define		RML_DENOMINATOR_EPSILON		((double)1.0e-12)
-
+#define RML_DENOMINATOR_EPSILON ((double)1.0e-12)
 
 //  ---------------------- Doxygen info ----------------------
 //! \def RML_MIN_VALUE_FOR_MAXVELOCITY
@@ -85,8 +75,7 @@ namespace TypeIRMLMath
 //! Positive threshold value to determine the minimum allowed value for
 //! the maximum velocity value
 //  ----------------------------------------------------------
-#define		RML_MIN_VALUE_FOR_MAXVELOCITY		((double)1.0e-4)
-
+#define RML_MIN_VALUE_FOR_MAXVELOCITY ((double)1.0e-4)
 
 //  ---------------------- Doxygen info ----------------------
 //! \def RML_MIN_VALUE_FOR_MAXACCELERATION
@@ -95,14 +84,13 @@ namespace TypeIRMLMath
 //! Positive threshold value to determine the minimum allowed value
 //! for the maximum acceleration value
 //  ----------------------------------------------------------
-#define		RML_MIN_VALUE_FOR_MAXACCELERATION	((double)1.0e-4)
-
+#define RML_MIN_VALUE_FOR_MAXACCELERATION ((double)1.0e-4)
 
 //  ---------------------- Doxygen info ----------------------
 //! \def pow2(A)
 //!
 //! \brief
-//! A to the power of 2 
+//! A to the power of 2
 //!
 //! \param A
 //! Basis
@@ -110,8 +98,7 @@ namespace TypeIRMLMath
 //! \return
 //! Result value
 //  ----------------------------------------------------------
-#define pow2(A)							((A)*(A))
-
+#define pow2(A) ((A) * (A))
 
 //  ---------------------- Doxygen info ----------------------
 //! \fn double RMLSqrt(const double &Value)
@@ -127,9 +114,8 @@ namespace TypeIRMLMath
 //! \return
 //! Square root value (real)
 //  ----------------------------------------------------------
-double RMLSqrt(const double &Value);
+double RMLSqrt(const double& Value);
 
-
-}	// namespace TypeIRMLMath
+}  // namespace TypeIRMLMath
 
 #endif

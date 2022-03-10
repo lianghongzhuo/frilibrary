@@ -34,12 +34,11 @@
 //! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n
 //! See the License for the specific language governing permissions and\n
 //! limitations under the License.\n
-//! 
+//!
 //  ----------------------------------------------------------
 //   For a convenient reading of this file's source code,
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
-
 
 #ifndef __LinuxAbstraction__
 #define __LinuxAbstraction__
@@ -47,18 +46,13 @@
 #include <unistd.h>
 #include <string.h>
 
-#define EOK				0
-#define ETIME			62
-#define ENOTCONN		107
-#define EALREADY		114
+#define EOK 0
+#define ETIME 62
+#define ENOTCONN 107
+#define EALREADY 114
 
-void delay(const int &TimeInMilliseconds);
+void delay(const int& TimeInMilliseconds);
 
-
-int stricmp(const char *s1, const char *s2);
-
-
-
+int stricmp(const char* s1, const char* s2);
 
 #endif
-

@@ -39,20 +39,17 @@
 //! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n
 //! See the License for the specific language governing permissions and\n
 //! limitations under the License.\n
-//! 
+//!
 //  ----------------------------------------------------------
 //   For a convenient reading of this file's source code,
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-
 #ifndef __LWRJointPositionController__
 #define __LWRJointPositionController__
 
-
 #include <FastResearchInterface.h>
 #include <LWRBaseControllerInterface.h>
-
 
 //  ---------------------- Doxygen info ----------------------
 //! \class LWRJointPositionController
@@ -64,70 +61,62 @@
 
 class LWRJointPositionController : public LWRBaseControllerInterface
 {
-
-
 public:
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn LWRJointPositionController(const char *InitFileName):LWRBaseControllerInterface(InitFileName)
+    //!
+    //! \brief
+    //! Constructor
+    //!
+    //! \copydetails LWRBaseControllerInterface::LWRBaseControllerInterface()
+    //  ----------------------------------------------------------
+    LWRJointPositionController(const char* InitFileName) : LWRBaseControllerInterface(InitFileName)
+    {
+    }
 
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn ~LWRJointPositionController(void)
+    //!
+    //! \brief
+    //! Destructor
+    //!
+    //! \copydetails LWRBaseControllerInterface::~LWRBaseControllerInterface()
+    //  ----------------------------------------------------------
+    ~LWRJointPositionController(void)
+    {
+    }
 
-//  ---------------------- Doxygen info ----------------------
-//! \fn LWRJointPositionController(const char *InitFileName):LWRBaseControllerInterface(InitFileName)
-//!
-//! \brief
-//! Constructor
-//!
-//! \copydetails LWRBaseControllerInterface::LWRBaseControllerInterface()
-//  ----------------------------------------------------------
-	LWRJointPositionController(const char *InitFileName):LWRBaseControllerInterface(InitFileName)
-	{
-	}
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn inline int StartRobot(const float &TimeOutValueInSeconds	=	120.0)
+    //!
+    //! \brief
+    //! \copybrief FastResearchInterface::StartRobot()
+    //!
+    //! \details
+    //! \copydetails FastResearchInterface::StartRobot()
+    //  ----------------------------------------------------------
+    inline int StartRobot(const float& TimeOutValueInSeconds = 120.0)
+    {
+        this->printf("Please start up the robot now by using KUKA Control Panel.\n");
 
+        // start the controller and switch to command mode
+        return (this->FRI->StartRobot(FastResearchInterface::JOINT_POSITION_CONTROL, TimeOutValueInSeconds));
+    }
 
-//  ---------------------- Doxygen info ----------------------
-//! \fn ~LWRJointPositionController(void)
-//!
-//! \brief
-//! Destructor
-//!
-//! \copydetails LWRBaseControllerInterface::~LWRBaseControllerInterface()
-//  ----------------------------------------------------------
-	~LWRJointPositionController(void)
-	{
-	}
+    //  ---------------------- Doxygen info ----------------------
+    //! \fn inline void SetCommandedJointPositions(const float *CommandedJointPositions)
+    //!
+    //! \brief
+    //! \copybrief FastResearchInterface::SetCommandedJointPositions()
+    //!
+    //! \details
+    //! \copydetails FastResearchInterface::SetCommandedJointPositions()
+    //  ----------------------------------------------------------
+    inline void SetCommandedJointPositions(const float* CommandedJointPositions)
+    {
+        return (this->FRI->SetCommandedJointPositions(CommandedJointPositions));
+    }
 
-
-//  ---------------------- Doxygen info ----------------------
-//! \fn inline int StartRobot(const float &TimeOutValueInSeconds	=	120.0)
-//!
-//! \brief
-//! \copybrief FastResearchInterface::StartRobot()
-//!
-//! \details
-//! \copydetails FastResearchInterface::StartRobot()
-//  ----------------------------------------------------------
-	inline int StartRobot(const float &TimeOutValueInSeconds	=	120.0)
-	{
-		this->printf("Please start up the robot now by using KUKA Control Panel.\n");
-
-		// start the controller and switch to command mode
-		return(this->FRI->StartRobot(		FastResearchInterface::JOINT_POSITION_CONTROL
-									 	,	TimeOutValueInSeconds));
-	}
-
-
-//  ---------------------- Doxygen info ----------------------
-//! \fn inline void SetCommandedJointPositions(const float *CommandedJointPositions)
-//!
-//! \brief
-//! \copybrief FastResearchInterface::SetCommandedJointPositions()
-//!
-//! \details
-//! \copydetails FastResearchInterface::SetCommandedJointPositions()
-//  ----------------------------------------------------------
-	inline void SetCommandedJointPositions(const float *CommandedJointPositions)
-	{
-		return(this->FRI->SetCommandedJointPositions(CommandedJointPositions));
-	}
-
-};	// class LWRJointPositionController
+};  // class LWRJointPositionController
 
 #endif

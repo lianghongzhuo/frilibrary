@@ -2,7 +2,7 @@
 //! \file TypeIRMLDecision.h
 //!
 //! \brief
-//! Header file for decisions of the two decision trees of the 
+//! Header file for decisions of the two decision trees of the
 //! Type I On-Line Trajectory Generation algorithm
 //!
 //! \details
@@ -37,29 +37,24 @@
 //! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n
 //! See the License for the specific language governing permissions and\n
 //! limitations under the License.\n
-//! 
+//!
 //  ----------------------------------------------------------
 //   For a convenient reading of this file's source code,
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-
 #ifndef __TypeIRMLDecision__
 #define __TypeIRMLDecision__
 
-
-
 namespace TypeIRMLMath
-{	
-
+{
 //  ---------------------- Doxygen info ----------------------
 //! \fn bool Decision_1001(const double &CurrentVelocity)
 //!
 //! \brief
 //! Is (vi >= 0)?
 //  ----------------------------------------------------------
-bool Decision_1001(		const double &CurrentVelocity);
-
+bool Decision_1001(const double& CurrentVelocity);
 
 //  ---------------------- Doxygen info ----------------------
 //! \fn bool Decision_1002(const double &CurrentVelocity, const double &MaxVelocity)
@@ -67,35 +62,28 @@ bool Decision_1001(		const double &CurrentVelocity);
 //! \brief
 //! Is (vi >= vmax)?
 //  ----------------------------------------------------------
-//is (vi <= vmax)?
-bool Decision_1002(		const double &CurrentVelocity
-					,	const double &MaxVelocity);
-
+// is (vi <= vmax)?
+bool Decision_1002(const double& CurrentVelocity, const double& MaxVelocity);
 
 //  ---------------------- Doxygen info ----------------------
-//! \fn bool Decision_1003(const double &CurrentPosition, const double &CurrentVelocity, const double &MaxAcceleration, const double &TargetPosition)
+//! \fn bool Decision_1003(const double &CurrentPosition, const double &CurrentVelocity, const double &MaxAcceleration,
+//! const double &TargetPosition)
 //!
 //! \brief
 //! If v->0, is (p<=ptrgt)?
 //  ----------------------------------------------------------
-bool Decision_1003(		const double &CurrentPosition
-					,	const double &CurrentVelocity
-					,	const double &MaxAcceleration
-					,	const double &TargetPosition);
-
+bool Decision_1003(const double& CurrentPosition, const double& CurrentVelocity, const double& MaxAcceleration,
+                   const double& TargetPosition);
 
 //  ---------------------- Doxygen info ----------------------
-//! \fn bool Decision_1004(const double &CurrentPosition, const double &CurrentVelocity, const double &MaxVelocity, const double &MaxAcceleration, const double &TargetPosition)
+//! \fn bool Decision_1004(const double &CurrentPosition, const double &CurrentVelocity, const double &MaxVelocity,
+//! const double &MaxAcceleration, const double &TargetPosition)
 //!
 //! \brief
 //! If v->+vmax->0, is p<=ptrgt?
 //  ----------------------------------------------------------
-bool Decision_1004(		const double &CurrentPosition
-					,	const double &CurrentVelocity
-					,	const double &MaxVelocity
-					,	const double &MaxAcceleration
-					,	const double &TargetPosition);
-
+bool Decision_1004(const double& CurrentPosition, const double& CurrentVelocity, const double& MaxVelocity,
+                   const double& MaxAcceleration, const double& TargetPosition);
 
 //  ---------------------- Doxygen info ----------------------
 //! \fn bool Decision_2001(const double &CurrentVelocity)
@@ -103,8 +91,7 @@ bool Decision_1004(		const double &CurrentPosition
 //! \brief
 //! Is (vi >= 0)?
 //  ----------------------------------------------------------
-bool Decision_2001(		const double &CurrentVelocity);
-
+bool Decision_2001(const double& CurrentVelocity);
 
 //  ---------------------- Doxygen info ----------------------
 //! \fn bool Decision_2002(const double &CurrentVelocity, const double &MaxVelocity)
@@ -112,34 +99,28 @@ bool Decision_2001(		const double &CurrentVelocity);
 //! \brief
 //! Is (vi <= vmax)?
 //  ----------------------------------------------------------
-bool Decision_2002(		const double &CurrentVelocity
-					,	const double &MaxVelocity);
-
+bool Decision_2002(const double& CurrentVelocity, const double& MaxVelocity);
 
 //  ---------------------- Doxygen info ----------------------
-//! \fn bool Decision_2003(const double &CurrentPosition, const double &CurrentVelocity, const double &MaxAcceleration, const double &TargetPosition)
+//! \fn bool Decision_2003(const double &CurrentPosition, const double &CurrentVelocity, const double &MaxAcceleration,
+//! const double &TargetPosition)
 //!
 //! \brief
 //! If v->0, is (p<=ptrgt)?
 //  ----------------------------------------------------------
-bool Decision_2003(		const double &CurrentPosition
-					,	const double &CurrentVelocity
-					,	const double &MaxAcceleration
-					,	const double &TargetPosition);
-
+bool Decision_2003(const double& CurrentPosition, const double& CurrentVelocity, const double& MaxAcceleration,
+                   const double& TargetPosition);
 
 //  ---------------------- Doxygen info ----------------------
-//! \fn bool Decision_2004(const double &CurrentPosition, const double &CurrentVelocity, const double &MaxAcceleration, const double &TargetPosition, const double &SynchronizationTime)
+//! \fn bool Decision_2004(const double &CurrentPosition, const double &CurrentVelocity, const double &MaxAcceleration,
+//! const double &TargetPosition, const double &SynchronizationTime)
 //!
 //! \brief
 //! If v->hold->0, so that t=tsync, is p<=ptrgt?
 //  ----------------------------------------------------------
-bool Decision_2004(		const double &CurrentPosition
-					,	const double &CurrentVelocity
-					,	const double &MaxAcceleration
-					,	const double &TargetPosition
-					,	const double &SynchronizationTime);
+bool Decision_2004(const double& CurrentPosition, const double& CurrentVelocity, const double& MaxAcceleration,
+                   const double& TargetPosition, const double& SynchronizationTime);
 
-}	// namespace TypeIRMLMath
+}  // namespace TypeIRMLMath
 
 #endif

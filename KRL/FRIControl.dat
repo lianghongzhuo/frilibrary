@@ -5,20 +5,20 @@ DEFDAT  FRICONTROL
     ;=====================================
     ; Stanford University
     ; Department of Computer Science
-    ; Artificial Intelligence Laboratory 
+    ; Artificial Intelligence Laboratory
     ; Gates Computer Science Building 1A
     ; 353 Serra Mall
     ; Stanford, CA 94305-9010
     ; USA
-    ; 
+    ;
     ; KRL application, which contains the KRL commands
     ; for appying the Fast Research Interface (FRI) of
     ; the KUKA Light-Weight Robot (LWR)
-    ; 
+    ;
     ; July 20, 2010
-    ; 
+    ;
     ; Author: Torsten Kroeger, tkr@stanford.edu
-    ; 
+    ;
     ; Latest update: November 19, 2011
     ;=====================================
 ;ENDFOLD (Program information)
@@ -30,7 +30,7 @@ DEFDAT  FRICONTROL
     ;ENDFOLD (BASISTECH EXT)
     ;FOLD USER EXT;%{E}%MKUKATPUSER,%CEXT,%VEXT,%P
         ;Make here your modifications
-    
+
         DECL FRISTATE RETURN_VALUE
         INT I
         INT STRING_OFFSET

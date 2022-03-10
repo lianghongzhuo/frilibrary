@@ -34,13 +34,11 @@
 //! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n
 //! See the License for the specific language governing permissions and\n
 //! limitations under the License.\n
-//! 
+//!
 //  ----------------------------------------------------------
 //   For a convenient reading of this file's source code,
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
-
-
 
 /*! \mainpage Start Page
 
@@ -62,10 +60,11 @@ to the KRC (KUKA Robot Controller) via an Ethernet connection. In intervals of 1
 UDP packages are periodically sent from the KRC unit to the remote host. These packages contain
 a complete set of robot control and status data (e.g., joint positions, joint torques, drive FRIDriveTemperatures,
 etc.; cf. FRI User Documentation).
-The remote host (e.g., with <a href="http://www.qnx.com" target="_blank" >QNX Neutrino RTOS</a>) has to instantaneously send a reply message after the reception of each package. A reply message
-contains input data for the applied controllers (e.g., joint position set-points, joint stiffness set-points,
-etc.). This way, users become able to set-up own control architectures and/or application-specific controllers
-for the light-weight arm as it is often desired at research institutions.\n\n
+The remote host (e.g., with <a href="http://www.qnx.com" target="_blank" >QNX Neutrino RTOS</a>) has to instantaneously
+send a reply message after the reception of each package. A reply message contains input data for the applied
+controllers (e.g., joint position set-points, joint stiffness set-points, etc.). This way, users become able to set-up
+own control architectures and/or application-specific controllers for the light-weight arm as it is often desired at
+research institutions.\n\n
 
 \section sec_Download Download
 
@@ -81,16 +80,13 @@ The Fast Research Interface Library is available for\n
 \section sec_Overview Software Overview
 The Fast Research Interface Library can be used in two different ways:
 <ol>
-<li>The class FastResearchInterface provides access to \em all functionalities offered by KUKA. This class has a simple structure,
-but it consists of a rather huge number of methods.\n\n
-<li>Based on the class FastResearchInterface, a set of classes has been designed in order to provide an easy-to-use and
-easy-to-start-with API with all necessary functionalities while hiding all API-irrelevant parts of the library. The
-base class for this controller interface is the class LWRBaseControllerInterface. Derived from this class, users can
-select among interfaces for\n\n
-<ul>
-<li>joint position control (class LWRJointPositionController),</li>
-<li>Cartesian impedance control (LWRCartImpedanceController), and</li>
-<li>joint impedance control (class LWRJointImpedanceController).\n</li>
+<li>The class FastResearchInterface provides access to \em all functionalities offered by KUKA. This class has a simple
+structure, but it consists of a rather huge number of methods.\n\n <li>Based on the class FastResearchInterface, a set
+of classes has been designed in order to provide an easy-to-use and easy-to-start-with API with all necessary
+functionalities while hiding all API-irrelevant parts of the library. The base class for this controller interface is
+the class LWRBaseControllerInterface. Derived from this class, users can select among interfaces for\n\n <ul> <li>joint
+position control (class LWRJointPositionController),</li> <li>Cartesian impedance control (LWRCartImpedanceController),
+and</li> <li>joint impedance control (class LWRJointImpedanceController).\n</li>
 </ul>
  </ol>
 The following section briefly describes how to get started with the robot and this library.\n\n
@@ -105,45 +101,40 @@ Research Interface (see also FRI User Documentation).
 Please refer to
 the manual of Installation/Uninstallation/Update of Tech Packages
 SystemTech (KRS) from V5.x. \n\n\n</li>
-<li><b>Step 2: Send your machine information to your KUKA representative in order to receive your FRI license file.</b>\n\n
- After installing the FRI software on the KRC unit, send the generated log file\n\n
- <tt> C:\\KRC\\Roboter\\Log\\lbrBoot.log</tt>\n\n
- from the KRC unit to your KUKA contact to receive your license file and respective
- KUKA instructions about how obtain an FRI license and how to install it. \n\n\n</li>
-<li><b>Step 3: Configure the KRC node.</b>\n\n
-Open the file <tt>C:\\Windows\\vxwin.ini</tt> on the KRC node and enter its IP address (e.g., <b>192.168.0.20</b>):\n\n
-\code
-[Boot]\n
-Bootline=elPci(0,1)pc:vxworks h=192.0.1.2 b=192.0.1.1 e=192.168.0.20 u=target pw=vxworks
-\endcode\n
-The KUKA Fast Research Interface running on the KRC node requires the IP address and an open port of the remote host.
-To specify both, open the file <tt> C:\\KRC\\Roboter\\INIT\\dlrrc.ini</tt> may contain\n\n
-\code
+<li><b>Step 2: Send your machine information to your KUKA representative in order to receive your FRI license
+file.</b>\n\n After installing the FRI software on the KRC unit, send the generated log file\n\n <tt>
+C:\\KRC\\Roboter\\Log\\lbrBoot.log</tt>\n\n from the KRC unit to your KUKA contact to receive your license file and
+respective KUKA instructions about how obtain an FRI license and how to install it. \n\n\n</li> <li><b>Step 3: Configure
+the KRC node.</b>\n\n Open the file <tt>C:\\Windows\\vxwin.ini</tt> on the KRC node and enter its IP address (e.g.,
+<b>192.168.0.20</b>):\n\n \code [Boot]\n Bootline=elPci(0,1)pc:vxworks h=192.0.1.2 b=192.0.1.1 e=192.168.0.20 u=target
+pw=vxworks \endcode\n The KUKA Fast Research Interface running on the KRC node requires the IP address and an open port
+of the remote host. To specify both, open the file <tt> C:\\KRC\\Roboter\\INIT\\dlrrc.ini</tt> may contain\n\n \code
 [DLRRC]
 FRIHOST=192.168.0.100
 FRISOCK=49938,0
 \endcode\n
 After a reboot, you may use <tt>ping 192.168.0.20</tt> and <tt>ping 192.168.0.100</tt> on either node to check whether
-the connection was successfully established. In order to achieve minimum latencies between both nodes, you may simply use
-a crossed Ethernet cable.\n\n
-Copy the \ref sec_KRLFiles to
-\verbatim
-C:\KRC\Roboter\KRC\R1\Program\FRIDemo
+the connection was successfully established. In order to achieve minimum latencies between both nodes, you may simply
+use a crossed Ethernet cable.\n\n Copy the \ref sec_KRLFiles to \verbatim C:\KRC\Roboter\KRC\R1\Program\FRIDemo
 \endverbatim
 on the KRC unit and restart it.\n\n\n</li>
 <li><b>Step 4: Check out the Sample Applications.</b>\anchor StepFour\n\n
 Depending on your needs, you may choose one of these simple sample applications in the folder
 \verbatim src/FastResearchInterfaceTest \endverbatim
-or 
+or
 \verbatim src/LWRGettingStartedExamples \endverbatim
-to start with. The first folder only contains one sample application, <a href="../html/_fast_research_interface_test_8cpp_source.html">FastResearchInterfaceTest.cpp</a>
-that makes use of the class FastResearchInterface and shows, how this generic API can be used. The
-second folder contains a number of very simple sample applications, all which make use of one of these interface classes:\n\n
-<ul>
-<li><a href="../html/_l_w_r_joint_position_control_example_8cpp_source.html">LWRJointPositionControlExample.cpp</a> for an application using the <em>joint position controller</em></li>
-<li><a href="../html/_l_w_r_cart_impedance_control_example_8cpp_source.html">LWRCartImpedanceControlExample.cpp</a> for an application using the <em>Cartesian impedance controller</em></li>
-<li><a href="../html/_l_w_r_joint_impedance_control_example_8cpp_source.html">LWRJointImpedanceControlExample.cpp</a> for an application using the <em>joint impedance controller</em></li>
-<li><a href="../html/_l_w_r_logging_example_8cpp_source.html">LWRLoggingExample.cpp</a> for an application using the interface for logging low-level control data\n\n</li>
+to start with. The first folder only contains one sample application, <a
+href="../html/_fast_research_interface_test_8cpp_source.html">FastResearchInterfaceTest.cpp</a> that makes use of the
+class FastResearchInterface and shows, how this generic API can be used. The second folder contains a number of very
+simple sample applications, all which make use of one of these interface classes:\n\n <ul> <li><a
+href="../html/_l_w_r_joint_position_control_example_8cpp_source.html">LWRJointPositionControlExample.cpp</a> for an
+application using the <em>joint position controller</em></li> <li><a
+href="../html/_l_w_r_cart_impedance_control_example_8cpp_source.html">LWRCartImpedanceControlExample.cpp</a> for an
+application using the <em>Cartesian impedance controller</em></li> <li><a
+href="../html/_l_w_r_joint_impedance_control_example_8cpp_source.html">LWRJointImpedanceControlExample.cpp</a> for an
+application using the <em>joint impedance controller</em></li> <li><a
+href="../html/_l_w_r_logging_example_8cpp_source.html">LWRLoggingExample.cpp</a> for an application using the interface
+for logging low-level control data\n\n</li>
 </ul>
 The respective user APIs for the controller interfaces are defined by the classes\n\n
 <ul>
@@ -151,19 +142,16 @@ The respective user APIs for the controller interfaces are defined by the classe
 <li>LWRCartImpedanceController for the Cartesian impedance controller, and</li>
 <li>LWRJointImpedanceController for the joint impedance controller,\n\n</li>
 </ul>
- which are all derived from the class LWRBaseControllerInterface. This class contains an object of the class FastResearchInterface,
- which constitutes the actual interface and provides the full set functionalities. The class LWRBaseControllerInterface and its
- three derivatives only act as a wrapper and hide the actual (rather voluminous) library with all its relevant communication issues. Only
- necessary and required functionalities are provided for each controller.
+ which are all derived from the class LWRBaseControllerInterface. This class contains an object of the class
+FastResearchInterface, which constitutes the actual interface and provides the full set functionalities. The class
+LWRBaseControllerInterface and its three derivatives only act as a wrapper and hide the actual (rather voluminous)
+library with all its relevant communication issues. Only necessary and required functionalities are provided for each
+controller.
 
-\em Optionally, a real-time capable \c printf() function (LWRBaseControllerInterface::printf()) and a low-level real-time
-data logger may be useful (class DataLogging).\n\n\n</li>
-<li><b>Step 5: Compile the Fast Research Interface Library for the remote host.</b>\n\n
-Instructions for the following operating systems can be found here:\n\n
-<ul>
-<li>\ref page_QNX "QNX Neutrino",\n</li>
-<li>\ref page_Linux "Linux",\n</li>
-<li>\ref page_MACOS "MacOS", and\n</li>
+\em Optionally, a real-time capable \c printf() function (LWRBaseControllerInterface::printf()) and a low-level
+real-time data logger may be useful (class DataLogging).\n\n\n</li> <li><b>Step 5: Compile the Fast Research Interface
+Library for the remote host.</b>\n\n Instructions for the following operating systems can be found here:\n\n <ul>
+<li>\ref page_QNX "QNX Neutrino",\n</li> <li>\ref page_Linux "Linux",\n</li> <li>\ref page_MACOS "MacOS", and\n</li>
 <li>\ref page_Windows "Microsoft Windows".\n</li>
 </ul>
 \n\n\n</li>
@@ -224,9 +212,6 @@ are received by the KRC \em from the Remote host. The remote host may call the m
 to read or write these variables.
 */
 
-
-
-
 // -----------------------------------------------------------------
 /*!
 \page page_NWSetup Network Setup (Example)
@@ -238,7 +223,8 @@ This section briefly describes the network set-up.
 <ul>
 <li><b>IP address:</b> 192.168.0.20\n\n</li>
 <li><b>MAC address:</b> 00:0A:5E:26:26:43\n\n</li>
-<li><b>Note:</b> The network adapter is \em only used by the VxWorks system; in the MS Windows environment, only a dummy adapter can be found.\n\n</li>
+<li><b>Note:</b> The network adapter is \em only used by the VxWorks system; in the MS Windows environment, only a dummy
+adapter can be found.\n\n</li>
 </ul></li>
 </ul>
 
@@ -285,14 +271,12 @@ To remotely access the QNX host, the following service are available (cf. <tt>/e
 */
 // -----------------------------------------------------------------
 
-
-
 /*!
 \page page_InitFile The Initialization File for the Fast Research Interface Library
 \section sec_InitFile The Initialization File for the Fast Research Interface Library
-The constructor of the class FastResearchInterface requires the specification of an initialization file. This initialization file
-contains basic parameters to set-up the features provided by the Fast Research Interface Library.
-A sample file may be seen here:
+The constructor of the class FastResearchInterface requires the specification of an initialization file. This
+initialization file contains basic parameters to set-up the features provided by the Fast Research Interface Library. A
+sample file may be seen here:
 
 \verbinclude 980039-FRI-Driver.init
 
@@ -306,33 +290,31 @@ A sample file may be seen here:
 <li>Section \b Priorities \n\n\n
 <ul>
 <li> \b KRCCommunicationThread: The priority of the thread communicating with the KRC unit via a UDP socket connection
-(see also FastResearchInterface::KRCCommunicationThreadMain()). It is recommended to use a high (or even the highest) priority
- for this thread as it is of major importance to immediately respond to received messages. This may minimize the latency
- and the jitter of the UDP communication channel between the KRC unit and the remote host. \n\n
-<li> \b TimerThread: As the timing quality of the VxWorks platform is not necessarily sufficient, users
-can (optionally) use this local timer for their control algorithms. The timer is managed by this thread, which provides the
-timer service via a simple condition variable (see also FastResearchInterface::TimerThreadMain() and
-FastResearchInterface::WaitForTimerTick()). \n\n
-<li> \b MainThread: This priority is assigned to the thread that calls the constructor of the class FastResearchInterface. \n\n
-<li> \b OutputConsoleThread: In order to enable error (and debug) information output (e.g., to \c stdout), the class Console
-is used. An object of this class contains an output thread (Console::ConsoleThreadMain()) that is supposed to run at a low
-priority. \n\n\n
+(see also FastResearchInterface::KRCCommunicationThreadMain()). It is recommended to use a high (or even the highest)
+priority for this thread as it is of major importance to immediately respond to received messages. This may minimize the
+latency and the jitter of the UDP communication channel between the KRC unit and the remote host. \n\n <li> \b
+TimerThread: As the timing quality of the VxWorks platform is not necessarily sufficient, users can (optionally) use
+this local timer for their control algorithms. The timer is managed by this thread, which provides the timer service via
+a simple condition variable (see also FastResearchInterface::TimerThreadMain() and
+FastResearchInterface::WaitForTimerTick()). \n\n <li> \b MainThread: This priority is assigned to the thread that calls
+the constructor of the class FastResearchInterface. \n\n <li> \b OutputConsoleThread: In order to enable error (and
+debug) information output (e.g., to \c stdout), the class Console is used. An object of this class contains an output
+thread (Console::ConsoleThreadMain()) that is supposed to run at a low priority. \n\n\n
 </ul>
 <li>Section \b ControlValues \n\n\n
 <ul>
-<li> \b CycleTime: The communication cycle time in seconds. This value has to be the same as used by the KRL function call
- of <tt>friStart()</tt> (cf. \ref sec_KRLFile1). The KRC unit sends messages to the remote host in isochronous time intervals whose
- width is specified by this value. \n\n\n
+<li> \b CycleTime: The communication cycle time in seconds. This value has to be the same as used by the KRL function
+call of <tt>friStart()</tt> (cf. \ref sec_KRLFile1). The KRC unit sends messages to the remote host in isochronous time
+intervals whose width is specified by this value. \n\n\n
 </ul>
 <li>Section \b Logging \n\n\n
 <ul>
-<li> \b NumberOfLoggingFileEntries: The class FastResearchInterface offers the possibility of using a low-level real-time
-data logger implemented in the class DataLogging. The value \em NumberOfLoggingFileEntries specifies the maximum number of
-logged entries (cf. DataLogging::MaximumNumberOfEntries). \n\n
-<li> \b LoggingPath specifies the output directory used by the logging object of the class DataLogging (cf.
-DataLogging::OutputPath). \n\n
-<li> \b LoggingFileName specifies the output file name and its extension used by the logging object of the class DataLogging (cf.
-DataLogging::OutputFileName). \n\n
+<li> \b NumberOfLoggingFileEntries: The class FastResearchInterface offers the possibility of using a low-level
+real-time data logger implemented in the class DataLogging. The value \em NumberOfLoggingFileEntries specifies the
+maximum number of logged entries (cf. DataLogging::MaximumNumberOfEntries). \n\n <li> \b LoggingPath specifies the
+output directory used by the logging object of the class DataLogging (cf. DataLogging::OutputPath). \n\n <li> \b
+LoggingFileName specifies the output file name and its extension used by the logging object of the class DataLogging
+(cf. DataLogging::OutputFileName). \n\n
 </ul>
 </ul>
 
@@ -370,7 +352,8 @@ DataLogging::OutputFileName). \n\n
 \page page_QNX Download and Installation Instructions: QNX Neutrino
 
 \n
-<b>Download URL</b>: <a href="http://cs.stanford.edu/people/tkr/fri/download/fril.zip"><b>http://cs.stanford.edu/people/tkr/fri/download/fril.zip</b></a>\n\n
+<b>Download URL</b>: <a
+href="http://cs.stanford.edu/people/tkr/fri/download/fril.zip"><b>http://cs.stanford.edu/people/tkr/fri/download/fril.zip</b></a>\n\n
 
 
 Please download the file and copy it to a directory of yours (e.g.,
@@ -385,7 +368,7 @@ the absolute path of the directory
 \code
 FRILibrary
 \endcode
-as the location of your project. In the directory \c QNX, you can find 
+as the location of your project. In the directory \c QNX, you can find
 corresponding makefiles. In the file <c>Makefile.global</c>, you need
 adapt the variable <c>ROOT_DIR</c> to the absolute path of the directory
 \c FRILibrary. Now, you can rebuild your the entire project in your
@@ -410,7 +393,8 @@ establish a connection form the remote host to the KRC control unit.
 \page page_Linux Download and Installation Instructions: Linux
 
 \n
-<b>Download URL</b>: <a href="http://cs.stanford.edu/people/tkr/fri/download/fril.zip"><b>http://cs.stanford.edu/people/tkr/fri/download/fril.zip</b></a>\n\n
+<b>Download URL</b>: <a
+href="http://cs.stanford.edu/people/tkr/fri/download/fril.zip"><b>http://cs.stanford.edu/people/tkr/fri/download/fril.zip</b></a>\n\n
 
 Please download the file and copy it to a directory of yours (e.g.,
 <tt>/home/MyUsername/FRI</tt>)and unzip the compressed file
@@ -422,7 +406,7 @@ Afterwards, you change to the directory <tt>FRILibrary/Linux</tt> and enter
 \code
 make clean all
 \endcode
-to check whether all files compile correctly on your system. 
+to check whether all files compile correctly on your system.
 If so, you may continue with \ref StepFour "Step 4 of the Quick Start Manual".
 The class FastResearchInterface represents
 the user API.
@@ -448,7 +432,8 @@ the marked lines in the file <b>ExternalTargets.global</b>.
 \page page_MACOS Download and Installation Instructions: MacOS
 
 \n
-<b>Download URL</b>: <a href="http://cs.stanford.edu/people/tkr/fri/download/fril.zip"><b>http://cs.stanford.edu/people/tkr/fri/download/fril.zip</b></a>\n\n
+<b>Download URL</b>: <a
+href="http://cs.stanford.edu/people/tkr/fri/download/fril.zip"><b>http://cs.stanford.edu/people/tkr/fri/download/fril.zip</b></a>\n\n
 
 Please download the file and copy it to a directory of yours (e.g.,
 <tt>/home/MyUsername/FRI</tt>) and unzip the compressed file with
@@ -459,7 +444,7 @@ Afterwards, you change to the directory <tt>FRILibrary/MacOS</tt> and enter
 \code
 make clean all
 \endcode
-to check whether all files compile correctly on your system. 
+to check whether all files compile correctly on your system.
 If so, you may continue with \ref StepFour "Step 4 of the Quick Start Manual".
 The class FastResearchInterface represents
 the user API.
@@ -478,7 +463,8 @@ establish a connection form the remote host to the KRC control unit.
 \page page_Windows Download and Installation Instructions: Microsoft Windows (Visual Studio 2008)
 
 \n
-<b>Download URL</b>: <a href="http://cs.stanford.edu/people/tkr/fri/download/fril.zip"><b>http://cs.stanford.edu/people/tkr/fri/download/fril.zip</b></a>\n\n
+<b>Download URL</b>: <a
+href="http://cs.stanford.edu/people/tkr/fri/download/fril.zip"><b>http://cs.stanford.edu/people/tkr/fri/download/fril.zip</b></a>\n\n
 
 Please download the file and copy it to a directory of yours (e.g.,
 <tt>C:\\Users\\MyUsername\\FRI</tt>) and unzip the compressed file

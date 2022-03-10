@@ -32,25 +32,22 @@
 //! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n
 //! See the License for the specific language governing permissions and\n
 //! limitations under the License.\n
-//! 
+//!
 //  ----------------------------------------------------------
 //   For a convenient reading of this file's source code,
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-
 #ifndef __TypeIRMLProfiles__
 #define __TypeIRMLProfiles__
 
-
 #include <TypeIRMLPolynomial.h>
 
-
 namespace TypeIRMLMath
-{	
-
+{
 //  ---------------------- Doxygen info ----------------------
-//! \fn double ProfileStep1PosTri(const double &CurrentPosition, const double &CurrentVelocity, const double &MaxAcceleration, const double &TargetPosition)
+//! \fn double ProfileStep1PosTri(const double &CurrentPosition, const double &CurrentVelocity, const double
+//! &MaxAcceleration, const double &TargetPosition)
 //!
 //! \brief
 //! Calculates the execution time of the PosTri velocity profile
@@ -74,14 +71,12 @@ namespace TypeIRMLMath
 //! \return
 //! Execution time for this profile in seconds
 //  ----------------------------------------------------------
-double ProfileStep1PosTri(		const double &CurrentPosition
-							,	const double &CurrentVelocity
-							,	const double &MaxAcceleration
-							,	const double &TargetPosition);
-
+double ProfileStep1PosTri(const double& CurrentPosition, const double& CurrentVelocity, const double& MaxAcceleration,
+                          const double& TargetPosition);
 
 //  ---------------------- Doxygen info ----------------------
-//! \fn double ProfileStep1PosTrap(const double &CurrentPosition, const double &CurrentVelocity, const double &MaxVelocity, const double &MaxAcceleration, const double &TargetPosition)
+//! \fn double ProfileStep1PosTrap(const double &CurrentPosition, const double &CurrentVelocity, const double
+//! &MaxVelocity, const double &MaxAcceleration, const double &TargetPosition)
 //!
 //! \brief Calculates the execution time of the PosTrap velocity profile
 //!
@@ -108,15 +103,12 @@ double ProfileStep1PosTri(		const double &CurrentPosition
 //! \return
 //! Execution time for this profile in seconds
 //  ----------------------------------------------------------
-double ProfileStep1PosTrap(		const double &CurrentPosition
-							,	const double &CurrentVelocity
-							,	const double &MaxVelocity
-							,	const double &MaxAcceleration
-							,	const double &TargetPosition);
-
+double ProfileStep1PosTrap(const double& CurrentPosition, const double& CurrentVelocity, const double& MaxVelocity,
+                           const double& MaxAcceleration, const double& TargetPosition);
 
 //  ---------------------- Doxygen info ----------------------
-//! \fn void ProfileStep2V_To_Vmax(double *CurrentPosition, double *CurrentVelocity, const double &MaxVelocity, const double &MaxAcceleration, double *ElapsedTime,	const bool &SignsAreInverted, TypeIRMLMath::TypeIMotionPolynomials *P)
+//! \fn void ProfileStep2V_To_Vmax(double *CurrentPosition, double *CurrentVelocity, const double &MaxVelocity, const double
+//! &MaxAcceleration, double *ElapsedTime,	const bool &SignsAreInverted, TypeIRMLMath::TypeIMotionPolynomials *P)
 //!
 //! \brief Calculates the polynomial parameters to bring the velocity
 //! value to the maximum velocity
@@ -146,17 +138,13 @@ double ProfileStep1PosTrap(		const double &CurrentPosition
 //! \param P
 //! The set of polynomials that are parameterized by this method
 //  ----------------------------------------------------------
-void ProfileStep2V_To_Vmax(		double 									*CurrentPosition
-							,	double 									*CurrentVelocity
-							,	const double							&MaxVelocity
-							,	const double							&MaxAcceleration
-							,	double									*ElapsedTime					
-							,	const bool								&SignsAreInverted
-							,	TypeIRMLMath::TypeIMotionPolynomials	*P					);
-
+void ProfileStep2V_To_Vmax(double* CurrentPosition, double* CurrentVelocity, const double& MaxVelocity,
+                           const double& MaxAcceleration, double* ElapsedTime, const bool& SignsAreInverted,
+                           TypeIRMLMath::TypeIMotionPolynomials* P);
 
 //  ---------------------- Doxygen info ----------------------
-//! \fn void ProfileStep2V_To_Zero(double *CurrentPosition, double *CurrentVelocity, const double &MaxAcceleration, double *ElapsedTime, const bool &SignsAreInverted, TypeIRMLMath::TypeIMotionPolynomials *P)
+//! \fn void ProfileStep2V_To_Zero(double *CurrentPosition, double *CurrentVelocity, const double &MaxAcceleration,
+//! double *ElapsedTime, const bool &SignsAreInverted, TypeIRMLMath::TypeIMotionPolynomials *P)
 //!
 //! \brief Calculates the polynomial parameters to bring the velocity
 //! value to zero
@@ -182,16 +170,13 @@ void ProfileStep2V_To_Vmax(		double 									*CurrentPosition
 //! \param P
 //! The set of polynomials that are parameterized by this method
 //  ----------------------------------------------------------
-void ProfileStep2V_To_Zero(		double 									*CurrentPosition
-							,	double 									*CurrentVelocity
-							,	const double							&MaxAcceleration
-							,	double									*ElapsedTime					
-							,	const bool								&SignsAreInverted
-							,	TypeIRMLMath::TypeIMotionPolynomials	*P					);
-
+void ProfileStep2V_To_Zero(double* CurrentPosition, double* CurrentVelocity, const double& MaxAcceleration,
+                           double* ElapsedTime, const bool& SignsAreInverted, TypeIRMLMath::TypeIMotionPolynomials* P);
 
 //  ---------------------- Doxygen info ----------------------
-//! \fn void ProfileStep2PosTrap(double *CurrentPosition, double *CurrentVelocity, const double &MaxAcceleration, const double &TargetPosition, const double &SynchronizationTime, double *ElapsedTime, const bool &SignsAreInverted, TypeIRMLMath::TypeIMotionPolynomials *P)
+//! \fn void ProfileStep2PosTrap(double *CurrentPosition, double *CurrentVelocity, const double &MaxAcceleration, const
+//! double &TargetPosition, const double &SynchronizationTime, double *ElapsedTime, const bool &SignsAreInverted,
+//! TypeIRMLMath::TypeIMotionPolynomials *P)
 //!
 //! \brief Calculates all trajectory parameters the PosTrap
 //! velocity profile
@@ -213,7 +198,7 @@ void ProfileStep2V_To_Zero(		double 									*CurrentPosition
 //! \f$ T_{i} \f$, \f$\ _{k}P_{i}^{\,trgt} \f$
 //!
 //! \param SynchronizationTime
-//! Synchronization time \f$\ t_{i}^{\,sync} \f$ 
+//! Synchronization time \f$\ t_{i}^{\,sync} \f$
 //!
 //! \param ElapsedTime
 //! Elapsed time in seconds, this value may be modified by the method.
@@ -224,17 +209,14 @@ void ProfileStep2V_To_Zero(		double 									*CurrentPosition
 //! \param P
 //! The set of polynomials that are parameterized by this method
 //  ----------------------------------------------------------
-void ProfileStep2PosTrap(		double 									*CurrentPosition
-							,	double									*CurrentVelocity
-							,	const double 							&MaxAcceleration
-							,	const double 							&TargetPosition
-							,	const double 							&SynchronizationTime
-							,	double									*ElapsedTime					
-							,	const bool								&SignsAreInverted
-							,	TypeIRMLMath::TypeIMotionPolynomials	*P						);
+void ProfileStep2PosTrap(double* CurrentPosition, double* CurrentVelocity, const double& MaxAcceleration,
+                         const double& TargetPosition, const double& SynchronizationTime, double* ElapsedTime,
+                         const bool& SignsAreInverted, TypeIRMLMath::TypeIMotionPolynomials* P);
 
 //  ---------------------- Doxygen info ----------------------
-//! \fn void ProfileStep2NegHldNegLin(double *CurrentPosition, double *CurrentVelocity, const double &MaxAcceleration, const double &TargetPosition, const double &SynchronizationTime, double *ElapsedTime, const bool &SignsAreInverted, TypeIRMLMath::TypeIMotionPolynomials *P)
+//! \fn void ProfileStep2NegHldNegLin(double *CurrentPosition, double *CurrentVelocity, const double &MaxAcceleration,
+//! const double &TargetPosition, const double &SynchronizationTime, double *ElapsedTime, const bool &SignsAreInverted,
+//! TypeIRMLMath::TypeIMotionPolynomials *P)
 //!
 //! \brief Calculates all trajectory parameters the NegHldNegLin
 //! velocity profile
@@ -256,7 +238,7 @@ void ProfileStep2PosTrap(		double 									*CurrentPosition
 //! \f$ T_{i} \f$, \f$\ _{k}P_{i}^{\,trgt} \f$
 //!
 //! \param SynchronizationTime
-//! Synchronization time \f$\ t_{i}^{\,sync} \f$ 
+//! Synchronization time \f$\ t_{i}^{\,sync} \f$
 //!
 //! \param ElapsedTime
 //! Elapsed time in seconds, this value may be modified by the method.
@@ -267,16 +249,10 @@ void ProfileStep2PosTrap(		double 									*CurrentPosition
 //! \param P
 //! The set of polynomials that are parameterized by this method
 //  ----------------------------------------------------------
-void ProfileStep2NegHldNegLin(		double		 							*CurrentPosition
-								,	double	 								*CurrentVelocity
-								,	const double 							&MaxAcceleration
-								,	const double 							&TargetPosition
-								,	const double 							&SynchronizationTime
-								,	double									*ElapsedTime					
-								,	const bool								&SignsAreInverted
-								,	TypeIRMLMath::TypeIMotionPolynomials	*P						);
+void ProfileStep2NegHldNegLin(double* CurrentPosition, double* CurrentVelocity, const double& MaxAcceleration,
+                              const double& TargetPosition, const double& SynchronizationTime, double* ElapsedTime,
+                              const bool& SignsAreInverted, TypeIRMLMath::TypeIMotionPolynomials* P);
 
-
-}	// namespace TypeIRMLMath
+}  // namespace TypeIRMLMath
 
 #endif

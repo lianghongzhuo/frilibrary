@@ -2,7 +2,7 @@
 //! \file TypeIRMLDecision.cpp
 //!
 //! \brief
-//! Implementation file for decisions of the two decision trees of the 
+//! Implementation file for decisions of the two decision trees of the
 //! Type I On-Line Trajectory Generation algorithm
 //!
 //! \sa TypeIRMLDecision.h
@@ -34,107 +34,82 @@
 //! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n
 //! See the License for the specific language governing permissions and\n
 //! limitations under the License.\n
-//! 
+//!
 //  ----------------------------------------------------------
 //   For a convenient reading of this file's source code,
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-
-
 #include <TypeIRMLDecision.h>
 #include <TypeIRMLMath.h>
-
 
 //************************************************************************************
 // Decision_1001()
 
-bool TypeIRMLMath::Decision_1001(const double &CurrentVelocity)
+bool TypeIRMLMath::Decision_1001(const double& CurrentVelocity)
 {
-	return(CurrentVelocity >= 0.0);
+    return (CurrentVelocity >= 0.0);
 }
-
 
 //************************************************************************************
 // Decision_1002()
 
-bool TypeIRMLMath::Decision_1002(		const double &CurrentVelocity
-									,	const double &MaxVelocity)
+bool TypeIRMLMath::Decision_1002(const double& CurrentVelocity, const double& MaxVelocity)
 {
-	return(CurrentVelocity <= MaxVelocity);
+    return (CurrentVelocity <= MaxVelocity);
 }
-
 
 //************************************************************************************
 // Decision_1003()
 
-bool TypeIRMLMath::Decision_1003(		const double &CurrentPosition
-									,	const double &CurrentVelocity
-									,	const double &MaxAcceleration
-									,	const double &TargetPosition)
+bool TypeIRMLMath::Decision_1003(const double& CurrentPosition, const double& CurrentVelocity,
+                                 const double& MaxAcceleration, const double& TargetPosition)
 {
-	return((CurrentPosition + 0.5 * pow2(CurrentVelocity) / MaxAcceleration) <= TargetPosition);
+    return ((CurrentPosition + 0.5 * pow2(CurrentVelocity) / MaxAcceleration) <= TargetPosition);
 }
-
 
 //************************************************************************************
 // Decision_1004()
 
-bool TypeIRMLMath::Decision_1004(		const double &CurrentPosition
-									,	const double &CurrentVelocity
-									,	const double &MaxVelocity
-									,	const double &MaxAcceleration
-									,	const double &TargetPosition)
+bool TypeIRMLMath::Decision_1004(const double& CurrentPosition, const double& CurrentVelocity,
+                                 const double& MaxVelocity, const double& MaxAcceleration, const double& TargetPosition)
 {
-	return( (CurrentPosition + (2.0 * pow2(MaxVelocity) - pow2(CurrentVelocity))
-				/ (2.0 * MaxAcceleration) ) <= TargetPosition );
+    return ((CurrentPosition + (2.0 * pow2(MaxVelocity) - pow2(CurrentVelocity)) / (2.0 * MaxAcceleration)) <=
+            TargetPosition);
 }
-
 
 //************************************************************************************
 // Decision_2001()
 
-bool TypeIRMLMath::Decision_2001(const double &CurrentVelocity)
+bool TypeIRMLMath::Decision_2001(const double& CurrentVelocity)
 {
-	return(TypeIRMLMath::Decision_1001(CurrentVelocity));
+    return (TypeIRMLMath::Decision_1001(CurrentVelocity));
 }
-
 
 //************************************************************************************
 // Decision_2002()
 
-bool TypeIRMLMath::Decision_2002(		const double &CurrentVelocity
-									,	const double &MaxVelocity)
+bool TypeIRMLMath::Decision_2002(const double& CurrentVelocity, const double& MaxVelocity)
 {
-	return(TypeIRMLMath::Decision_1002(		CurrentVelocity
-										,	MaxVelocity));
+    return (TypeIRMLMath::Decision_1002(CurrentVelocity, MaxVelocity));
 }
-
 
 //************************************************************************************
 // Decision_2003()
 
-bool TypeIRMLMath::Decision_2003(		const double &CurrentPosition
-									,	const double &CurrentVelocity
-									,	const double &MaxAcceleration
-									,	const double &TargetPosition)
+bool TypeIRMLMath::Decision_2003(const double& CurrentPosition, const double& CurrentVelocity,
+                                 const double& MaxAcceleration, const double& TargetPosition)
 {
-	return(TypeIRMLMath::Decision_1003(		CurrentPosition
-										,	CurrentVelocity
-										,	MaxAcceleration
-										,	TargetPosition	));
+    return (TypeIRMLMath::Decision_1003(CurrentPosition, CurrentVelocity, MaxAcceleration, TargetPosition));
 }
-
 
 //************************************************************************************
 // Decision_2004()
 
-bool TypeIRMLMath::Decision_2004(		const double &CurrentPosition
-									,	const double &CurrentVelocity
-									,	const double &MaxAcceleration
-									,	const double &TargetPosition
-									,	const double &SynchronizationTime)
+bool TypeIRMLMath::Decision_2004(const double& CurrentPosition, const double& CurrentVelocity,
+                                 const double& MaxAcceleration, const double& TargetPosition,
+                                 const double& SynchronizationTime)
 {
-	return((CurrentPosition + SynchronizationTime * CurrentVelocity
-			- 0.5 * pow2(CurrentVelocity) / MaxAcceleration) <= TargetPosition);
+    return ((CurrentPosition + SynchronizationTime * CurrentVelocity - 0.5 * pow2(CurrentVelocity) / MaxAcceleration) <=
+            TargetPosition);
 }

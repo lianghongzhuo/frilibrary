@@ -4,7 +4,7 @@
 //! \brief
 //! Implementation file for functions and definitions of constant values
 //! and macros
-//! 
+//!
 //! \sa TypeIRMLMath.h
 //!
 //! \date December 2014
@@ -34,23 +34,19 @@
 //! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n
 //! See the License for the specific language governing permissions and\n
 //! limitations under the License.\n
-//! 
+//!
 //  ----------------------------------------------------------
 //   For a convenient reading of this file's source code,
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-
-
 #include <TypeIRMLMath.h>
 #include <math.h>
-
-
 
 //****************************************************************************
 // RMLSqrt()
 
-double TypeIRMLMath::RMLSqrt(const double &Value)
+double TypeIRMLMath::RMLSqrt(const double& Value)
 {
-	return( ( Value <= 0.0 ) ? ( 0.0 ) : ( sqrt( Value ) ) );
+    return ((Value <= 0.0) ? (0.0) : (sqrt(Value)));
 }

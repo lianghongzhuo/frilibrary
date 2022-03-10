@@ -39,85 +39,85 @@
 //! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n
 //! See the License for the specific language governing permissions and\n
 //! limitations under the License.\n
-//! 
+//!
 //  ----------------------------------------------------------
 //   For a convenient reading of this file's source code,
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
-
 
 #include <FastResearchInterface.h>
 #include <Console.h>
 #include <errno.h>
 #include <OSAbstraction.h>
 
-#define TIMEOUT_VALUE_IN_SECONDS_TO_REACH_MONITOR_MODE	10.0
-
+#define TIMEOUT_VALUE_IN_SECONDS_TO_REACH_MONITOR_MODE 10.0
 
 // ****************************************************************
 // StartRobot()
 //
 int FastResearchInterface::StopRobot(void)
 {
-	unsigned int		DataTelegramCounter		=	0;
+    unsigned int DataTelegramCounter = 0;
 
-	int					ResultValue				=	0;
+    int ResultValue = 0;
 
-	// The KRL program running on the robot controller waits for a
-	// integer value change at position 15 (i.e., 16 in KRL).
-	// A value of 20 lets the KRL program call friStop()
-	this->SetKRLIntValue(15, 20);
+    // The KRL program running on the robot controller waits for a
+    // integer value change at position 15 (i.e., 16 in KRL).
+    // A value of 20 lets the KRL program call friStop()
+    this->SetKRLIntValue(15, 20);
 
-	// wait for the next data telegram of the KRC unit
-	pthread_mutex_lock(&(this->MutexForControlData));
-	this->NewDataFromKRCReceived	=	false;
-	pthread_mutex_unlock(&(this->MutexForControlData));
-	ResultValue	=	this->WaitForKRCTick(((unsigned int)(this->CycleTime * 3000000.0)));
+    // wait for the next data telegram of the KRC unit
+    pthread_mutex_lock(&(this->MutexForControlData));
+    this->NewDataFromKRCReceived = false;
+    pthread_mutex_unlock(&(this->MutexForControlData));
+    ResultValue = this->WaitForKRCTick(((unsigned int)(this->CycleTime * 3000000.0)));
 
-	if (ResultValue != EOK)
-	{
-		this->OutputConsole->printf("FastResearchInterface::StopRobot(): ERROR, the KRC unit does not respond anymore. Probably, the FRI was closed or there is no UDP connection anymore.");
-		return(ENOTCONN);
-	}
+    if (ResultValue != EOK)
+    {
+        this->OutputConsole->printf("FastResearchInterface::StopRobot(): ERROR, the KRC unit does not respond anymore. "
+                                    "Probably, the FRI was closed or there is no UDP connection anymore.");
+        return (ENOTCONN);
+    }
 
-	// wait until we are in monitor mode again
-	while (		((double)DataTelegramCounter * this->CycleTime	<	TIMEOUT_VALUE_IN_SECONDS_TO_REACH_MONITOR_MODE)
-			&&	(this->GetFRIMode()								!=	FRI_STATE_MON		)	)
-	{
-		ResultValue	=	this->WaitForKRCTick(((unsigned int)(this->CycleTime * 3000000.0)));
+    // wait until we are in monitor mode again
+    while (((double)DataTelegramCounter * this->CycleTime < TIMEOUT_VALUE_IN_SECONDS_TO_REACH_MONITOR_MODE) &&
+           (this->GetFRIMode() != FRI_STATE_MON))
+    {
+        ResultValue = this->WaitForKRCTick(((unsigned int)(this->CycleTime * 3000000.0)));
 
-		if (ResultValue != EOK)
-		{
-			this->OutputConsole->printf("FastResearchInterface::StartRobot(): ERROR, the KRC unit does not respond anymore. Probably, the FRI was closed or there is no UDP connection anymore.");
-			return(ENOTCONN);
-		}
+        if (ResultValue != EOK)
+        {
+            this->OutputConsole->printf("FastResearchInterface::StartRobot(): ERROR, the KRC unit does not respond "
+                                        "anymore. Probably, the FRI was closed or there is no UDP connection anymore.");
+            return (ENOTCONN);
+        }
 
-		DataTelegramCounter++;
-	}
+        DataTelegramCounter++;
+    }
 
-	// wait until the KRC unit ready for the reception of the next command
-	while (		((double)DataTelegramCounter * this->CycleTime	<	TIMEOUT_VALUE_IN_SECONDS_TO_REACH_MONITOR_MODE)
-			&&	(this->GetKRLIntValue(15) != 10)	)
-	{
-		ResultValue	=	this->WaitForKRCTick(((unsigned int)(this->CycleTime * 3000000.0)));
+    // wait until the KRC unit ready for the reception of the next command
+    while (((double)DataTelegramCounter * this->CycleTime < TIMEOUT_VALUE_IN_SECONDS_TO_REACH_MONITOR_MODE) &&
+           (this->GetKRLIntValue(15) != 10))
+    {
+        ResultValue = this->WaitForKRCTick(((unsigned int)(this->CycleTime * 3000000.0)));
 
-		if (ResultValue != EOK)
-		{
-			this->OutputConsole->printf("FastResearchInterface::StartRobot(): ERROR, the KRC unit does not respond anymore. Probably, the FRI was closed or there is no UDP connection anymore.");
-			return(ENOTCONN);
-		}
+        if (ResultValue != EOK)
+        {
+            this->OutputConsole->printf("FastResearchInterface::StartRobot(): ERROR, the KRC unit does not respond "
+                                        "anymore. Probably, the FRI was closed or there is no UDP connection anymore.");
+            return (ENOTCONN);
+        }
 
-		DataTelegramCounter++;
-	}
+        DataTelegramCounter++;
+    }
 
-	if ((double)DataTelegramCounter * this->CycleTime	<	TIMEOUT_VALUE_IN_SECONDS_TO_REACH_MONITOR_MODE)
-	{
-		delay(12);	// KUKA interpolation cycle time
-		return(EOK);
-	}
-	else
-	{
-		return(ETIME);
-	}
+    if ((double)DataTelegramCounter * this->CycleTime < TIMEOUT_VALUE_IN_SECONDS_TO_REACH_MONITOR_MODE)
+    {
+        delay(12);  // KUKA interpolation cycle time
+        return (EOK);
+    }
+    else
+    {
+        return (ETIME);
+    }
 }
-

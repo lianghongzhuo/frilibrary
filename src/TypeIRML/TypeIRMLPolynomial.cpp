@@ -34,79 +34,68 @@
 //! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n
 //! See the License for the specific language governing permissions and\n
 //! limitations under the License.\n
-//! 
+//!
 //  ----------------------------------------------------------
 //   For a convenient reading of this file's source code,
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-
-
 #include <TypeIRMLPolynomial.h>
 #include <TypeIRMLMath.h>
-
 
 //************************************************************************************
 // Constructor
 
-
 TypeIRMLMath::TypeIRMLPolynomial::TypeIRMLPolynomial()
 {
-	a0		= 0.0;
-	a1		= 0.0;
-	a2		= 0.0;
-	DeltaT	= 0.0;
-	Degree	= 0;
+    a0 = 0.0;
+    a1 = 0.0;
+    a2 = 0.0;
+    DeltaT = 0.0;
+    Degree = 0;
 }
-
 
 //************************************************************************************
 // Destructor
 
 TypeIRMLMath::TypeIRMLPolynomial::~TypeIRMLPolynomial()
-{}
-
+{
+}
 
 //************************************************************************************
 // SetCoefficients()
 // f(x) = a_2 * (t - DeltaT)^2 + a_1 * (t - DeltaT) + a_0
 
-void TypeIRMLMath::TypeIRMLPolynomial::SetCoefficients(		const double	&Coeff2
-														,	const double	&Coeff1
-														,	const double	&Coeff0
-														,	const double	&Diff)
+void TypeIRMLMath::TypeIRMLPolynomial::SetCoefficients(const double& Coeff2, const double& Coeff1, const double& Coeff0,
+                                                       const double& Diff)
 {
-	a0		= Coeff0;
-	a1		= Coeff1;
-	a2		= Coeff2;
-	DeltaT	= Diff;
+    a0 = Coeff0;
+    a1 = Coeff1;
+    a2 = Coeff2;
+    DeltaT = Diff;
 
-	if (a2 != 0.0)
-	{
-		Degree = 2;
-		return;
-	}
+    if (a2 != 0.0)
+    {
+        Degree = 2;
+        return;
+    }
 
-	if (a1 != 0.0)
-	{
-		Degree = 1;
-		return;
-	}
+    if (a1 != 0.0)
+    {
+        Degree = 1;
+        return;
+    }
 
-	Degree = 0;
-	return;
+    Degree = 0;
+    return;
 }
-
 
 //*******************************************************************************************
 // CalculateValue()
 // calculates f(t)
 
-double TypeIRMLMath::TypeIRMLPolynomial::CalculateValue(const double &t) const
+double TypeIRMLMath::TypeIRMLPolynomial::CalculateValue(const double& t) const
 {
-	return(	((Degree == 2)?
-			(a2 * (t - DeltaT) * (t - DeltaT) + a1 * (t - DeltaT) + a0):
-			((Degree == 1)?
-			(a1 * (t - DeltaT) + a0):
-			(a0))));
+    return (((Degree == 2) ? (a2 * (t - DeltaT) * (t - DeltaT) + a1 * (t - DeltaT) + a0) :
+                             ((Degree == 1) ? (a1 * (t - DeltaT) + a0) : (a0))));
 }

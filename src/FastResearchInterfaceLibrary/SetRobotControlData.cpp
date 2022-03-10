@@ -40,157 +40,148 @@
 //! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n
 //! See the License for the specific language governing permissions and\n
 //! limitations under the License.\n
-//! 
+//!
 //  ----------------------------------------------------------
 //   For a convenient reading of this file's source code,
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
 
-
 #include <FastResearchInterface.h>
 #include <pthread.h>
 #include <FRICommunication.h>
 
-
 // ****************************************************************
 // SetCommandedJointPositions()
 //
-void FastResearchInterface::SetCommandedJointPositions(const float *CommandedJointPositions)
+void FastResearchInterface::SetCommandedJointPositions(const float* CommandedJointPositions)
 {
-	unsigned int		i	=	0;
+    unsigned int i = 0;
 
-	pthread_mutex_lock(&(this->MutexForControlData));
-	for (i = 0; i < NUMBER_OF_JOINTS; i++)
-	{
-		this->CommandData.CommandValues.FRICommandedJointPositionVectorInRad[i]	=	CommandedJointPositions[i];
-	}
-	pthread_mutex_unlock(&(this->MutexForControlData));
+    pthread_mutex_lock(&(this->MutexForControlData));
+    for (i = 0; i < NUMBER_OF_JOINTS; i++)
+    {
+        this->CommandData.CommandValues.FRICommandedJointPositionVectorInRad[i] = CommandedJointPositions[i];
+    }
+    pthread_mutex_unlock(&(this->MutexForControlData));
 
-	return;
+    return;
 }
-
 
 // ****************************************************************
 // SetCommandedJointTorques()
 //
-void FastResearchInterface::SetCommandedJointTorques(const float *CommandedJointTorques)
+void FastResearchInterface::SetCommandedJointTorques(const float* CommandedJointTorques)
 {
-	unsigned int		i	=	0;
+    unsigned int i = 0;
 
-	pthread_mutex_lock(&(this->MutexForControlData));
-	for (i = 0; i < NUMBER_OF_JOINTS; i++)
-	{
-		this->CommandData.CommandValues.FRICommandedAdditionalJointTorqueVectorInNm[i]	=	CommandedJointTorques[i];
-	}
-	pthread_mutex_unlock(&(this->MutexForControlData));
+    pthread_mutex_lock(&(this->MutexForControlData));
+    for (i = 0; i < NUMBER_OF_JOINTS; i++)
+    {
+        this->CommandData.CommandValues.FRICommandedAdditionalJointTorqueVectorInNm[i] = CommandedJointTorques[i];
+    }
+    pthread_mutex_unlock(&(this->MutexForControlData));
 
-	return;
+    return;
 }
-
 
 // ****************************************************************
 // SetCommandedJointStiffness()
 //
-void FastResearchInterface::SetCommandedJointStiffness(const float *CommandedJointStiffness)
+void FastResearchInterface::SetCommandedJointStiffness(const float* CommandedJointStiffness)
 {
-	unsigned int		i	=	0;
+    unsigned int i = 0;
 
-	pthread_mutex_lock(&(this->MutexForControlData));
-	for (i = 0; i < NUMBER_OF_JOINTS; i++)
-	{
-		this->CommandData.CommandValues.FRICommandedJointStiffnessVectorInNmPerRad[i]	=	CommandedJointStiffness[i];
-	}
-	pthread_mutex_unlock(&(this->MutexForControlData));
+    pthread_mutex_lock(&(this->MutexForControlData));
+    for (i = 0; i < NUMBER_OF_JOINTS; i++)
+    {
+        this->CommandData.CommandValues.FRICommandedJointStiffnessVectorInNmPerRad[i] = CommandedJointStiffness[i];
+    }
+    pthread_mutex_unlock(&(this->MutexForControlData));
 
-	return;
+    return;
 }
-
 
 // ****************************************************************
 // SetCommandedJointDamping()
 //
-void FastResearchInterface::SetCommandedJointDamping(const float *CommandedJointDamping)
+void FastResearchInterface::SetCommandedJointDamping(const float* CommandedJointDamping)
 {
-	unsigned int		i	=	0;
+    unsigned int i = 0;
 
-	pthread_mutex_lock(&(this->MutexForControlData));
-	for (i = 0; i < NUMBER_OF_JOINTS; i++)
-	{
-		this->CommandData.CommandValues.FRICommandedNormalizedJointDampingVector[i]	=	CommandedJointDamping[i];
-	}
-	pthread_mutex_unlock(&(this->MutexForControlData));
+    pthread_mutex_lock(&(this->MutexForControlData));
+    for (i = 0; i < NUMBER_OF_JOINTS; i++)
+    {
+        this->CommandData.CommandValues.FRICommandedNormalizedJointDampingVector[i] = CommandedJointDamping[i];
+    }
+    pthread_mutex_unlock(&(this->MutexForControlData));
 
-	return;
+    return;
 }
-
 
 // ****************************************************************
 // SetCommandedCartPose()
 //
-void FastResearchInterface::SetCommandedCartPose(const float *CommandedCartPose)
+void FastResearchInterface::SetCommandedCartPose(const float* CommandedCartPose)
 {
-	unsigned int		i	=	0;
+    unsigned int i = 0;
 
-	pthread_mutex_lock(&(this->MutexForControlData));
-	for (i = 0; i < NUMBER_OF_FRAME_ELEMENTS; i++)
-	{
-		this->CommandData.CommandValues.FRICommandedCartesianFrame[i]	=	CommandedCartPose[i];
-	}
-	pthread_mutex_unlock(&(this->MutexForControlData));
+    pthread_mutex_lock(&(this->MutexForControlData));
+    for (i = 0; i < NUMBER_OF_FRAME_ELEMENTS; i++)
+    {
+        this->CommandData.CommandValues.FRICommandedCartesianFrame[i] = CommandedCartPose[i];
+    }
+    pthread_mutex_unlock(&(this->MutexForControlData));
 
-	return;
+    return;
 }
-
 
 // ****************************************************************
 // SetCommandedCartForcesAndTorques()
 //
-void FastResearchInterface::SetCommandedCartForcesAndTorques(const float *CartForcesAndTorques)
+void FastResearchInterface::SetCommandedCartForcesAndTorques(const float* CartForcesAndTorques)
 {
-	unsigned int		i	=	0;
+    unsigned int i = 0;
 
-	pthread_mutex_lock(&(this->MutexForControlData));
-	for (i = 0; i < NUMBER_OF_CART_DOFS; i++)
-	{
-		this->CommandData.CommandValues.FRICommandedAdditionalCartesianForceTorqueVector[i]	=	CartForcesAndTorques[i];
-	}
-	pthread_mutex_unlock(&(this->MutexForControlData));
+    pthread_mutex_lock(&(this->MutexForControlData));
+    for (i = 0; i < NUMBER_OF_CART_DOFS; i++)
+    {
+        this->CommandData.CommandValues.FRICommandedAdditionalCartesianForceTorqueVector[i] = CartForcesAndTorques[i];
+    }
+    pthread_mutex_unlock(&(this->MutexForControlData));
 
-	return;
+    return;
 }
-
 
 // ****************************************************************
 // SetCommandedCartStiffness()
 //
-void FastResearchInterface::SetCommandedCartStiffness(const float *CommandedCartStiffness)
+void FastResearchInterface::SetCommandedCartStiffness(const float* CommandedCartStiffness)
 {
-	unsigned int		i	=	0;
+    unsigned int i = 0;
 
-	pthread_mutex_lock(&(this->MutexForControlData));
-	for (i = 0; i < NUMBER_OF_CART_DOFS; i++)
-	{
-		this->CommandData.CommandValues.FRICommandedCartesianStiffnessVector[i]	=	CommandedCartStiffness[i];
-	}
-	pthread_mutex_unlock(&(this->MutexForControlData));
+    pthread_mutex_lock(&(this->MutexForControlData));
+    for (i = 0; i < NUMBER_OF_CART_DOFS; i++)
+    {
+        this->CommandData.CommandValues.FRICommandedCartesianStiffnessVector[i] = CommandedCartStiffness[i];
+    }
+    pthread_mutex_unlock(&(this->MutexForControlData));
 
-	return;
+    return;
 }
-
 
 // ****************************************************************
 // SetCommandedCartDamping()
 //
-void FastResearchInterface::SetCommandedCartDamping(const float *CommandedCartDamping)
+void FastResearchInterface::SetCommandedCartDamping(const float* CommandedCartDamping)
 {
-	unsigned int		i	=	0;
+    unsigned int i = 0;
 
-	pthread_mutex_lock(&(this->MutexForControlData));
-	for (i = 0; i < NUMBER_OF_CART_DOFS; i++)
-	{
-		this->CommandData.CommandValues.FRICommandedNormalizedCartesianDampingVector[i]	=	CommandedCartDamping[i];
-	}
-	pthread_mutex_unlock(&(this->MutexForControlData));
+    pthread_mutex_lock(&(this->MutexForControlData));
+    for (i = 0; i < NUMBER_OF_CART_DOFS; i++)
+    {
+        this->CommandData.CommandValues.FRICommandedNormalizedCartesianDampingVector[i] = CommandedCartDamping[i];
+    }
+    pthread_mutex_unlock(&(this->MutexForControlData));
 
-	return;
+    return;
 }

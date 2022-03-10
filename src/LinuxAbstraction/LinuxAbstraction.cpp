@@ -34,12 +34,11 @@
 //! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n
 //! See the License for the specific language governing permissions and\n
 //! limitations under the License.\n
-//! 
+//!
 //  ----------------------------------------------------------
 //   For a convenient reading of this file's source code,
 //   please use a tab width of four characters.
 //  ----------------------------------------------------------
-
 
 #include <OSAbstraction.h>
 #include <time.h>
@@ -50,50 +49,37 @@
 #include <termios.h>
 #include <unistd.h>
 
-
-
-
 // ****************************************************************
 // Global variables
 //
 
-static struct termios 			termattr
-							,	save_termattr;
+static struct termios termattr, save_termattr;
 
-static int 						ttysavefd								=	-1;
+static int ttysavefd = -1;
 
-static bool						GetSystemTimeInSecondsCalledFirstTime	=	true;
+static bool GetSystemTimeInSecondsCalledFirstTime = true;
 
-struct timespec					StoredSystemTimeInSeconds;
-
-
-
+struct timespec StoredSystemTimeInSeconds;
 
 // ****************************************************************
 // Data structure declarations
 //
 
-static enum
-{
-  RESET, RAW
-} ttystate = RESET;
+static enum { RESET, RAW } ttystate = RESET;
 
 int DisableSingleCharacterInput(void);
 int EnableSingleCharacterInput(void);
 
-
-void delay(const int &TimeInMilliseconds)
+void delay(const int& TimeInMilliseconds)
 {
-	usleep(TimeInMilliseconds * 1000);
-	return;
+    usleep(TimeInMilliseconds * 1000);
+    return;
 }
 
-
-int stricmp(const char *s1, const char *s2)
+int stricmp(const char* s1, const char* s2)
 {
-	return(strcasecmp(s1, s2));
+    return (strcasecmp(s1, s2));
 }
-
 
 // ****************************************************************
 // EnableSingleCharacterInput()
@@ -102,42 +88,40 @@ int stricmp(const char *s1, const char *s2)
 
 int EnableSingleCharacterInput(void)
 {
-	int 	i;
+    int i;
 
-	i = tcgetattr (STDIN_FILENO, &termattr);
+    i = tcgetattr(STDIN_FILENO, &termattr);
 
-	if (i < 0)
-	{
-		printf("tcgetattr() returned %d for fildes = %d ", i, STDIN_FILENO);
-		perror ("");
-		return -1;
-	}
+    if (i < 0)
+    {
+        printf("tcgetattr() returned %d for fildes = %d ", i, STDIN_FILENO);
+        perror("");
+        return -1;
+    }
 
-	save_termattr = termattr;
+    save_termattr = termattr;
 
-	termattr.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
-	termattr.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
-	termattr.c_cflag &= ~(CSIZE | PARENB);
-	termattr.c_cflag |= CS8;
-	termattr.c_oflag &= ~(OPOST);
+    termattr.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
+    termattr.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
+    termattr.c_cflag &= ~(CSIZE | PARENB);
+    termattr.c_cflag |= CS8;
+    termattr.c_oflag &= ~(OPOST);
 
-	termattr.c_cc[VMIN] = 0;
-	termattr.c_cc[VTIME] = 0;
+    termattr.c_cc[VMIN] = 0;
+    termattr.c_cc[VTIME] = 0;
 
-	i = tcsetattr (STDIN_FILENO, TCSANOW, &termattr);
-	if (i < 0)
-	{
-		printf("tcsetattr() returned %d for fildes=%d",i,STDIN_FILENO);
-		perror("");
-		return -1;
-	}
+    i = tcsetattr(STDIN_FILENO, TCSANOW, &termattr);
+    if (i < 0)
+    {
+        printf("tcsetattr() returned %d for fildes=%d", i, STDIN_FILENO);
+        perror("");
+        return -1;
+    }
 
-	ttystate = RAW;
-	ttysavefd = STDIN_FILENO;
-	return 0;
+    ttystate = RAW;
+    ttysavefd = STDIN_FILENO;
+    return 0;
 }
-
-
 
 // ****************************************************************
 // DisableSingleCharacterInput()
@@ -147,125 +131,119 @@ int EnableSingleCharacterInput(void)
 
 int DisableSingleCharacterInput()
 {
-	int i;
-	if (ttystate != RAW)
-	{
-		return 0;
-	}
-	i = tcsetattr (STDIN_FILENO, TCSAFLUSH, &save_termattr);
-	if (i < 0)
-	{
-		return -1;
-	}
-	ttystate = RESET;
-	return 0;
+    int i;
+    if (ttystate != RAW)
+    {
+        return 0;
+    }
+    i = tcsetattr(STDIN_FILENO, TCSAFLUSH, &save_termattr);
+    if (i < 0)
+    {
+        return -1;
+    }
+    ttystate = RESET;
+    return 0;
 }
-
 
 // ****************************************************************
 // WaitForKBCharacter()
 //
-unsigned char WaitForKBCharacter(bool *Abort)
+unsigned char WaitForKBCharacter(bool* Abort)
 {
-	unsigned char	ch		=	0;
-	size_t			size;
+    unsigned char ch = 0;
+    size_t size;
 
-	fflush(stdout);
-	fflush(stdin);
+    fflush(stdout);
+    fflush(stdin);
 
-	if (Abort == NULL)
-	{
-		delay(100);
-	}
+    if (Abort == NULL)
+    {
+        delay(100);
+    }
 
-	if (ttystate != RAW)
-	{
-		EnableSingleCharacterInput();
-	}
+    if (ttystate != RAW)
+    {
+        EnableSingleCharacterInput();
+    }
 
-	if (Abort == NULL)
-	{
-		while (1)
-		{
-			usleep(20000);
+    if (Abort == NULL)
+    {
+        while (1)
+        {
+            usleep(20000);
 
-			size = read (STDIN_FILENO, &ch, 1);
-			if (size > 0)
-			{
-				break;
-			}
-		}
-	}
-	else
-	{
-		size = read (STDIN_FILENO, &ch, 1);
-		if (size == 0)
-		{
-			ch = 255;
-			while (!(*Abort))
-			{
-				usleep(20000);
+            size = read(STDIN_FILENO, &ch, 1);
+            if (size > 0)
+            {
+                break;
+            }
+        }
+    }
+    else
+    {
+        size = read(STDIN_FILENO, &ch, 1);
+        if (size == 0)
+        {
+            ch = 255;
+            while (!(*Abort))
+            {
+                usleep(20000);
 
-				size = read (STDIN_FILENO, &ch, 1);
-				if (size > 0)
-				{
-					break;
-				}
-			}
-		}
-	}
-	DisableSingleCharacterInput();
-	fflush(stdout);
-	fflush(stdin);
-	if (Abort == NULL)
-	{
-		delay(100);
-	}
-	return(ch);
+                size = read(STDIN_FILENO, &ch, 1);
+                if (size > 0)
+                {
+                    break;
+                }
+            }
+        }
+    }
+    DisableSingleCharacterInput();
+    fflush(stdout);
+    fflush(stdin);
+    if (Abort == NULL)
+    {
+        delay(100);
+    }
+    return (ch);
 }
-
 
 unsigned char CheckForKBCharacter(void)
 {
-	unsigned char	ch		=	0;
-	size_t			size;
+    unsigned char ch = 0;
+    size_t size;
 
-	fflush(stdout);
-	fflush(stdin);
+    fflush(stdout);
+    fflush(stdin);
 
-	if (ttystate != RAW)
-	{
-		EnableSingleCharacterInput();
-	}
+    if (ttystate != RAW)
+    {
+        EnableSingleCharacterInput();
+    }
 
-	size = read (STDIN_FILENO, &ch, 1);
+    size = read(STDIN_FILENO, &ch, 1);
 
-	if (size == 0)
-	{
-		ch = 255;
-	}
+    if (size == 0)
+    {
+        ch = 255;
+    }
 
-	DisableSingleCharacterInput();
+    DisableSingleCharacterInput();
 
-	return(ch);
+    return (ch);
 }
 
-
-float GetSystemTimeInSeconds(const bool &Reset)
+float GetSystemTimeInSeconds(const bool& Reset)
 {
-	struct timespec			CurrentLocalMachineTime;
+    struct timespec CurrentLocalMachineTime;
 
-	clock_gettime( CLOCK_REALTIME, &CurrentLocalMachineTime);
+    clock_gettime(CLOCK_REALTIME, &CurrentLocalMachineTime);
 
-	if ( (GetSystemTimeInSecondsCalledFirstTime) || (Reset) )
-	{
-		clock_gettime( CLOCK_REALTIME, &StoredSystemTimeInSeconds);
-		GetSystemTimeInSecondsCalledFirstTime = false;
-	}
+    if ((GetSystemTimeInSecondsCalledFirstTime) || (Reset))
+    {
+        clock_gettime(CLOCK_REALTIME, &StoredSystemTimeInSeconds);
+        GetSystemTimeInSecondsCalledFirstTime = false;
+    }
 
-	return((float)(((double)(CurrentLocalMachineTime.tv_sec
-					-	StoredSystemTimeInSeconds.tv_sec))
-					+	(double)(CurrentLocalMachineTime.tv_nsec
-					-	StoredSystemTimeInSeconds.tv_nsec)
-					*	(double)1e-9));
+    return ((float)(((double)(CurrentLocalMachineTime.tv_sec - StoredSystemTimeInSeconds.tv_sec)) +
+                    (double)(CurrentLocalMachineTime.tv_nsec - StoredSystemTimeInSeconds.tv_nsec) * (double)1e-9));
 }
