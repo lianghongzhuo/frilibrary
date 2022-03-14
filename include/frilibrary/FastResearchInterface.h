@@ -1261,7 +1261,7 @@ public:
     int printf(const char* Format, ...);
 
     //  ---------------------- Doxygen info ----------------------
-    //! \fn int PrepareLogging(const char *FileIdentifier = NULL)
+    //! \fn int PrepareLogging(const char *FileIdentifier = nullptr)
     //!
     //! \brief
     //! Creates and prepares an output file for logging
@@ -1301,7 +1301,7 @@ public:
     //!
     //! \sa DataLogging::PrepareLogging()
     //  ----------------------------------------------------------
-    int PrepareLogging(const char* FileIdentifier = NULL);
+    int PrepareLogging(const char* FileIdentifier = nullptr);
 
     //  ---------------------- Doxygen info ----------------------
     //! \fn int StartLogging(void)

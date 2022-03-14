@@ -169,13 +169,13 @@ public:
         delete this->TargetVelocity;
         delete this->SelectionVector;
 
-        this->CurrentPosition = NULL;
-        this->CurrentVelocity = NULL;
-        this->MaxVelocity = NULL;
-        this->MaxAcceleration = NULL;
-        this->TargetPosition = NULL;
-        this->TargetVelocity = NULL;
-        this->SelectionVector = NULL;
+        this->CurrentPosition = nullptr;
+        this->CurrentVelocity = nullptr;
+        this->MaxVelocity = nullptr;
+        this->MaxAcceleration = nullptr;
+        this->TargetPosition = nullptr;
+        this->TargetVelocity = nullptr;
+        this->SelectionVector = nullptr;
     }
 
     TypeIRMLDoubleVector* CurrentPosition;

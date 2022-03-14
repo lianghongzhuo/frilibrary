@@ -48,7 +48,6 @@
 
 #include <frilibrary/FastResearchInterface.h>
 #include <string.h>
-#include <frilibrary/OSAbstraction.h>
 
 #define SINGLE_LINE "-----------------------------------------------------------------------------"
 #define DOUBLE_LINE "============================================================================="

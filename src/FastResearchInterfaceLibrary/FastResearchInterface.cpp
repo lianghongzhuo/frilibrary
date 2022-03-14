@@ -52,7 +52,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <signal.h>
-#include <errno.h>
 #include <stdarg.h>
 #include <frilibrary/OSAbstraction.h>
 
@@ -118,14 +117,14 @@ FastResearchInterface::FastResearchInterface(const char* InitFileName)
     memset((void*)(&(this->CommandData)), 0x0, sizeof(FRIDataSendToKRC));
     memset((void*)(&(this->ReadData)), 0x0, sizeof(FRIDataReceivedFromKRC));
 
-    pthread_mutex_init(&(this->MutexForControlData), NULL);
-    pthread_mutex_init(&(this->MutexForCondVarForTimer), NULL);
-    pthread_mutex_init(&(this->MutexForLogging), NULL);
-    pthread_mutex_init(&(this->MutexForThreadCreation), NULL);
+    pthread_mutex_init(&(this->MutexForControlData), nullptr);
+    pthread_mutex_init(&(this->MutexForCondVarForTimer), nullptr);
+    pthread_mutex_init(&(this->MutexForLogging), nullptr);
+    pthread_mutex_init(&(this->MutexForThreadCreation), nullptr);
 
-    pthread_cond_init(&(this->CondVarForTimer), NULL);
-    pthread_cond_init(&(this->CondVarForDataReceptionFromKRC), NULL);
-    pthread_cond_init(&(this->CondVarForThreadCreation), NULL);
+    pthread_cond_init(&(this->CondVarForTimer), nullptr);
+    pthread_cond_init(&(this->CondVarForDataReceptionFromKRC), nullptr);
+    pthread_cond_init(&(this->CondVarForThreadCreation), nullptr);
 
     this->OutputConsole->printf("Fast Research Interface: Using initialization file \"%s\".\n", InitFileName);
 
@@ -166,41 +165,6 @@ FastResearchInterface::FastResearchInterface(const char* InitFileName)
     // i.e. we have to set our own scheduling parameters
     this->MainThread = pthread_self();
     pthread_setschedparam(this->MainThread, SCHED_FIFO, &SchedulingParamsMainThread);
-
-#if defined(WIN32) || defined(WIN64) || defined(_WIN64)
-
-    if (!SetPriorityClass(GetCurrentProcess(), HIGH_PRIORITY_CLASS))
-    {
-        this->OutputConsole->printf(
-            "FastResearchInterface::FastResearchInterface(): ERROR, could not set process priority.\n");
-    }
-
-#endif
-
-#ifdef _NTO_
-
-    FuntionResult = pthread_create(&TimerThread, &AttributesTimerThread, &TimerThreadMain, this);
-
-    if (FuntionResult != EOK)
-    {
-        this->OutputConsole->printf(
-            "FastResearchInterface::FastResearchInterface(): ERROR, could not start the timer thread (Result: %d).\n",
-            FuntionResult);
-        getchar();
-        exit(EXIT_FAILURE);  // terminates the process
-    }
-
-    pthread_mutex_lock(&(this->MutexForThreadCreation));
-
-    while (!ThreadCreated)
-    {
-        pthread_cond_wait(&(this->CondVarForThreadCreation), &(this->MutexForThreadCreation));
-    }
-
-    ThreadCreated = false;
-    pthread_mutex_unlock(&(this->MutexForThreadCreation));
-
-#endif
 
     FuntionResult =
         pthread_create(&KRCCommunicationThread, &AttributesKRCCommunicationThread, &KRCCommunicationThreadMain, this);

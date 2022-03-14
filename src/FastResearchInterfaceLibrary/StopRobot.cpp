@@ -47,7 +47,6 @@
 
 #include <frilibrary/FastResearchInterface.h>
 #include <frilibrary/Console.h>
-#include <errno.h>
 #include <frilibrary/OSAbstraction.h>
 
 #define TIMEOUT_VALUE_IN_SECONDS_TO_REACH_MONITOR_MODE 10.0

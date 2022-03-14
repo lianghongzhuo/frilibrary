@@ -48,7 +48,6 @@
 
 #include <frilibrary/FastResearchInterface.h>
 #include <pthread.h>
-#include <frilibrary/FRICommunication.h>
 
 // ****************************************************************
 // GetFRICycleTime()

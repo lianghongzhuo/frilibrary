@@ -46,8 +46,6 @@
 //  ----------------------------------------------------------
 
 #include <frilibrary/FastResearchInterface.h>
-#include <frilibrary/Console.h>
-#include <errno.h>
 #include <string.h>
 #include <frilibrary/InitializationFileEntry.h>
 

@@ -48,7 +48,7 @@
 #define OS_FOLDER_SEPARATOR ("/")
 
 //  ---------------------- Doxygen info ----------------------
-//! \fn unsigned char WaitForKBCharacter(bool *Abort = NULL)
+//! \fn unsigned char WaitForKBCharacter(bool *Abort = nullptr)
 //!
 //! \brief Waits for one single keyboard stroke
 //!
@@ -66,7 +66,7 @@
 //!
 //! \sa CheckForKBCharacter()
 //  ----------------------------------------------------------
-unsigned char WaitForKBCharacter(bool* Abort = NULL);
+unsigned char WaitForKBCharacter(bool* Abort = nullptr);
 
 //  ---------------------- Doxygen info ----------------------
 //! \fn unsigned char char CheckForKBCharacter(void)

@@ -42,10 +42,8 @@
 
 #include <frilibrary/OSAbstraction.h>
 #include <time.h>
-#include <string.h>
 #include <strings.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <termios.h>
 #include <unistd.h>
 
@@ -156,7 +154,7 @@ unsigned char WaitForKBCharacter(bool* Abort)
     fflush(stdout);
     fflush(stdin);
 
-    if (Abort == NULL)
+    if (Abort == nullptr)
     {
         delay(100);
     }
@@ -166,7 +164,7 @@ unsigned char WaitForKBCharacter(bool* Abort)
         EnableSingleCharacterInput();
     }
 
-    if (Abort == NULL)
+    if (Abort == nullptr)
     {
         while (1)
         {
@@ -200,7 +198,7 @@ unsigned char WaitForKBCharacter(bool* Abort)
     DisableSingleCharacterInput();
     fflush(stdout);
     fflush(stdin);
-    if (Abort == NULL)
+    if (Abort == nullptr)
     {
         delay(100);
     }

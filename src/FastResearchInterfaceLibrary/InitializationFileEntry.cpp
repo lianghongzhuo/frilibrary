@@ -56,9 +56,9 @@
 //
 InitializationFileEntry::InitializationFileEntry(const char* FileName)
 {
-    this->Next = NULL;
-    this->Prev = NULL;
-    this->CurrentEntry = NULL;
+    this->Next = nullptr;
+    this->Prev = nullptr;
+    this->CurrentEntry = nullptr;
 
     memset(this->Name, 0x0, NAMELEN);
     memset(this->Value, 0x0, VALUELEN);
@@ -67,7 +67,7 @@ InitializationFileEntry::InitializationFileEntry(const char* FileName)
     memset(this->CurrentSectionName, 0x0, NAMELEN);
 
     // Now read the file if desired
-    if (FileName != NULL)
+    if (FileName != nullptr)
     {
         this->ReadFile(FileName);
     }
@@ -85,11 +85,11 @@ InitializationFileEntry::~InitializationFileEntry(void)
     InitializationFileEntry* current = this;
 
     // delete the successor(s)
-    if (current->Next != NULL)
+    if (current->Next != nullptr)
     {
-        current->Next->Prev = NULL;
+        current->Next->Prev = nullptr;
         delete (current->Next);
-        current->Next = NULL;
+        current->Next = nullptr;
     }
     // delete the predecessors
     if (current->Prev != NULL)
@@ -106,11 +106,11 @@ bool InitializationFileEntry::Add(const char* Line)
 {
     bool Result = false;
 
-    char *Start = NULL, *End = NULL;
+    char *Start = nullptr, *End = nullptr;
 
-    InitializationFileEntry *NewEntry = NULL, *EntryPtr = NULL;
+    InitializationFileEntry *NewEntry = nullptr, *EntryPtr = nullptr;
 
-    if (((Start = strchr((char*)Line, '[')) != NULL) && ((End = strchr((char*)Line, ']')) != NULL))
+    if (((Start = strchr((char*)Line, '[')) != nullptr) && ((End = strchr((char*)Line, ']')) != nullptr))
     {
         // (new) section name found
         strcpy(this->CurrentSectionName, Start + 1);
@@ -119,7 +119,7 @@ bool InitializationFileEntry::Add(const char* Line)
     }
     else
     {
-        if ((Start = strchr((char*)Line, '=')) != NULL)
+        if ((Start = strchr((char*)Line, '=')) != nullptr)
         {
             // entry = value found
             if ((this->EntryName[0] == '\0') && (this->SectionName[0] == '\0') && (this->Value[0] == '\0') &&
@@ -133,7 +133,7 @@ bool InitializationFileEntry::Add(const char* Line)
                 // reserve space for a new entry
                 NewEntry = new (InitializationFileEntry);
             }
-            if (NewEntry != NULL)
+            if (NewEntry != nullptr)
             {
                 // free space is available
                 strcpy(NewEntry->Value, Start + 1);
@@ -162,7 +162,7 @@ bool InitializationFileEntry::Add(const char* Line)
                 // reserve space for a new entry
                 NewEntry = new (InitializationFileEntry);
             }
-            if (NewEntry != NULL)
+            if (NewEntry != nullptr)
             {
                 // free space is available
                 // copy the entry and the section name
@@ -174,12 +174,12 @@ bool InitializationFileEntry::Add(const char* Line)
     }
 
     // if line contained a new entry it will be appended to the list
-    if ((NewEntry != NULL) && (NewEntry != this))
+    if ((NewEntry != nullptr) && (NewEntry != this))
     {
         // Start with this
         EntryPtr = this;
         // and move the pointer to the end of the list
-        while (EntryPtr->Next != NULL)
+        while (EntryPtr->Next != nullptr)
         {
             EntryPtr = EntryPtr->Next;
         }
@@ -198,7 +198,7 @@ bool InitializationFileEntry::NextEntry(void)
 {
     bool Result;
 
-    if (this->CurrentEntry != NULL)
+    if (this->CurrentEntry != nullptr)
     {
         this->CurrentEntry = this->CurrentEntry->Next;
     }
@@ -206,7 +206,7 @@ bool InitializationFileEntry::NextEntry(void)
     {
         this->CurrentEntry = this;
     }
-    Result = (this->CurrentEntry != NULL);
+    Result = (this->CurrentEntry != nullptr);
     return (Result);
 }
 
@@ -223,14 +223,14 @@ bool InitializationFileEntry::FindNextSection(void)
 
     memset(NameOfSection, 0x0, NAMELEN);
 
-    if (EntryPtr != NULL)
+    if (EntryPtr != nullptr)
     {
         // cycle through the list until a new section name is found or the end
         // of the list is reached
 
         strcpy(NameOfSection, EntryPtr->SectionName);
 
-        while ((EntryPtr != NULL) && !Found)
+        while ((EntryPtr != nullptr) && !Found)
         {
             if (strcmp(NameOfSection, EntryPtr->SectionName))
             {
@@ -264,7 +264,7 @@ bool InitializationFileEntry::FindNextSection(void)
 //
 char* InitializationFileEntry::GetSection(void)
 {
-    if (this->CurrentEntry == NULL)
+    if (this->CurrentEntry == nullptr)
     {
         this->CurrentEntry = this;
     }
@@ -290,7 +290,7 @@ char* InitializationFileEntry::GetName(void)
 {
     int Index = 0;
 
-    if (this->CurrentEntry == NULL)
+    if (this->CurrentEntry == nullptr)
     {
         this->CurrentEntry = this;
     }
@@ -312,7 +312,7 @@ char* InitializationFileEntry::GetName(void)
 //
 char* InitializationFileEntry::GetValue(void)
 {
-    if (this->CurrentEntry == NULL)
+    if (this->CurrentEntry == nullptr)
     {
         this->CurrentEntry = this;
     }
@@ -329,7 +329,7 @@ bool InitializationFileEntry::FindEntry(const char* Name)
     bool Found = false, Result = false;
 
     // Cycle through the list until the name is found or the end of the list is reached
-    while ((EntryPtr != NULL) && !Found)
+    while ((EntryPtr != nullptr) && !Found)
     {
         if (!strcmp(Name, EntryPtr->EntryName))
         {
@@ -365,11 +365,11 @@ void InitializationFileEntry::ReadFile(const char* FileName)
 
     int Input = 0, Counter = 0;
 
-    FILE* FileHandler = NULL;
+    FILE* FileHandler = nullptr;
 
     memset(Line, 0x0, LINELEN);
 
-    if ((FileHandler = fopen(FileName, "rt")) != NULL)
+    if ((FileHandler = fopen(FileName, "rt")) != nullptr)
     {
         while (!feof(FileHandler))
         {

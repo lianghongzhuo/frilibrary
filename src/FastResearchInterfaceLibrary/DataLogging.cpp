@@ -50,7 +50,6 @@
 #include <frilibrary/FastResearchInterface.h>
 #include <frilibrary/OSAbstraction.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <time.h>
 #include <errno.h>
 #include <string.h>
@@ -84,7 +83,7 @@ DataLogging::DataLogging(const char* RobotName, const char* LoggingPath, const c
     this->OutputFileName = (char*)LoggingFileName;
     this->MaximumNumberOfEntries = MaxNumberOfEntries;
     this->CurrentObjectState = DataLogging::WriteToFileCalled;
-    this->OutputFileHandler = NULL;
+    this->OutputFileHandler = nullptr;
     this->OutputCounter = 0;
     this->CurrentControlScheme = 0;
 
@@ -168,9 +167,9 @@ int DataLogging::PrepareLogging(const unsigned int& ControlScheme, const char* F
         memset(this->LoggingMemory[i], 0x0, this->MaximumNumberOfEntries * sizeof(float));
     }
 
-    CurrentDayTime = time(NULL);
+    CurrentDayTime = time(nullptr);
     strftime(TimeString, TIME_STRING_LENGTH, "%y%m%d-%H%M%S", localtime(&CurrentDayTime));
-    if (FileIdentifier == NULL)
+    if (FileIdentifier == nullptr)
     {
         sprintf(this->CompleteOutputFileString, "%s%s-%s-%s", this->OutputPath, TimeString, this->MachineName,
                 this->OutputFileName);
@@ -181,7 +180,7 @@ int DataLogging::PrepareLogging(const unsigned int& ControlScheme, const char* F
                 this->MachineName, this->OutputFileName);
     }
 
-    if ((this->OutputFileHandler = fopen(this->CompleteOutputFileString, "w")) == NULL)
+    if ((this->OutputFileHandler = fopen(this->CompleteOutputFileString, "w")) == nullptr)
     {
         return (EBADF);
     }
@@ -338,16 +337,6 @@ int DataLogging::WriteToFile(void)
         this->CurrentObjectState = DataLogging::WriteToFileCalled;
     }
 
-    // REMOVE
-    //------------------------
-#ifdef _NTO_
-    struct _clockperiod ClockResolution;
-
-    ClockResolution.nsec = 1000000;  // ns
-    ClockResolution.fract = 0;
-
-    ClockPeriod(CLOCK_REALTIME, &ClockResolution, NULL, 0);
-#endif
     //------------------------
 
     if (this->OutputCounter > this->MaximumNumberOfEntries)

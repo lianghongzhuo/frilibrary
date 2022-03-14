@@ -295,7 +295,7 @@ public:
     }
 
     //  ---------------------- Doxygen info ----------------------
-    //! \fn inline int PrepareLogging(const char *FileIdentifier = NULL)
+    //! \fn inline int PrepareLogging(const char *FileIdentifier = nullptr)
     //!
     //! \brief
     //! \copybrief FastResearchInterface::PrepareLogging()
@@ -303,7 +303,7 @@ public:
     //! \details
     //! \copydetails FastResearchInterface::PrepareLogging()
     //  ----------------------------------------------------------
-    inline int PrepareLogging(const char* FileIdentifier = NULL)
+    inline int PrepareLogging(const char* FileIdentifier = nullptr)
     {
         return (FRI->PrepareLogging(FileIdentifier));
     }

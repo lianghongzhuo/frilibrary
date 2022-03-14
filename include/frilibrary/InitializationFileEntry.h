@@ -84,7 +84,7 @@ class InitializationFileEntry
 {
 public:
     //  ---------------------- Doxygen info ----------------------
-    //! \fn InitializationFileEntry(const char *FileName = NULL)
+    //! \fn InitializationFileEntry(const char *FileName = nullptr)
     //!
     //! \brief
     //! Constructor
@@ -102,7 +102,7 @@ public:
     //!
     //! \sa \ref sec_InitFile
     //  ----------------------------------------------------------
-    InitializationFileEntry(const char* FileName = NULL);
+    InitializationFileEntry(const char* FileName = nullptr);
 
     //  ---------------------- Doxygen info ----------------------
     //! \fn ~InitializationFileEntry(void)

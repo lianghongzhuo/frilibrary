@@ -51,11 +51,6 @@
 #include <stdarg.h>
 #include <string.h>
 #include <pthread.h>
-#include <frilibrary/OSAbstraction.h>
-
-#if defined(WIN32) || defined(WIN64) || defined(_WIN64)  // \ToDo Make this clean through the OSAbstraction
-#include <Windows.h>
-#endif
 
 // ****************************************************************
 // Constructor
@@ -70,8 +65,8 @@ Console::Console(const unsigned int& Priority, const FILE* FileHandler)
     ThreadCreated = false;
     ConsoleThreadReadyToRun = false;
 
-    pthread_mutex_init(&(this->Mutex), NULL);
-    pthread_cond_init(&(this->CondVar), NULL);
+    pthread_mutex_init(&(this->Mutex), nullptr);
+    pthread_cond_init(&(this->CondVar), nullptr);
 
     ThreadSchedulingParams.sched_priority = Priority;
 
@@ -116,7 +111,7 @@ Console::~Console(void)
     this->TermintateThread = true;
     pthread_mutex_unlock(&(this->Mutex));
     pthread_cond_signal(&(this->CondVar));
-    pthread_join(this->ConsoleThread, NULL);
+    pthread_join(this->ConsoleThread, nullptr);
 }
 
 // ****************************************************************
@@ -218,7 +213,7 @@ void* Console::ConsoleThreadMain(void* ObjectPointer)
 
     ThisObjectPtr->flush();
 
-    pthread_exit(NULL);
+    pthread_exit(nullptr);
 
     return (NULL);
 }

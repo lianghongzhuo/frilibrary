@@ -47,11 +47,6 @@
 #include <frilibrary/UDPSocket.h>
 #include <frilibrary/OSAbstraction.h>
 
-#if defined(WIN32) || defined(WIN64) || defined(_WIN64)
-#include <winsock2.h>
-#pragma comment(lib, "ws2_32.lib")
-#endif
-
 //  ---------------------- Doxygen info ----------------------
 //! \def SERVER_PORT
 //!
@@ -76,9 +71,6 @@ UDPSocket::UDPSocket(void)
     }
     // --------------------------------------------
 
-#if defined(WIN32) || defined(WIN64) || defined(_WIN64)
-    StartWindowsSocket();
-#endif
     this->Init();
 }
 
@@ -89,17 +81,6 @@ UDPSocket::~UDPSocket()
 {
     this->Close();
 }
-
-// ****************************************************************
-// StartWindowsSocket()
-//
-#if defined(WIN32) || defined(WIN64) || defined(_WIN64)
-int UDPSocket::StartWindowsSocket(void)
-{
-    WSADATA WSAData;
-    return (WSAStartup(MAKEWORD(2, 0), &WSAData));
-}
-#endif
 
 // ****************************************************************
 // Init()
@@ -190,12 +171,7 @@ void UDPSocket::Close(void)
 {
     if (UDPSocketNumber >= 0)
     {
-#if defined(WIN32) || defined(WIN64) || defined(_WIN64)
-        closesocket(UDPSocketNumber);
-        WSACleanup();
-#else
         close(UDPSocketNumber);
-#endif
     }
     UDPSocketNumber = -1;
 
@@ -211,16 +187,7 @@ int UDPSocket::ReceiveUDPPackage(const int UDPSocketNumber, FRIDataReceivedFromK
 
     if (UDPSocketNumber >= 0)
     {
-#ifdef _NTO_
-        socklen_t SizeOfSocketAddressInBytes = sizeof(struct sockaddr_in);
-#else
-#if defined(WIN32) || defined(WIN64) || defined(_WIN64)
-        int SizeOfSocketAddressInBytes = sizeof(struct sockaddr_in);
-#else
         unsigned int SizeOfSocketAddressInBytes = sizeof(struct sockaddr_in);
-#endif
-#endif
-
         NumberOfReceivedBytes = recvfrom(UDPSocketNumber, (char*)ReceivedData, sizeof(FRIDataReceivedFromKRC), 0,
                                          (struct sockaddr*)&IPAddressOfKRCUnit, &SizeOfSocketAddressInBytes);
 

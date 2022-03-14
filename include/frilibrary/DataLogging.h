@@ -191,7 +191,7 @@ public:
     ~DataLogging(void);
 
     //  ---------------------- Doxygen info ----------------------
-    //! \fn int PrepareLogging(const unsigned int &ControlScheme, const char *FileIdentifier = NULL)
+    //! \fn int PrepareLogging(const unsigned int &ControlScheme, const char *FileIdentifier = nullptr)
     //!
     //! \brief
     //! Creates the output file and initializes all required class attributes
@@ -228,7 +228,7 @@ public:
     //! \sa Class DataLogging
     //! \sa FastResearchInterface::LWRControlModes
     //  ----------------------------------------------------------
-    int PrepareLogging(const unsigned int& ControlScheme, const char* FileIdentifier = NULL);
+    int PrepareLogging(const unsigned int& ControlScheme, const char* FileIdentifier = nullptr);
 
     //  ---------------------- Doxygen info ----------------------
     //! \fn void AddEntry(const FRIDataReceivedFromKRC  &ReceivedFRIData, const FRIDataSendToKRC &SentFRIData)

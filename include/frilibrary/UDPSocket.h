@@ -46,14 +46,9 @@
 
 #ifndef __UDPSocket__
 #define __UDPSocket__
-
-#include "FRICommunication.h"
+#include <frilibrary/FRICommunication.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-#if defined(WIN32) || defined(WIN64) || defined(_WIN64)
-#include <winsock2.h>
-#else
 #include <unistd.h>
 #include <string.h>
 #include <time.h>
@@ -61,7 +56,6 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
-#endif
 
 //  ---------------------- Doxygen info ----------------------
 //! \class UDPSocket
@@ -156,22 +150,6 @@ protected:
     //! Closes the socket (only called by the destructor)
     //  ----------------------------------------------------------
     void Close(void);
-
-#if defined(WIN32) || defined(WIN64) || defined(_WIN64)
-    //  ---------------------- Doxygen info ----------------------
-    //! \fn int StartWindowsSocket(void)
-    //!
-    //! \brief
-    //! Microsoft Windows only: Initializes the socket (only called by the constructor)
-    //!
-    //! \return
-    //! <ul>
-    //! <li> Zero if successful</li>
-    //! <li> Non-zero if Winsock DLL cannot be initialized</li>
-    //! </ul>
-    //  ----------------------------------------------------------
-    int StartWindowsSocket(void);
-#endif
 
 private:
     //  ---------------------- Doxygen info ----------------------

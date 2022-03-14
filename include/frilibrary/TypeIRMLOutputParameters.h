@@ -138,8 +138,8 @@ public:
         delete this->NewPosition;
         delete this->NewVelocity;
 
-        this->NewPosition = NULL;
-        this->NewVelocity = NULL;
+        this->NewPosition = nullptr;
+        this->NewVelocity = nullptr;
     }
 
     TypeIRMLDoubleVector* NewPosition;

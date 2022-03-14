@@ -46,7 +46,6 @@
 //  ----------------------------------------------------------
 
 #include <frilibrary/FastResearchInterface.h>
-#include <frilibrary/DataLogging.h>
 #include <errno.h>
 #include <frilibrary/OSAbstraction.h>
 
