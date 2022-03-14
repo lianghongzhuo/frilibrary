@@ -152,14 +152,7 @@ int Console::printf(const char* Format, ...)
 void* Console::ConsoleThreadMain(void* ObjectPointer)
 {
     unsigned int i = 0;
-
     Console* ThisObjectPtr = (Console*)ObjectPointer;
-
-#if defined(WIN32) || defined(WIN64) || defined(_WIN64)
-    // \ToDo Make this clean through the OSAbstraction
-    SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_LOWEST);
-#endif
-
     pthread_mutex_lock(&(ThisObjectPtr->Mutex));
     ThisObjectPtr->ThreadCreated = true;
     pthread_mutex_unlock(&(ThisObjectPtr->Mutex));

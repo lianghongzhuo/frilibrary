@@ -144,22 +144,6 @@ int DataLogging::PrepareLogging(const unsigned int& ControlScheme, const char* F
 
     GetSystemTimeInSeconds(true);
 
-    // REMOVE
-
-    //------------------------
-
-#ifdef _NTO_
-
-    struct _clockperiod ClockResolution;
-
-    ClockResolution.nsec = 10000;  // ns
-    ClockResolution.fract = 0;
-
-    ClockPeriod(CLOCK_REALTIME, &ClockResolution, NULL, 0);
-    //------------------------
-
-#endif
-
     memset(this->CompleteOutputFileString, 0x0, OUTPUT_FILE_STRING_LENGTH * sizeof(char));
 
     for (i = 0; i < NUMBER_OF_ELEMENTS_PER_ENTRY; i++)
