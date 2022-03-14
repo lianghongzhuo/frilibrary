@@ -285,16 +285,6 @@ FastResearchInterface::~FastResearchInterface(void)
 
     pthread_join(this->KRCCommunicationThread, NULL);
 
-#ifdef _NTO_
-
-    // End the timer thread
-    pthread_mutex_lock(&(this->MutexForCondVarForTimer));
-    this->TimerThreadIsRunning = false;
-    pthread_mutex_unlock(&(this->MutexForCondVarForTimer));
-    pthread_join(this->TimerThread, NULL);
-
-#endif
-
     if (this->LoggingState != FastResearchInterface::WriteLoggingDataFileCalled)
     {
         this->WriteLoggingDataFile();
