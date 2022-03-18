@@ -55,7 +55,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <errno.h>
 #include <math.h>
 #ifndef PI
 #define PI 3.1415926535897932384626433832795
@@ -75,7 +74,7 @@ int main(int argc, char* argv[])
 
     LWRJointPositionController* Robot;
 
-    Robot = new LWRJointPositionController("/home/lwrcontrol/etc/980039-FRI-Driver.init");
+    Robot = new LWRJointPositionController("/opt/FRILibrary/etc/980039-FRI-Driver.init");
 
     fprintf(stdout, "RobotJointPositionController object created. Starting the robot...\n");
 

@@ -1,6 +1,6 @@
 <package>
   <name>frilibrary</name>
-  <version>0.0.0</version>
+  <version>0.0.1</version>
   <description>
     The Fast Research Interface Library intends to provide a simple user interface to the KUKA Light-Weight
     Robot IV and hides all communication and set-up issues behind interface. It is only an interface and it

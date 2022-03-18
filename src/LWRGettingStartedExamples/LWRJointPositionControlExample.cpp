@@ -69,7 +69,7 @@ int main(int argc, char* argv[])
 
     LWRJointPositionController* Robot;
 
-    Robot = new LWRJointPositionController("/home/lwrcontrol/etc/980039-FRI-Driver.init");
+    Robot = new LWRJointPositionController("/opt/FRILibrary/etc/980039-FRI-Driver.init");
 
     fprintf(stdout, "RobotJointPositionController object created. Starting the robot...\n");
 

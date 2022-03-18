@@ -67,7 +67,7 @@ int main(int argc, char* argv[])
 
     LWRJointImpedanceController* Robot;
 
-    Robot = new LWRJointImpedanceController("/home/lwrcontrol/etc/980039-FRI-Driver.init");
+    Robot = new LWRJointImpedanceController("/opt/FRILibrary/etc/980039-FRI-Driver.init");
 
     fprintf(stdout, "RobotJointImpedanceController object created. Starting the robot...\n");
 
