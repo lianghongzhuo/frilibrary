@@ -24,9 +24,4 @@
   <url>https://cs.stanford.edu/people/tkr/fri/html/index.html</url>
   <license>Apachev2</license>
   <buildtool_depend>catkin</buildtool_depend>
-
-  <export>
-    <build_type>cmake</build_type>
-  </export>
-
 </package>
